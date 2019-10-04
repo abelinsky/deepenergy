@@ -1,0 +1,6 @@
+summary/
+data/
+models/
+model_tensorboard/
+data/
+__pycache__/

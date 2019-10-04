@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{16BF4EA2-30D7-4437-AA81-EC4579AA141E}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>EnvSimulatorGas</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_WIN32_WINNT=0x600;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>D:\apps\tools\gRPC\vcpkg\installed\x86-windows-static\include;D:\apps\tools\gRPC\vcpkg\installed\x86-windows-static\include\boost;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Core;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Objects;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\NSI;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Connections;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\utils;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\SimulationServer;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Tasks;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>D:\apps\tools\gRPC\vcpkg\installed\x86-windows-static\debug\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libeay32.lib;ssleay32.lib;zlibd.lib;libprotobufd.lib;ws2_32.lib;grpc.lib;gpr.lib;grpc++.lib;address_sorting.lib;cares.lib;bcrypt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_WIN32_WINNT=0x600;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>D:\apps\tools\gRPC\vcpkg\installed\x86-windows-static\include;D:\apps\tools\gRPC\vcpkg\installed\x86-windows-static\include\boost;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Core;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Objects;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\NSI;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Connections;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\utils;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\SimulationServer;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Tasks;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>D:\apps\tools\gRPC\vcpkg\installed\x86-windows-static\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libeay32.lib;ssleay32.lib;zlib.lib;libprotobuf.lib;ws2_32.lib;grpc.lib;gpr.lib;grpc++.lib;address_sorting.lib;cares.lib;bcrypt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>..\..\..\publish.cmd</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Connections\ConnectionsMatrix.h" />
+    <ClInclude Include="Connections\Node.h" />
+    <ClInclude Include="Core\GasEnv.h" />
+    <ClInclude Include="Core\GlobalData.h" />
+    <ClInclude Include="Core\ObjectsModel.h" />
+    <ClInclude Include="Core\OptDefines.h" />
+    <ClInclude Include="Core\OptEnums.h" />
+    <ClInclude Include="EnvSimulatorGas.h" />
+    <ClInclude Include="grpc\Env.grpc.pb.h" />
+    <ClInclude Include="grpc\Env.pb.h" />
+    <ClInclude Include="NSI\BNSI.h" />
+    <ClInclude Include="NSI\BNSIAVO.h" />
+    <ClInclude Include="NSI\BNSIGPA.h" />
+    <ClInclude Include="Objects\BGTS.h" />
+    <ClInclude Include="Objects\BIn.h" />
+    <ClInclude Include="Objects\BLost.h" />
+    <ClInclude Include="Objects\BManagedObject.h" />
+    <ClInclude Include="Objects\BObject.h" />
+    <ClInclude Include="Objects\BOut.h" />
+    <ClInclude Include="Objects\BPipe.h" />
+    <ClInclude Include="Objects\BRDValve.h" />
+    <ClInclude Include="Objects\BShop.h" />
+    <ClInclude Include="Objects\BShopAVO.h" />
+    <ClInclude Include="Objects\BShopBypass.h" />
+    <ClInclude Include="Objects\BShopGPA.h" />
+    <ClInclude Include="Objects\BShopGPAGroup.h" />
+    <ClInclude Include="Objects\BShopObject.h" />
+    <ClInclude Include="Objects\BValve.h" />
+    <ClInclude Include="Objects\Objects.h" />
+    <ClInclude Include="Objects\RManagedParam.h" />
+    <ClInclude Include="Objects\RShopsGroup.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="SimulationServer\ServerMapper.h" />
+    <ClInclude Include="SimulationServer\SimulationServerImpl.h" />
+    <ClInclude Include="Tasks\MaxThroughputTask.h" />
+    <ClInclude Include="Tasks\SimpleTask.h" />
+    <ClInclude Include="Tasks\TrainingTask.h" />
+    <ClInclude Include="utils.h" />
+    <ClInclude Include="utils\FileSystem.h" />
+    <ClInclude Include="utils\StringUtils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Connections\ConnectionsMatrix.cpp" />
+    <ClCompile Include="Connections\Node.cpp" />
+    <ClCompile Include="Core\GasEnv.cpp" />
+    <ClCompile Include="Core\GlobalData.cpp" />
+    <ClCompile Include="Core\ObjectsModel.cpp" />
+    <ClCompile Include="EnvSimulatorGas.cpp" />
+    <ClCompile Include="grpc\Env.grpc.pb.cc" />
+    <ClCompile Include="grpc\Env.pb.cc" />
+    <ClCompile Include="NSI\BNSI.cpp" />
+    <ClCompile Include="NSI\BNSIAVO.cpp" />
+    <ClCompile Include="NSI\BNSIGPA.cpp" />
+    <ClCompile Include="Objects\BGTS.cpp" />
+    <ClCompile Include="Objects\BIn.cpp" />
+    <ClCompile Include="Objects\BLost.cpp" />
+    <ClCompile Include="Objects\BManagedObject.cpp" />
+    <ClCompile Include="Objects\BObject.cpp" />
+    <ClCompile Include="Objects\BOut.cpp" />
+    <ClCompile Include="Objects\BPipe.cpp" />
+    <ClCompile Include="Objects\BRDValve.cpp" />
+    <ClCompile Include="Objects\BShop.cpp" />
+    <ClCompile Include="Objects\BShopAVO.cpp" />
+    <ClCompile Include="Objects\BShopBypass.cpp" />
+    <ClCompile Include="Objects\BShopGPA.cpp" />
+    <ClCompile Include="Objects\BShopGPAGroup.cpp" />
+    <ClCompile Include="Objects\BShopObject.cpp" />
+    <ClCompile Include="Objects\BValve.cpp" />
+    <ClCompile Include="Objects\RManagedParam.cpp" />
+    <ClCompile Include="Objects\RShopsGroup.cpp" />
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="SimulationServer\ServerMapper.cpp" />
+    <ClCompile Include="SimulationServer\SimulationServerImpl.cpp" />
+    <ClCompile Include="Tasks\MaxThroughputTask.cpp" />
+    <ClCompile Include="Tasks\SimpleTask.cpp" />
+    <ClCompile Include="Tasks\TrainingTask.cpp" />
+    <ClCompile Include="utils\FileSystem.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

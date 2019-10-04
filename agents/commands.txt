@@ -1,0 +1,25 @@
+C:\Users\ab\Anaconda3\envs\grpcenv\python.exe .\agent_gas_baselines.py --data Data/
+C:\Users\ab\Anaconda3\envs\grpcenv\python.exe .\agent_simple.py --data Data/
+C:\Users\ab\Anaconda3\envs\grpcenv\python.exe .\agent_gym_gas.py --inf --data RealData/ --model models/13-09-2019_17-28-10.pkl
+
+C:\Users\ab\Anaconda3\envs\grpcenv\python.exe .\agent_complex.py --data Data/
+
+C:\Users\ab\Anaconda3\envs\grpcenv\python.exe .\agent_gas.py --data Data/ -n 1000 -b 1000 -e 1 --exp_name sb_rtg_na --discount 0.99 --render
+
+tensorboard --logdir D:/apps/ai/agents_py/summary
+tensorboard --logdir D:/apps/ai/agents_py/model_tensorboard
+
+C:\Users\ab\Anaconda3\envs\grpcenv\python.exe plot.py data/ac_sb_rtg_na_env_25-09-2019_10-42-11 --value AverageReturn MaxReturn StdReturn
+
+C:\Users\ab\Anaconda3\envs\grpcenv\python.exe .\agent_gas.py --data Data/ -n 100 -b 1000 -e 1 --exp_name sb_rtg_na --discount 0.99 --size 32 --render
+
+# cd Projects/rl/homework/hw2
+#  python train_pg_f18.py CartPole-v0 -n 100 -b 1000 -e 1 -dna --exp_name sb_no_rtg_dna --render
+#  python train_pg_f18.py CartPole-v0 -n 100 -b 1000 -e 1 -rtg -dna --exp_name sb_rtg_dna --render
+#  python train_pg_f18.py CartPole-v0 -n 100 -b 1000 -e 1 -rtg --exp_name sb_rtg_na --render
+#  python train_pg_f18.py CartPole-v0 CartPole-v0 -n 100 -b 5000 -e 3 -dna --exp_name lb_no_rtg_dna --render
+#  python train_pg_f18.py CartPole-v0 -n 100 -b 5000 -e 3 -rtg -dna --exp_name lb_rtg_dna --render
+#  python train_pg_f18.py CartPole-v0 -n 100 -b 5000 -e 3 -rtg --exp_name lb_rtg_na --render
+
+#  Best:
+#  python train_pg_f18.py CartPole-v0 -n 100 -b 1000 -e 1 -rtg --exp_name sb_rtg_na --discount 0.99 --size 32 --render

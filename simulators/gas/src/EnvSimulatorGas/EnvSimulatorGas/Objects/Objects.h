@@ -1,0 +1,18 @@
+#pragma once
+
+#include "BObject.h"
+#include "BGTS.h"
+#include "BPipe.h"
+#include "BShop.h"
+#include "BRDValve.h"
+#include "BLost.h"
+#include "BValve.h"
+#include "BShopGPA.h"
+#include "BShopAVO.h"
+#include "BIn.h"
+#include "BOut.h"
+#include "BNSI.h"
+#include "BShopGPAGroup.h"
+#include "BManagedObject.h"
+#include "RManagedParam.h"
+#include "RShopsGroup.h"

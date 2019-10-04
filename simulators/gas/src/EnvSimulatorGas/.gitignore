@@ -1,0 +1,31 @@
+# gitignore for C++
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.db
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+
+# Visual Studio Files
+EnvSimulatorGas/Debug
+EnvSimulatorGas/Release
+Debug
+Release
+
+*.suo
+*.csproj.user
+*.vbproj.user
+ipch
+*sdf
+
+calc.dll
+calc.exe
+*.dat
