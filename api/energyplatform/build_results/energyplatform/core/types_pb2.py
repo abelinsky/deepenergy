@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='energyplatform',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\x1f\x65nergyplatform/core/types.proto\x12\x0e\x65nergyplatform\"\x1d\n\x10\x44iscreteInterval\x12\t\n\x01n\x18\x01 \x01(\x05\";\n\x12\x43ontinuousInterval\x12\x11\n\tlow_value\x18\x01 \x01(\x01\x12\x12\n\nhigh_value\x18\x02 \x01(\x01\"O\n\rPhysicalParam\x12/\n\x04type\x18\x01 \x01(\x0e\x32!.energyplatform.PhysicalValueType\x12\r\n\x05value\x18\x02 \x01(\x02*3\n\rParameterType\x12\x0f\n\x0bPT_DISCRETE\x10\x00\x12\x11\n\rPT_CONTINUOUS\x10\x01*\x86\x01\n\x11PhysicalValueType\x12\r\n\tPV_NOTYPE\x10\x00\x12\x0c\n\x08PV_STATE\x10\x01\x12\x0f\n\x0bPV_PRESSURE\x10\x02\x12\x12\n\x0ePV_TEMPERATURE\x10\x03\x12\x0e\n\nPV_DENSITY\x10\x04\x12\r\n\tPV_VOLUME\x10\x05\x12\x10\n\x0cPV_FREQUENCY\x10\x06\x62\x06proto3')
+  serialized_pb=_b('\n\x1f\x65nergyplatform/core/types.proto\x12\x0e\x65nergyplatform\"\x1d\n\x10\x44iscreteInterval\x12\t\n\x01n\x18\x01 \x01(\x05\";\n\x12\x43ontinuousInterval\x12\x11\n\tlow_value\x18\x01 \x01(\x01\x12\x12\n\nhigh_value\x18\x02 \x01(\x01\"[\n\rPhysicalParam\x12\n\n\x02id\x18\x01 \x01(\t\x12/\n\x04type\x18\x02 \x01(\x0e\x32!.energyplatform.PhysicalValueType\x12\r\n\x05value\x18\x03 \x01(\x02*3\n\rParameterType\x12\x0f\n\x0bPT_DISCRETE\x10\x00\x12\x11\n\rPT_CONTINUOUS\x10\x01*\x86\x01\n\x11PhysicalValueType\x12\r\n\tPV_NOTYPE\x10\x00\x12\x0c\n\x08PV_STATE\x10\x01\x12\x0f\n\x0bPV_PRESSURE\x10\x02\x12\x12\n\x0ePV_TEMPERATURE\x10\x03\x12\x0e\n\nPV_DENSITY\x10\x04\x12\r\n\tPV_VOLUME\x10\x05\x12\x10\n\x0cPV_FREQUENCY\x10\x06\x62\x06proto3')
 )
 
 _PARAMETERTYPE = _descriptor.EnumDescriptor(
@@ -41,8 +41,8 @@ _PARAMETERTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=224,
-  serialized_end=275,
+  serialized_start=236,
+  serialized_end=287,
 )
 _sym_db.RegisterEnumDescriptor(_PARAMETERTYPE)
 
@@ -84,8 +84,8 @@ _PHYSICALVALUETYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=278,
-  serialized_end=412,
+  serialized_start=290,
+  serialized_end=424,
 )
 _sym_db.RegisterEnumDescriptor(_PHYSICALVALUETYPE)
 
@@ -179,15 +179,22 @@ _PHYSICALPARAM = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='type', full_name='energyplatform.PhysicalParam.type', index=0,
-      number=1, type=14, cpp_type=8, label=1,
+      name='id', full_name='energyplatform.PhysicalParam.id', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='type', full_name='energyplatform.PhysicalParam.type', index=1,
+      number=2, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='value', full_name='energyplatform.PhysicalParam.value', index=1,
-      number=2, type=2, cpp_type=6, label=1,
+      name='value', full_name='energyplatform.PhysicalParam.value', index=2,
+      number=3, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -205,7 +212,7 @@ _PHYSICALPARAM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=143,
-  serialized_end=222,
+  serialized_end=234,
 )
 
 _PHYSICALPARAM.fields_by_name['type'].enum_type = _PHYSICALVALUETYPE

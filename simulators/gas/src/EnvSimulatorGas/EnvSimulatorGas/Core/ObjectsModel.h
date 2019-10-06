@@ -54,6 +54,7 @@ namespace Core
 		void InputEfficiencyResults(const string &ResultShopEf);
 		int CountGroupLosts();
 		void SetFlowMode(bool bFlowModel = true);
+		bool IsLoaded() { return !m_Objects.empty(); }
 		inline bool IsFlowMode() { return m_bFlowMode; }
 		inline Connections::CConnectionsMatrix& GetConnectionsMatrix() { return m_Connections; }
 		inline const list <BObject*>& GetObjectsList() { return m_ObjectsList; }

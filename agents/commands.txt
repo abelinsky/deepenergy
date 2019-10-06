@@ -2,7 +2,7 @@ C:\Users\ab\Anaconda3\envs\grpcenv\python.exe .\agent_gas_baselines.py --data Da
 C:\Users\ab\Anaconda3\envs\grpcenv\python.exe .\agent_simple.py --data Data/
 C:\Users\ab\Anaconda3\envs\grpcenv\python.exe .\agent_gym_gas.py --inf --data RealData/ --model models/13-09-2019_17-28-10.pkl
 
-C:\Users\ab\Anaconda3\envs\grpcenv\python.exe .\agent_complex.py --data Data/
+C:\Users\ab\Anaconda3\envs\grpcenv\python.exe .\agent4gas.py --data Data/
 
 C:\Users\ab\Anaconda3\envs\grpcenv\python.exe .\agent_gas.py --data Data/ -n 1000 -b 1000 -e 1 --exp_name sb_rtg_na --discount 0.99 --render
 

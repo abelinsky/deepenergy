@@ -26,15 +26,15 @@ class EnvServiceStub(object):
         request_serializer=energyplatform_dot_core_dot_env__service__functions__pb2.LoadDataRequest.SerializeToString,
         response_deserializer=energyplatform_dot_core_dot_env__service__functions__pb2.LoadDataResponse.FromString,
         )
-    self.GetEnvDescription = channel.unary_unary(
-        '/energyplatform.EnvService/GetEnvDescription',
-        request_serializer=energyplatform_dot_core_dot_env__service__functions__pb2.GetEnvDescriptionRequest.SerializeToString,
-        response_deserializer=energyplatform_dot_core_dot_env__service__functions__pb2.GetEnvDescriptionResponse.FromString,
-        )
     self.SetCurrentTask = channel.unary_unary(
         '/energyplatform.EnvService/SetCurrentTask',
         request_serializer=energyplatform_dot_core_dot_env__service__functions__pb2.SetCurrentTaskRequest.SerializeToString,
         response_deserializer=energyplatform_dot_core_dot_env__service__functions__pb2.SetCurrentTaskResponse.FromString,
+        )
+    self.GetEnvDescription = channel.unary_unary(
+        '/energyplatform.EnvService/GetEnvDescription',
+        request_serializer=energyplatform_dot_core_dot_env__service__functions__pb2.GetEnvDescriptionRequest.SerializeToString,
+        response_deserializer=energyplatform_dot_core_dot_env__service__functions__pb2.GetEnvDescriptionResponse.FromString,
         )
     self.GetOptimizationParams = channel.unary_unary(
         '/energyplatform.EnvService/GetOptimizationParams',
@@ -76,15 +76,15 @@ class EnvServiceServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
-  def GetEnvDescription(self, request, context):
-    """Loads data and returns environment description. Data location must be already set.
+  def SetCurrentTask(self, request, context):
+    """Sets current task 
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
-  def SetCurrentTask(self, request, context):
-    """Sets current task 
+  def GetEnvDescription(self, request, context):
+    """Loads data and returns environment description. Data location must be already set.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -126,15 +126,15 @@ def add_EnvServiceServicer_to_server(servicer, server):
           request_deserializer=energyplatform_dot_core_dot_env__service__functions__pb2.LoadDataRequest.FromString,
           response_serializer=energyplatform_dot_core_dot_env__service__functions__pb2.LoadDataResponse.SerializeToString,
       ),
-      'GetEnvDescription': grpc.unary_unary_rpc_method_handler(
-          servicer.GetEnvDescription,
-          request_deserializer=energyplatform_dot_core_dot_env__service__functions__pb2.GetEnvDescriptionRequest.FromString,
-          response_serializer=energyplatform_dot_core_dot_env__service__functions__pb2.GetEnvDescriptionResponse.SerializeToString,
-      ),
       'SetCurrentTask': grpc.unary_unary_rpc_method_handler(
           servicer.SetCurrentTask,
           request_deserializer=energyplatform_dot_core_dot_env__service__functions__pb2.SetCurrentTaskRequest.FromString,
           response_serializer=energyplatform_dot_core_dot_env__service__functions__pb2.SetCurrentTaskResponse.SerializeToString,
+      ),
+      'GetEnvDescription': grpc.unary_unary_rpc_method_handler(
+          servicer.GetEnvDescription,
+          request_deserializer=energyplatform_dot_core_dot_env__service__functions__pb2.GetEnvDescriptionRequest.FromString,
+          response_serializer=energyplatform_dot_core_dot_env__service__functions__pb2.GetEnvDescriptionResponse.SerializeToString,
       ),
       'GetOptimizationParams': grpc.unary_unary_rpc_method_handler(
           servicer.GetOptimizationParams,

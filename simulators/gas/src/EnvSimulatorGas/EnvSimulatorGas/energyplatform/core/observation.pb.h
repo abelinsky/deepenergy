@@ -31,11 +31,8 @@
 #include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
-#include <google/protobuf/map.h>  // IWYU pragma: export
-#include <google/protobuf/map_entry.h>
-#include <google/protobuf/map_field_inl.h>
 #include <google/protobuf/unknown_field_set.h>
-#include "energyplatform/core/graph.pb.h"
+#include "energyplatform/core/types.pb.h"
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
 #define PROTOBUF_INTERNAL_EXPORT_energyplatform_2fcore_2fobservation_2eproto
@@ -51,7 +48,7 @@ struct TableStruct_energyplatform_2fcore_2fobservation_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[3]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[1]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -62,81 +59,13 @@ namespace energyplatform {
 class Observation;
 class ObservationDefaultTypeInternal;
 extern ObservationDefaultTypeInternal _Observation_default_instance_;
-class Observation_EdgeValuesEntry_DoNotUse;
-class Observation_EdgeValuesEntry_DoNotUseDefaultTypeInternal;
-extern Observation_EdgeValuesEntry_DoNotUseDefaultTypeInternal _Observation_EdgeValuesEntry_DoNotUse_default_instance_;
-class Observation_NodeValuesEntry_DoNotUse;
-class Observation_NodeValuesEntry_DoNotUseDefaultTypeInternal;
-extern Observation_NodeValuesEntry_DoNotUseDefaultTypeInternal _Observation_NodeValuesEntry_DoNotUse_default_instance_;
 }  // namespace energyplatform
 PROTOBUF_NAMESPACE_OPEN
 template<> ::energyplatform::Observation* Arena::CreateMaybeMessage<::energyplatform::Observation>(Arena*);
-template<> ::energyplatform::Observation_EdgeValuesEntry_DoNotUse* Arena::CreateMaybeMessage<::energyplatform::Observation_EdgeValuesEntry_DoNotUse>(Arena*);
-template<> ::energyplatform::Observation_NodeValuesEntry_DoNotUse* Arena::CreateMaybeMessage<::energyplatform::Observation_NodeValuesEntry_DoNotUse>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace energyplatform {
 
 // ===================================================================
-
-class Observation_NodeValuesEntry_DoNotUse : public ::PROTOBUF_NAMESPACE_ID::internal::MapEntry<Observation_NodeValuesEntry_DoNotUse, 
-    ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Node,
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32,
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_MESSAGE,
-    0 > {
-public:
-  typedef ::PROTOBUF_NAMESPACE_ID::internal::MapEntry<Observation_NodeValuesEntry_DoNotUse, 
-    ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Node,
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32,
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_MESSAGE,
-    0 > SuperType;
-  Observation_NodeValuesEntry_DoNotUse();
-  Observation_NodeValuesEntry_DoNotUse(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-  void MergeFrom(const Observation_NodeValuesEntry_DoNotUse& other);
-  static const Observation_NodeValuesEntry_DoNotUse* internal_default_instance() { return reinterpret_cast<const Observation_NodeValuesEntry_DoNotUse*>(&_Observation_NodeValuesEntry_DoNotUse_default_instance_); }
-  static bool ValidateKey(void*) { return true; }
-  static bool ValidateValue(void*) { return true; }
-  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& other) final;
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-  private:
-  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
-    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_energyplatform_2fcore_2fobservation_2eproto);
-    return ::descriptor_table_energyplatform_2fcore_2fobservation_2eproto.file_level_metadata[0];
-  }
-
-  public:
-};
-
-// -------------------------------------------------------------------
-
-class Observation_EdgeValuesEntry_DoNotUse : public ::PROTOBUF_NAMESPACE_ID::internal::MapEntry<Observation_EdgeValuesEntry_DoNotUse, 
-    ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Edge,
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32,
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_MESSAGE,
-    0 > {
-public:
-  typedef ::PROTOBUF_NAMESPACE_ID::internal::MapEntry<Observation_EdgeValuesEntry_DoNotUse, 
-    ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Edge,
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32,
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_MESSAGE,
-    0 > SuperType;
-  Observation_EdgeValuesEntry_DoNotUse();
-  Observation_EdgeValuesEntry_DoNotUse(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-  void MergeFrom(const Observation_EdgeValuesEntry_DoNotUse& other);
-  static const Observation_EdgeValuesEntry_DoNotUse* internal_default_instance() { return reinterpret_cast<const Observation_EdgeValuesEntry_DoNotUse*>(&_Observation_EdgeValuesEntry_DoNotUse_default_instance_); }
-  static bool ValidateKey(void*) { return true; }
-  static bool ValidateValue(void*) { return true; }
-  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& other) final;
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-  private:
-  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
-    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_energyplatform_2fcore_2fobservation_2eproto);
-    return ::descriptor_table_energyplatform_2fcore_2fobservation_2eproto.file_level_metadata[1];
-  }
-
-  public:
-};
-
-// -------------------------------------------------------------------
 
 class Observation :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:energyplatform.Observation) */ {
@@ -180,7 +109,7 @@ class Observation :
                &_Observation_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    2;
+    0;
 
   friend void swap(Observation& a, Observation& b) {
     a.Swap(&b);
@@ -248,46 +177,28 @@ class Observation :
 
   // nested types ----------------------------------------------------
 
-
   // accessors -------------------------------------------------------
 
   enum : int {
-    kNodeValuesFieldNumber = 1,
-    kEdgeValuesFieldNumber = 2,
+    kItemsFieldNumber = 1,
   };
-  // map<int32, .energyplatform.Node> node_values = 1;
-  int node_values_size() const;
-  void clear_node_values();
-  const ::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Node >&
-      node_values() const;
-  ::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Node >*
-      mutable_node_values();
-
-  // map<int32, .energyplatform.Edge> edge_values = 2;
-  int edge_values_size() const;
-  void clear_edge_values();
-  const ::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Edge >&
-      edge_values() const;
-  ::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Edge >*
-      mutable_edge_values();
+  // repeated .energyplatform.PhysicalParam items = 1;
+  int items_size() const;
+  void clear_items();
+  ::energyplatform::PhysicalParam* mutable_items(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::energyplatform::PhysicalParam >*
+      mutable_items();
+  const ::energyplatform::PhysicalParam& items(int index) const;
+  ::energyplatform::PhysicalParam* add_items();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::energyplatform::PhysicalParam >&
+      items() const;
 
   // @@protoc_insertion_point(class_scope:energyplatform.Observation)
  private:
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::PROTOBUF_NAMESPACE_ID::internal::MapField<
-      Observation_NodeValuesEntry_DoNotUse,
-      ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Node,
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32,
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_MESSAGE,
-      0 > node_values_;
-  ::PROTOBUF_NAMESPACE_ID::internal::MapField<
-      Observation_EdgeValuesEntry_DoNotUse,
-      ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Edge,
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32,
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_MESSAGE,
-      0 > edge_values_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::energyplatform::PhysicalParam > items_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_energyplatform_2fcore_2fobservation_2eproto;
 };
@@ -300,49 +211,38 @@ class Observation :
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
-// -------------------------------------------------------------------
-
-// -------------------------------------------------------------------
-
 // Observation
 
-// map<int32, .energyplatform.Node> node_values = 1;
-inline int Observation::node_values_size() const {
-  return node_values_.size();
+// repeated .energyplatform.PhysicalParam items = 1;
+inline int Observation::items_size() const {
+  return items_.size();
 }
-inline const ::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Node >&
-Observation::node_values() const {
-  // @@protoc_insertion_point(field_map:energyplatform.Observation.node_values)
-  return node_values_.GetMap();
+inline ::energyplatform::PhysicalParam* Observation::mutable_items(int index) {
+  // @@protoc_insertion_point(field_mutable:energyplatform.Observation.items)
+  return items_.Mutable(index);
 }
-inline ::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Node >*
-Observation::mutable_node_values() {
-  // @@protoc_insertion_point(field_mutable_map:energyplatform.Observation.node_values)
-  return node_values_.MutableMap();
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::energyplatform::PhysicalParam >*
+Observation::mutable_items() {
+  // @@protoc_insertion_point(field_mutable_list:energyplatform.Observation.items)
+  return &items_;
 }
-
-// map<int32, .energyplatform.Edge> edge_values = 2;
-inline int Observation::edge_values_size() const {
-  return edge_values_.size();
+inline const ::energyplatform::PhysicalParam& Observation::items(int index) const {
+  // @@protoc_insertion_point(field_get:energyplatform.Observation.items)
+  return items_.Get(index);
 }
-inline const ::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Edge >&
-Observation::edge_values() const {
-  // @@protoc_insertion_point(field_map:energyplatform.Observation.edge_values)
-  return edge_values_.GetMap();
+inline ::energyplatform::PhysicalParam* Observation::add_items() {
+  // @@protoc_insertion_point(field_add:energyplatform.Observation.items)
+  return items_.Add();
 }
-inline ::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Edge >*
-Observation::mutable_edge_values() {
-  // @@protoc_insertion_point(field_mutable_map:energyplatform.Observation.edge_values)
-  return edge_values_.MutableMap();
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::energyplatform::PhysicalParam >&
+Observation::items() const {
+  // @@protoc_insertion_point(field_list:energyplatform.Observation.items)
+  return items_;
 }
 
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
-// -------------------------------------------------------------------
-
-// -------------------------------------------------------------------
-
 
 // @@protoc_insertion_point(namespace_scope)
 

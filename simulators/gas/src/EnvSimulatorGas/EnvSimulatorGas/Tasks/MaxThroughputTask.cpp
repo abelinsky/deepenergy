@@ -28,16 +28,18 @@ namespace Tasks
 
 	double CMaxThroughputTask::GetCurrentReward()
 	{
-		if (m_PrevThroughput == 0.)
-			return 0;
+		return 0;
 
-		double rq = CalcCurrentThroughput();
-		double delta = rq - m_PrevThroughput;
+		//if (m_PrevThroughput == 0.)
+		//	return 0;
 
-		double eps = 0.1;
-		return delta > eps
-			? sgn(delta) * exp(abs(delta))
-			: 0;
+		//double rq = CalcCurrentThroughput();
+		//double delta = rq - m_PrevThroughput;
+
+		//double eps = 0.1;
+		//return delta > eps
+		//	? sgn(delta) * exp(abs(delta))
+		//	: 0;
 
 		//return delta > 0
 		//	? exp(delta)

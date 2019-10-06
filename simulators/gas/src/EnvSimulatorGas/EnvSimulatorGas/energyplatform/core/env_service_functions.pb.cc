@@ -17,7 +17,7 @@
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
 extern PROTOBUF_INTERNAL_EXPORT_energyplatform_2fcore_2faction_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Action_energyplatform_2fcore_2faction_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_energyplatform_2fcore_2fobservation_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_Observation_energyplatform_2fcore_2fobservation_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_energyplatform_2fcore_2fobservation_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Observation_energyplatform_2fcore_2fobservation_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_energyplatform_2fcore_2foptimization_5fparam_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_OptimizationParameter_energyplatform_2fcore_2foptimization_5fparam_2eproto;
 namespace energyplatform {
 class LoadDataRequestDefaultTypeInternal {

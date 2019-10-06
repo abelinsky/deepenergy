@@ -5,25 +5,18 @@
 
 namespace SimulationServer
 {
-	void ServerMapper::CurrentObservationToProtobuf(energy_platform::Observation *pObservation)
+	void ServerMapper::CurrentObservationToProtobuf(energyplatform::Observation *pObservation)
 	{
 		for (auto pObject : GetModel()->m_Ins)
 		{
 			BIn *pIn = dynamic_cast<BIn*>(pObject);
 			assert(pIn);
 
-			energy_platform::Node *pNode = pObservation->add_nodes();
-			pNode->set_uid(pIn->m_Node);
-
-			// Add node's pressure value
-			energy_platform::NodeParams *pParam = pNode->add_node_params();
-			pParam->set_param_type(energy_platform::NodeParams_ParamType::NodeParams_ParamType_P);
-			pParam->set_param_value(pIn->m_rP);
-
-			// Add node's temperature value
-			pParam = pNode->add_node_params();
-			pParam->set_param_type(energy_platform::NodeParams_ParamType::NodeParams_ParamType_T);
-			pParam->set_param_value(pIn->m_rT);
+			energyplatform::PhysicalParam *pParam = pObservation->add_items();
+			string sid = (boost::format("%d__P") % pIn->m_ID).str();
+			pParam->set_id(sid);
+			pParam->set_type(energyplatform::PhysicalValueType::PV_PRESSURE);
+			pParam->set_value(pIn->m_rP);
 		}
 
 		for (auto pObject : GetModel()->m_Outs)
@@ -31,63 +24,29 @@ namespace SimulationServer
 			BOut *pOut = dynamic_cast<BOut*>(pObject);
 			assert(pOut);
 
-			energy_platform::Node *pNode = pObservation->add_nodes();
-			pNode->set_uid(pOut->m_Node);
-
-			// Add node's pressure value
-			energy_platform::NodeParams *pParam = pNode->add_node_params();
-			pParam->set_param_type(energy_platform::NodeParams_ParamType::NodeParams_ParamType_P);
-			pParam->set_param_value(pOut->m_rP);
-
-			// Add node's temperature value
-			pParam = pNode->add_node_params();
-			pParam->set_param_type(energy_platform::NodeParams_ParamType::NodeParams_ParamType_T);
-			pParam->set_param_value(pOut->m_rT);
+			energyplatform::PhysicalParam *pParam = pObservation->add_items();
+			string sid = (boost::format("%d__P") % pOut->m_ID).str();
+			pParam->set_id(sid);
+			pParam->set_type(energyplatform::PhysicalValueType::PV_PRESSURE);
+			pParam->set_value(pOut->m_rP);
 		}
-
-		//for (auto modelNode : GetModel()->GetConnectionsMatrix().GetNodes())
-		//{
-		//	energy_platform::Node *pNode = pObservation->add_nodes();
-		//	pNode->set_uid(modelNode.second->m_ID);
-
-		//	// Add node's pressure value
-		//	energy_platform::NodeParams *pParam = pNode->add_node_params();
-		//	pParam->set_param_type(energy_platform::NodeParams_ParamType::NodeParams_ParamType_P);
-		//	pParam->set_param_value(modelNode.second->m_rP);
-
-		//	// Add node's temperature value
-		//	pParam = pNode->add_node_params();
-		//	pParam->set_param_type(energy_platform::NodeParams_ParamType::NodeParams_ParamType_T);
-		//	pParam->set_param_value(modelNode.second->m_rT);
-		//}
-
-		//for (auto pObject : GetModel()->GetPipes())
-		//{
-		//	energy_platform::Edge *pEdge = pObservation->add_edges();
-		//	pEdge->set_uid(pObject->m_ID);
-
-		//	// Add value
-		//	energy_platform::EdgeParams *pParam = pEdge->add_edge_params();
-		//	pParam->set_param_type(energy_platform::EdgeParams_ParamType::EdgeParams_ParamType_Q);
-		//	pParam->set_param_value(pObject->m_rQin);
-		//}			
 	}
 
-	CTrainingTask::TaskType ServerMapper::ProtoTaskToInternalTask(energy_platform::Task ProtoTask)
+	CTrainingTask::TaskType ServerMapper::ProtoTaskToInternalTask(energyplatform::SystemTask ProtoTask)
 	{
 		CTrainingTask::TaskType Task;
 		switch (ProtoTask)
 		{
-		case energy_platform::Task::FEED_FORWARD:
+		case energyplatform::SystemTask::FEED_FORWARD:
 			Task = CTrainingTask::TaskType::FEED_FORWARD;
 			break;
-		case energy_platform::Task::AVAILABLE_TECHNOLOGICAL_MODE:
+		case energyplatform::SystemTask::AVAILABLE_TECHNOLOGICAL_MODE:
 			Task = CTrainingTask::TaskType::AVAILABLE_TECHNOLOGICAL_MODE;
 			break;
-		case energy_platform::Task::MAX_THROUGHPUT:
+		case energyplatform::SystemTask::MAX_THROUGHPUT:
 			Task = CTrainingTask::TaskType::MAX_THROUGHPUT;
 			break;
-		case energy_platform::Task::SIMPLE:
+		case energyplatform::SystemTask::SIMPLE:
 			Task = CTrainingTask::TaskType::SIMPLE;
 			break;
 		default:
@@ -95,5 +54,48 @@ namespace SimulationServer
 			break;
 		}
 		return Task;
+	}
+
+	inline void operator << (energyplatform::OptimizationParameter &eParam, Objects::OptimizationParam &iParam)
+	{
+			eParam.set_id(iParam.GetUId());
+
+		bool bDiscrete = true; // iParam.IsDiscrete();
+		eParam.mutable_metadata()->set_type(bDiscrete
+			? energyplatform::ParameterType::PT_DISCRETE
+			: energyplatform::ParameterType::PT_CONTINUOUS);
+
+		energyplatform::PhysicalValueType vtype = energyplatform::PhysicalValueType::PV_NOTYPE;
+		switch (iParam.m_Code)
+		{
+		case OParam::O_OB:
+			vtype = energyplatform::PhysicalValueType::PV_FREQUENCY;
+			break;
+		default:
+			break;
+		}
+		eParam.mutable_metadata()->set_physical_type(vtype);
+
+		if (!bDiscrete)
+		{
+			double min = 0, max = 0;
+			iParam.GetParamBorders(min, max);
+			eParam.mutable_metadata()->mutable_continuos_space()->set_low_value(min);
+			eParam.mutable_metadata()->mutable_continuos_space()->set_high_value(max);
+			// Set value
+			eParam.set_float_value(iParam.Get());
+		}
+		else
+		{
+			// temp, test discrete space
+			double min = 0, max = 0;
+			iParam.GetParamBorders(min, max);
+			int n = int((max - min) * 100);
+			eParam.mutable_metadata()->mutable_discrete_space()->set_n(n);
+			// Set value
+			eParam.set_int_value(0);
+		}
+
+		eParam.set_info(iParam.GetInfo());
 	}
 }

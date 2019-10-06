@@ -15,18 +15,13 @@ syntax = "proto3";
 
 package energyplatform;
 
-import "energyplatform/core/graph.proto";
+import "energyplatform/core/types.proto";
 
 // Protocol buffer representing observation (state) of the environment.
 // Observation is the set of values in graph's nodes and edges, 
 // which can be directly observed (measurable params).
 message Observation {
-    // Values in graph nodes.
-    // Keys are unique system graph's nodes' ids.
-    map<int32, Node> node_values = 1;
-
-    // Values in graph edges.
-    // Keys are unique system graph's edges' ids.
-    map<int32, Edge> edge_values = 2;
+    // Array of measurable params of observation.
+    repeated PhysicalParam items = 1;
 }
 

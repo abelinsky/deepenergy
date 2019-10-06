@@ -23,36 +23,6 @@ namespace Core
 		CloseHandle(m_hDynConfirmEvent);
 	}
 
-	bool CGasEnv::LoadData(const string& FullPath)
-	{
-		m_SimulatorData.m_InitialDir = FullPath;
-
-		string Errors, Warnings;
-		
-		if (!GetModel()->LoadData(gData.m_DataDir, Errors, Warnings))
-		{
-			DoLogForced("Data path doesn't contain appropriate dataset.");
-			DoLogForced("(" + gData.m_DataDir + ")");
-			if (!Errors.empty())
-				DoLogForced("Errors: " + Errors);
-			if (!Warnings.empty())
-				DoLogForced("Warnings: " + Warnings);
-			return false;
-		}
-
-		CFileSystem fs;
-		string OperativeData(gData.m_DataDir + "Optimization/");
-		if (fs.DirectoryExists(OperativeData))
-			fs.RemoveAll(OperativeData);
-		fs.MakeDirectory(OperativeData);
-
-		m_SimulatorData.m_DataDir = OperativeData;
-
-		DoLog("Data has been loaded");
-
-		return true;
-	}
-
 	void CGasEnv::ResetEvents()
 	{
 		ResetEvent(m_hDynRunEvent);
@@ -246,25 +216,54 @@ namespace Core
 		ExportOperativeShopData(DataDir, bExportAll);
 	}
 
-	void CGasEnv::RecalculateEnvDescriptionParams()
+	bool CGasEnv::RecalculateEnvDescriptionParams()
 	{
 		// load / reload data
-		if (!LoadData(gData.m_DataDir))
-			return;
-		list<ObjectAction*> allowedActions;
-		GetAllowedActions(allowedActions);
+		if (!GetModel()->IsLoaded())
+		{
+			DoLogForced("Failed to get env description because data was not loaded.");
+			return false;
+		}
+		list<OptimizationParam*> optParams;
+		GetOptimizationParams(optParams);
 
-		m_EnvDescription.m_ActionsNumber = allowedActions.size();
-		//m_EnvDescription.m_ObservationSpace = GetModel()->GetConnectionsMatrix().GetNodes().size(); // +
+		m_EnvDescription.m_bDiscrete = true;
+		m_EnvDescription.m_OpimizationParamsNumber = optParams.size();
 		m_EnvDescription.m_ObservationSpace = GetModel()->m_Ins.size() + GetModel()->m_Outs.size();
+		return true;
 	}
 
 	// =================== Public methods =============================/
 
-	void  CGasEnv::SetDataLocation(const string& FullPath)
+	bool CGasEnv::LoadData(const string& FullPath)
 	{
 		gData.m_DataDir = FullPath;
-		DoLog("Data location is set to: " + FullPath);
+		m_SimulatorData.m_InitialDir = FullPath;
+
+		string Errors, Warnings;
+
+		if (!GetModel()->LoadData(gData.m_DataDir, Errors, Warnings))
+		{
+			DoLogForced("Data path doesn't contain appropriate dataset.");
+			DoLogForced("(" + gData.m_DataDir + ")");
+			if (!Errors.empty())
+				DoLogForced("Errors: " + Errors);
+			if (!Warnings.empty())
+				DoLogForced("Warnings: " + Warnings);
+			return false;
+		}
+
+		CFileSystem fs;
+		string OperativeData(gData.m_DataDir + "Optimization/");
+		if (fs.DirectoryExists(OperativeData))
+			fs.RemoveAll(OperativeData);
+		fs.MakeDirectory(OperativeData);
+
+		m_SimulatorData.m_DataDir = OperativeData;
+
+		DoLog("Data has been loaded");
+
+		return true;
 	}
 
 	void CGasEnv::SetCurrentTask(CTrainingTask::TaskType Task)
@@ -272,43 +271,30 @@ namespace Core
 		gData.SetCurrentTask(Task);
 	}
 
-	const EnvDescription& CGasEnv::GetEnvDescription(bool bReloadAndCalculate)
+	const EnvDescription& CGasEnv::GetEnvDescription()
 	{
-		if (bReloadAndCalculate)
-			RecalculateEnvDescriptionParams();
+		RecalculateEnvDescriptionParams();
 		return m_EnvDescription;
 	}
 
-	void CGasEnv::GetAllowedActions(list<ObjectAction*>& allowedActions)
+	void CGasEnv::GetOptimizationParams(list<OptimizationParam*>& optParams)
 	{
-		// temp
-		assert(gData.GetCurrentTask());
-		if (gData.GetCurrentTask()->Is(CTrainingTask::SIMPLE))
-		{
-			// choose one ShopGPAto try to tune it with AI-model
-			BShopGPA *pShopGPA = NULL;
-			for (auto pObject : GetModel()->m_GPAs)
-			{
-				BShopGPA *pGPA = dynamic_cast<BShopGPA*>(pObject);
-				if (pGPA->m_State == 1)
-				{
-					pShopGPA = pGPA;
-					break;
-				}
-			}
-			if (pShopGPA)
-				allowedActions.push_back(pShopGPA->GetParam(OParam::O_OB));
-		}
-
-		//for (auto cp : GetModel()->m_ControlParams)
-		//	allowedActions.push_back(cp.second);
-		
+		for (auto pObject : GetModel()->m_GPAs) {
+			BShopGPA *pGPA = dynamic_cast<BShopGPA*>(pObject);
+			if (pGPA->m_State == 1)
+				optParams.push_back(pGPA->GetParam(OParam::O_OB));
+		}		
 	}
 
 	bool CGasEnv::Reset(string& info)
 	{
+		assert(gData.GetCurrentTask());
 		if (!gData.GetCurrentTask())
-			gData.SetCurrentTask(CTrainingTask::MAX_THROUGHPUT);
+		{
+			info = "Task to be solved was not set.";
+			return false;
+		}
+
 		gData.GetCurrentTask()->Reset();
 
 		ClearErrorFiles(m_SimulatorData.m_DataDir);

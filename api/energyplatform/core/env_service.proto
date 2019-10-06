@@ -28,12 +28,12 @@ service EnvService {
     // Loads data.
     rpc LoadData(LoadDataRequest) returns (LoadDataResponse);
 
-    // Loads data and returns environment description. Data location must be already set.
-    rpc GetEnvDescription(GetEnvDescriptionRequest) returns (GetEnvDescriptionResponse);
-
     //  Sets current task 
     rpc SetCurrentTask(SetCurrentTaskRequest) returns (SetCurrentTaskResponse);
 
+    // Loads data and returns environment description. Data location must be already set.
+    rpc GetEnvDescription(GetEnvDescriptionRequest) returns (GetEnvDescriptionResponse);
+    
     //  Returns the list of control parameters (possible agent's actions)
     rpc GetOptimizationParams(GetOptimizationParamsRequest) returns (GetOptimizationParamsResponse); 
 
