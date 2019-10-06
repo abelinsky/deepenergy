@@ -64,4 +64,8 @@ namespace Objects {
 		return (boost::format("%1%_PARAM_%2%") % m_pParent->m_SID % m_Code).str();
 	}
 
+	bool RManagedParam::IsDiscrete()
+	{
+		return false;
+	}
 }

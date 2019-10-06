@@ -3,7 +3,7 @@
 set ROOT=.\..\energyplatform
 set OUTPUT=build_results
 set CPP_DESTINATION_DIR=.\..\..\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas
-set PY_DESTINATION_DIR=.\..\..\agents_py
+set PY_DESTINATION_DIR=.\..\..\agents
 REM Set the list of directories with *.proto files to compile. Example: set APIS=(core, core2)
 set APIS=(core)
 

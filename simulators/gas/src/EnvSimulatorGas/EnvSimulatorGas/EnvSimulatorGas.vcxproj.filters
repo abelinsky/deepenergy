@@ -129,10 +129,52 @@
     <ClInclude Include="Tasks\SimpleTask.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="grpc\Env.grpc.pb.h">
+    <ClInclude Include="energyplatform\core\action.grpc.pb.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="grpc\Env.pb.h">
+    <ClInclude Include="energyplatform\core\action.pb.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="energyplatform\core\env_service.grpc.pb.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="energyplatform\core\env_service.pb.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="energyplatform\core\env_service_functions.grpc.pb.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="energyplatform\core\env_service_functions.pb.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="energyplatform\core\graph.grpc.pb.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="energyplatform\core\graph.pb.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="energyplatform\core\observation.grpc.pb.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="energyplatform\core\observation.pb.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="energyplatform\core\optimization_param.grpc.pb.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="energyplatform\core\optimization_param.pb.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="energyplatform\core\tasks.grpc.pb.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="energyplatform\core\tasks.pb.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="energyplatform\core\types.grpc.pb.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="energyplatform\core\types.pb.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
@@ -236,10 +278,52 @@
     <ClCompile Include="Tasks\SimpleTask.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="grpc\Env.grpc.pb.cc">
+    <ClCompile Include="energyplatform\core\action.grpc.pb.cc">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="grpc\Env.pb.cc">
+    <ClCompile Include="energyplatform\core\action.pb.cc">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="energyplatform\core\env_service.grpc.pb.cc">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="energyplatform\core\env_service.pb.cc">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="energyplatform\core\env_service_functions.grpc.pb.cc">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="energyplatform\core\env_service_functions.pb.cc">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="energyplatform\core\graph.grpc.pb.cc">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="energyplatform\core\graph.pb.cc">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="energyplatform\core\observation.grpc.pb.cc">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="energyplatform\core\observation.pb.cc">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="energyplatform\core\optimization_param.grpc.pb.cc">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="energyplatform\core\optimization_param.pb.cc">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="energyplatform\core\tasks.grpc.pb.cc">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="energyplatform\core\tasks.pb.cc">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="energyplatform\core\types.grpc.pb.cc">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="energyplatform\core\types.pb.cc">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

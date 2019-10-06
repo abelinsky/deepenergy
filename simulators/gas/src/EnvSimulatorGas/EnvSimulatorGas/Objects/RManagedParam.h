@@ -43,6 +43,7 @@ namespace Objects
 		void On();
 		double GetDelta(); // шаг для расчета производных
 		void PostCreate();
+		bool IsDiscrete();
 
 	public:
 		// string m_uuId; // unique identifier
@@ -53,5 +54,5 @@ namespace Objects
 		double m_OldValue;
 	};
 
-	typedef Objects::RManagedParam ObjectAction;
+	typedef Objects::RManagedParam OptimizationParam;
 }

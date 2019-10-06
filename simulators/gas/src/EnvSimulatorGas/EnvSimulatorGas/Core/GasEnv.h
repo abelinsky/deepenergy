@@ -18,13 +18,15 @@ namespace Core
 
 	struct EnvDescription
 	{
-		int m_ActionsNumber;
+		int m_OpimizationParamsNumber;
 		int m_ObservationSpace;
+		bool m_bDiscrete;
 		
 		EnvDescription()
 		{
-			m_ActionsNumber = 0;
+			m_OpimizationParamsNumber = 0;
 			m_ObservationSpace = 0;
+			m_bDiscrete = false;
 		}
 	};
 
@@ -43,8 +45,6 @@ namespace Core
 			HANDLE m_lpEvents[2]; // указатели на события
 			string m_ProcessParams; // параметры запуска Calc.dll
 		} m_SimulatorData;
-
-		bool LoadData(const string& FullPath);
 
 		// Performs one calc event
 		bool DoSimulation(HANDLE lpEvents[2], const string& ProcessParams, const string& DataDir);
@@ -68,15 +68,15 @@ namespace Core
 		void ResetEvents();
 
 		// loads data and calculates env description params
-		void RecalculateEnvDescriptionParams();
+		bool RecalculateEnvDescriptionParams();
 
 	public:
 
-		// Sets data location
-		void SetDataLocation(const string& FullPath);
+		// Loads data
+		bool LoadData(const string& FullPath);
 
 		// Returns env description
-		const EnvDescription& GetEnvDescription(bool bReloadAndCalculate = true);
+		const EnvDescription& GetEnvDescription();
 
 		// Loads data, resets simulations
 		bool Reset(string& info);
@@ -91,7 +91,7 @@ namespace Core
 		void StopSimulations();
 
 		// Returns allowed agent's actions
-		void GetAllowedActions(list<ObjectAction*>& allowedActions);
+		void GetOptimizationParams(list<OptimizationParam*>& optParams);
 		
 
 	public:
