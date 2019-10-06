@@ -17,5 +17,6 @@ namespace SimulationServer
 		static CTrainingTask::TaskType ProtoTaskToInternalTask(energyplatform::SystemTask);
 	};
 
+
 	extern void operator << (energyplatform::OptimizationParameter&, Objects::OptimizationParam&);
 }

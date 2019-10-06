@@ -512,15 +512,27 @@ class PhysicalParam :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kTypeFieldNumber = 1,
-    kValueFieldNumber = 2,
+    kIdFieldNumber = 1,
+    kTypeFieldNumber = 2,
+    kValueFieldNumber = 3,
   };
-  // .energyplatform.PhysicalValueType type = 1;
+  // string id = 1;
+  void clear_id();
+  const std::string& id() const;
+  void set_id(const std::string& value);
+  void set_id(std::string&& value);
+  void set_id(const char* value);
+  void set_id(const char* value, size_t size);
+  std::string* mutable_id();
+  std::string* release_id();
+  void set_allocated_id(std::string* id);
+
+  // .energyplatform.PhysicalValueType type = 2;
   void clear_type();
   ::energyplatform::PhysicalValueType type() const;
   void set_type(::energyplatform::PhysicalValueType value);
 
-  // float value = 2;
+  // float value = 3;
   void clear_value();
   float value() const;
   void set_value(float value);
@@ -530,6 +542,7 @@ class PhysicalParam :
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr id_;
   int type_;
   float value_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -596,7 +609,58 @@ inline void ContinuousInterval::set_high_value(double value) {
 
 // PhysicalParam
 
-// .energyplatform.PhysicalValueType type = 1;
+// string id = 1;
+inline void PhysicalParam::clear_id() {
+  id_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline const std::string& PhysicalParam::id() const {
+  // @@protoc_insertion_point(field_get:energyplatform.PhysicalParam.id)
+  return id_.GetNoArena();
+}
+inline void PhysicalParam::set_id(const std::string& value) {
+  
+  id_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:energyplatform.PhysicalParam.id)
+}
+inline void PhysicalParam::set_id(std::string&& value) {
+  
+  id_.SetNoArena(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:energyplatform.PhysicalParam.id)
+}
+inline void PhysicalParam::set_id(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  id_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:energyplatform.PhysicalParam.id)
+}
+inline void PhysicalParam::set_id(const char* value, size_t size) {
+  
+  id_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:energyplatform.PhysicalParam.id)
+}
+inline std::string* PhysicalParam::mutable_id() {
+  
+  // @@protoc_insertion_point(field_mutable:energyplatform.PhysicalParam.id)
+  return id_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline std::string* PhysicalParam::release_id() {
+  // @@protoc_insertion_point(field_release:energyplatform.PhysicalParam.id)
+  
+  return id_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline void PhysicalParam::set_allocated_id(std::string* id) {
+  if (id != nullptr) {
+    
+  } else {
+    
+  }
+  id_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), id);
+  // @@protoc_insertion_point(field_set_allocated:energyplatform.PhysicalParam.id)
+}
+
+// .energyplatform.PhysicalValueType type = 2;
 inline void PhysicalParam::clear_type() {
   type_ = 0;
 }
@@ -610,7 +674,7 @@ inline void PhysicalParam::set_type(::energyplatform::PhysicalValueType value) {
   // @@protoc_insertion_point(field_set:energyplatform.PhysicalParam.type)
 }
 
-// float value = 2;
+// float value = 3;
 inline void PhysicalParam::clear_value() {
   value_ = 0;
 }

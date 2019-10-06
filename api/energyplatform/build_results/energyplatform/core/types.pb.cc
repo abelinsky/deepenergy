@@ -95,6 +95,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_energyplatform_2fcore_2ftypes_
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::energyplatform::PhysicalParam, id_),
   PROTOBUF_FIELD_OFFSET(::energyplatform::PhysicalParam, type_),
   PROTOBUF_FIELD_OFFSET(::energyplatform::PhysicalParam, value_),
 };
@@ -114,14 +115,14 @@ const char descriptor_table_protodef_energyplatform_2fcore_2ftypes_2eproto[] PRO
   "\n\037energyplatform/core/types.proto\022\016energ"
   "yplatform\"\035\n\020DiscreteInterval\022\t\n\001n\030\001 \001(\005"
   "\";\n\022ContinuousInterval\022\021\n\tlow_value\030\001 \001("
-  "\001\022\022\n\nhigh_value\030\002 \001(\001\"O\n\rPhysicalParam\022/"
-  "\n\004type\030\001 \001(\0162!.energyplatform.PhysicalVa"
-  "lueType\022\r\n\005value\030\002 \001(\002*3\n\rParameterType\022"
-  "\017\n\013PT_DISCRETE\020\000\022\021\n\rPT_CONTINUOUS\020\001*\206\001\n\021"
-  "PhysicalValueType\022\r\n\tPV_NOTYPE\020\000\022\014\n\010PV_S"
-  "TATE\020\001\022\017\n\013PV_PRESSURE\020\002\022\022\n\016PV_TEMPERATUR"
-  "E\020\003\022\016\n\nPV_DENSITY\020\004\022\r\n\tPV_VOLUME\020\005\022\020\n\014PV"
-  "_FREQUENCY\020\006b\006proto3"
+  "\001\022\022\n\nhigh_value\030\002 \001(\001\"[\n\rPhysicalParam\022\n"
+  "\n\002id\030\001 \001(\t\022/\n\004type\030\002 \001(\0162!.energyplatfor"
+  "m.PhysicalValueType\022\r\n\005value\030\003 \001(\002*3\n\rPa"
+  "rameterType\022\017\n\013PT_DISCRETE\020\000\022\021\n\rPT_CONTI"
+  "NUOUS\020\001*\206\001\n\021PhysicalValueType\022\r\n\tPV_NOTY"
+  "PE\020\000\022\014\n\010PV_STATE\020\001\022\017\n\013PV_PRESSURE\020\002\022\022\n\016P"
+  "V_TEMPERATURE\020\003\022\016\n\nPV_DENSITY\020\004\022\r\n\tPV_VO"
+  "LUME\020\005\022\020\n\014PV_FREQUENCY\020\006b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_energyplatform_2fcore_2ftypes_2eproto_deps[1] = {
 };
@@ -133,7 +134,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_ene
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_energyplatform_2fcore_2ftypes_2eproto_once;
 static bool descriptor_table_energyplatform_2fcore_2ftypes_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_energyplatform_2fcore_2ftypes_2eproto = {
-  &descriptor_table_energyplatform_2fcore_2ftypes_2eproto_initialized, descriptor_table_protodef_energyplatform_2fcore_2ftypes_2eproto, "energyplatform/core/types.proto", 420,
+  &descriptor_table_energyplatform_2fcore_2ftypes_2eproto_initialized, descriptor_table_protodef_energyplatform_2fcore_2ftypes_2eproto, "energyplatform/core/types.proto", 432,
   &descriptor_table_energyplatform_2fcore_2ftypes_2eproto_once, descriptor_table_energyplatform_2fcore_2ftypes_2eproto_sccs, descriptor_table_energyplatform_2fcore_2ftypes_2eproto_deps, 3, 0,
   schemas, file_default_instances, TableStruct_energyplatform_2fcore_2ftypes_2eproto::offsets,
   file_level_metadata_energyplatform_2fcore_2ftypes_2eproto, 3, file_level_enum_descriptors_energyplatform_2fcore_2ftypes_2eproto, file_level_service_descriptors_energyplatform_2fcore_2ftypes_2eproto,
@@ -734,6 +735,10 @@ PhysicalParam::PhysicalParam(const PhysicalParam& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
       _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
+  id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from.id().empty()) {
+    id_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.id_);
+  }
   ::memcpy(&type_, &from.type_,
     static_cast<size_t>(reinterpret_cast<char*>(&value_) -
     reinterpret_cast<char*>(&type_)) + sizeof(value_));
@@ -741,6 +746,8 @@ PhysicalParam::PhysicalParam(const PhysicalParam& from)
 }
 
 void PhysicalParam::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_PhysicalParam_energyplatform_2fcore_2ftypes_2eproto.base);
+  id_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(&type_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&value_) -
       reinterpret_cast<char*>(&type_)) + sizeof(value_));
@@ -752,6 +759,7 @@ PhysicalParam::~PhysicalParam() {
 }
 
 void PhysicalParam::SharedDtor() {
+  id_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 void PhysicalParam::SetCachedSize(int size) const {
@@ -769,6 +777,7 @@ void PhysicalParam::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  id_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(&type_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&value_) -
       reinterpret_cast<char*>(&type_)) + sizeof(value_));
@@ -783,17 +792,24 @@ const char* PhysicalParam::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // .energyplatform.PhysicalValueType type = 1;
+      // string id = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(mutable_id(), ptr, ctx, "energyplatform.PhysicalParam.id");
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .energyplatform.PhysicalValueType type = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
           ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
           CHK_(ptr);
           set_type(static_cast<::energyplatform::PhysicalValueType>(val));
         } else goto handle_unusual;
         continue;
-      // float value = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 21)) {
+      // float value = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 29)) {
           value_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
           ptr += sizeof(float);
         } else goto handle_unusual;
@@ -828,9 +844,24 @@ bool PhysicalParam::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // .energyplatform.PhysicalValueType type = 1;
+      // string id = 1;
       case 1: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (8 & 0xFF)) {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (10 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
+                input, this->mutable_id()));
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+            this->id().data(), static_cast<int>(this->id().length()),
+            ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE,
+            "energyplatform.PhysicalParam.id"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .energyplatform.PhysicalValueType type = 2;
+      case 2: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (16 & 0xFF)) {
           int value = 0;
           DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
                    int, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_ENUM>(
@@ -842,9 +873,9 @@ bool PhysicalParam::MergePartialFromCodedStream(
         break;
       }
 
-      // float value = 2;
-      case 2: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (21 & 0xFF)) {
+      // float value = 3;
+      case 3: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (29 & 0xFF)) {
 
           DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
                    float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
@@ -882,15 +913,25 @@ void PhysicalParam::SerializeWithCachedSizes(
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .energyplatform.PhysicalValueType type = 1;
-  if (this->type() != 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnum(
-      1, this->type(), output);
+  // string id = 1;
+  if (this->id().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->id().data(), static_cast<int>(this->id().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "energyplatform.PhysicalParam.id");
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->id(), output);
   }
 
-  // float value = 2;
+  // .energyplatform.PhysicalValueType type = 2;
+  if (this->type() != 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnum(
+      2, this->type(), output);
+  }
+
+  // float value = 3;
   if (!(this->value() <= 0 && this->value() >= 0)) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(2, this->value(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(3, this->value(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -906,15 +947,26 @@ void PhysicalParam::SerializeWithCachedSizes(
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .energyplatform.PhysicalValueType type = 1;
-  if (this->type() != 0) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
-      1, this->type(), target);
+  // string id = 1;
+  if (this->id().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->id().data(), static_cast<int>(this->id().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "energyplatform.PhysicalParam.id");
+    target =
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
+        1, this->id(), target);
   }
 
-  // float value = 2;
+  // .energyplatform.PhysicalValueType type = 2;
+  if (this->type() != 0) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      2, this->type(), target);
+  }
+
+  // float value = 3;
   if (!(this->value() <= 0 && this->value() >= 0)) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(2, this->value(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(3, this->value(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -938,13 +990,20 @@ size_t PhysicalParam::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .energyplatform.PhysicalValueType type = 1;
+  // string id = 1;
+  if (this->id().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->id());
+  }
+
+  // .energyplatform.PhysicalValueType type = 2;
   if (this->type() != 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->type());
   }
 
-  // float value = 2;
+  // float value = 3;
   if (!(this->value() <= 0 && this->value() >= 0)) {
     total_size += 1 + 4;
   }
@@ -976,6 +1035,10 @@ void PhysicalParam::MergeFrom(const PhysicalParam& from) {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
+  if (from.id().size() > 0) {
+
+    id_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.id_);
+  }
   if (from.type() != 0) {
     set_type(from.type());
   }
@@ -1005,6 +1068,8 @@ bool PhysicalParam::IsInitialized() const {
 void PhysicalParam::InternalSwap(PhysicalParam* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
+  id_.Swap(&other->id_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
   swap(type_, other->type_);
   swap(value_, other->value_);
 }

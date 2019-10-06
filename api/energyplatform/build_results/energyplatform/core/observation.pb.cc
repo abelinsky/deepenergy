@@ -16,19 +16,8 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
-extern PROTOBUF_INTERNAL_EXPORT_energyplatform_2fcore_2fgraph_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Edge_energyplatform_2fcore_2fgraph_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_energyplatform_2fcore_2fgraph_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Node_energyplatform_2fcore_2fgraph_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_energyplatform_2fcore_2fobservation_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Observation_EdgeValuesEntry_DoNotUse_energyplatform_2fcore_2fobservation_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_energyplatform_2fcore_2fobservation_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Observation_NodeValuesEntry_DoNotUse_energyplatform_2fcore_2fobservation_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_energyplatform_2fcore_2ftypes_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PhysicalParam_energyplatform_2fcore_2ftypes_2eproto;
 namespace energyplatform {
-class Observation_NodeValuesEntry_DoNotUseDefaultTypeInternal {
- public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Observation_NodeValuesEntry_DoNotUse> _instance;
-} _Observation_NodeValuesEntry_DoNotUse_default_instance_;
-class Observation_EdgeValuesEntry_DoNotUseDefaultTypeInternal {
- public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Observation_EdgeValuesEntry_DoNotUse> _instance;
-} _Observation_EdgeValuesEntry_DoNotUse_default_instance_;
 class ObservationDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Observation> _instance;
@@ -45,148 +34,54 @@ static void InitDefaultsscc_info_Observation_energyplatform_2fcore_2fobservation
   ::energyplatform::Observation::InitAsDefaultInstance();
 }
 
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_Observation_energyplatform_2fcore_2fobservation_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsscc_info_Observation_energyplatform_2fcore_2fobservation_2eproto}, {
-      &scc_info_Observation_NodeValuesEntry_DoNotUse_energyplatform_2fcore_2fobservation_2eproto.base,
-      &scc_info_Observation_EdgeValuesEntry_DoNotUse_energyplatform_2fcore_2fobservation_2eproto.base,}};
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Observation_energyplatform_2fcore_2fobservation_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_Observation_energyplatform_2fcore_2fobservation_2eproto}, {
+      &scc_info_PhysicalParam_energyplatform_2fcore_2ftypes_2eproto.base,}};
 
-static void InitDefaultsscc_info_Observation_EdgeValuesEntry_DoNotUse_energyplatform_2fcore_2fobservation_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::energyplatform::_Observation_EdgeValuesEntry_DoNotUse_default_instance_;
-    new (ptr) ::energyplatform::Observation_EdgeValuesEntry_DoNotUse();
-  }
-  ::energyplatform::Observation_EdgeValuesEntry_DoNotUse::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Observation_EdgeValuesEntry_DoNotUse_energyplatform_2fcore_2fobservation_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_Observation_EdgeValuesEntry_DoNotUse_energyplatform_2fcore_2fobservation_2eproto}, {
-      &scc_info_Edge_energyplatform_2fcore_2fgraph_2eproto.base,}};
-
-static void InitDefaultsscc_info_Observation_NodeValuesEntry_DoNotUse_energyplatform_2fcore_2fobservation_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::energyplatform::_Observation_NodeValuesEntry_DoNotUse_default_instance_;
-    new (ptr) ::energyplatform::Observation_NodeValuesEntry_DoNotUse();
-  }
-  ::energyplatform::Observation_NodeValuesEntry_DoNotUse::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Observation_NodeValuesEntry_DoNotUse_energyplatform_2fcore_2fobservation_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_Observation_NodeValuesEntry_DoNotUse_energyplatform_2fcore_2fobservation_2eproto}, {
-      &scc_info_Node_energyplatform_2fcore_2fgraph_2eproto.base,}};
-
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_energyplatform_2fcore_2fobservation_2eproto[3];
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_energyplatform_2fcore_2fobservation_2eproto[1];
 static constexpr ::PROTOBUF_NAMESPACE_ID::EnumDescriptor const** file_level_enum_descriptors_energyplatform_2fcore_2fobservation_2eproto = nullptr;
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_energyplatform_2fcore_2fobservation_2eproto = nullptr;
 
 const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_energyplatform_2fcore_2fobservation_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  PROTOBUF_FIELD_OFFSET(::energyplatform::Observation_NodeValuesEntry_DoNotUse, _has_bits_),
-  PROTOBUF_FIELD_OFFSET(::energyplatform::Observation_NodeValuesEntry_DoNotUse, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::energyplatform::Observation_NodeValuesEntry_DoNotUse, key_),
-  PROTOBUF_FIELD_OFFSET(::energyplatform::Observation_NodeValuesEntry_DoNotUse, value_),
-  0,
-  1,
-  PROTOBUF_FIELD_OFFSET(::energyplatform::Observation_EdgeValuesEntry_DoNotUse, _has_bits_),
-  PROTOBUF_FIELD_OFFSET(::energyplatform::Observation_EdgeValuesEntry_DoNotUse, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::energyplatform::Observation_EdgeValuesEntry_DoNotUse, key_),
-  PROTOBUF_FIELD_OFFSET(::energyplatform::Observation_EdgeValuesEntry_DoNotUse, value_),
-  0,
-  1,
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::energyplatform::Observation, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::energyplatform::Observation, node_values_),
-  PROTOBUF_FIELD_OFFSET(::energyplatform::Observation, edge_values_),
+  PROTOBUF_FIELD_OFFSET(::energyplatform::Observation, items_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, 7, sizeof(::energyplatform::Observation_NodeValuesEntry_DoNotUse)},
-  { 9, 16, sizeof(::energyplatform::Observation_EdgeValuesEntry_DoNotUse)},
-  { 18, -1, sizeof(::energyplatform::Observation)},
+  { 0, -1, sizeof(::energyplatform::Observation)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::energyplatform::_Observation_NodeValuesEntry_DoNotUse_default_instance_),
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::energyplatform::_Observation_EdgeValuesEntry_DoNotUse_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::energyplatform::_Observation_default_instance_),
 };
 
 const char descriptor_table_protodef_energyplatform_2fcore_2fobservation_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n%energyplatform/core/observation.proto\022"
-  "\016energyplatform\032\037energyplatform/core/gra"
-  "ph.proto\"\243\002\n\013Observation\022@\n\013node_values\030"
-  "\001 \003(\0132+.energyplatform.Observation.NodeV"
-  "aluesEntry\022@\n\013edge_values\030\002 \003(\0132+.energy"
-  "platform.Observation.EdgeValuesEntry\032G\n\017"
-  "NodeValuesEntry\022\013\n\003key\030\001 \001(\005\022#\n\005value\030\002 "
-  "\001(\0132\024.energyplatform.Node:\0028\001\032G\n\017EdgeVal"
-  "uesEntry\022\013\n\003key\030\001 \001(\005\022#\n\005value\030\002 \001(\0132\024.e"
-  "nergyplatform.Edge:\0028\001b\006proto3"
+  "\016energyplatform\032\037energyplatform/core/typ"
+  "es.proto\";\n\013Observation\022,\n\005items\030\001 \003(\0132\035"
+  ".energyplatform.PhysicalParamb\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_energyplatform_2fcore_2fobservation_2eproto_deps[1] = {
-  &::descriptor_table_energyplatform_2fcore_2fgraph_2eproto,
+  &::descriptor_table_energyplatform_2fcore_2ftypes_2eproto,
 };
-static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_energyplatform_2fcore_2fobservation_2eproto_sccs[3] = {
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_energyplatform_2fcore_2fobservation_2eproto_sccs[1] = {
   &scc_info_Observation_energyplatform_2fcore_2fobservation_2eproto.base,
-  &scc_info_Observation_EdgeValuesEntry_DoNotUse_energyplatform_2fcore_2fobservation_2eproto.base,
-  &scc_info_Observation_NodeValuesEntry_DoNotUse_energyplatform_2fcore_2fobservation_2eproto.base,
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_energyplatform_2fcore_2fobservation_2eproto_once;
 static bool descriptor_table_energyplatform_2fcore_2fobservation_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_energyplatform_2fcore_2fobservation_2eproto = {
-  &descriptor_table_energyplatform_2fcore_2fobservation_2eproto_initialized, descriptor_table_protodef_energyplatform_2fcore_2fobservation_2eproto, "energyplatform/core/observation.proto", 390,
-  &descriptor_table_energyplatform_2fcore_2fobservation_2eproto_once, descriptor_table_energyplatform_2fcore_2fobservation_2eproto_sccs, descriptor_table_energyplatform_2fcore_2fobservation_2eproto_deps, 3, 1,
+  &descriptor_table_energyplatform_2fcore_2fobservation_2eproto_initialized, descriptor_table_protodef_energyplatform_2fcore_2fobservation_2eproto, "energyplatform/core/observation.proto", 157,
+  &descriptor_table_energyplatform_2fcore_2fobservation_2eproto_once, descriptor_table_energyplatform_2fcore_2fobservation_2eproto_sccs, descriptor_table_energyplatform_2fcore_2fobservation_2eproto_deps, 1, 1,
   schemas, file_default_instances, TableStruct_energyplatform_2fcore_2fobservation_2eproto::offsets,
-  file_level_metadata_energyplatform_2fcore_2fobservation_2eproto, 3, file_level_enum_descriptors_energyplatform_2fcore_2fobservation_2eproto, file_level_service_descriptors_energyplatform_2fcore_2fobservation_2eproto,
+  file_level_metadata_energyplatform_2fcore_2fobservation_2eproto, 1, file_level_enum_descriptors_energyplatform_2fcore_2fobservation_2eproto, file_level_service_descriptors_energyplatform_2fcore_2fobservation_2eproto,
 };
 
 // Force running AddDescriptors() at dynamic initialization time.
 static bool dynamic_init_dummy_energyplatform_2fcore_2fobservation_2eproto = (  ::PROTOBUF_NAMESPACE_ID::internal::AddDescriptors(&descriptor_table_energyplatform_2fcore_2fobservation_2eproto), true);
 namespace energyplatform {
-
-// ===================================================================
-
-Observation_NodeValuesEntry_DoNotUse::Observation_NodeValuesEntry_DoNotUse() {}
-Observation_NodeValuesEntry_DoNotUse::Observation_NodeValuesEntry_DoNotUse(::PROTOBUF_NAMESPACE_ID::Arena* arena)
-    : SuperType(arena) {}
-void Observation_NodeValuesEntry_DoNotUse::MergeFrom(const Observation_NodeValuesEntry_DoNotUse& other) {
-  MergeFromInternal(other);
-}
-::PROTOBUF_NAMESPACE_ID::Metadata Observation_NodeValuesEntry_DoNotUse::GetMetadata() const {
-  return GetMetadataStatic();
-}
-void Observation_NodeValuesEntry_DoNotUse::MergeFrom(
-    const ::PROTOBUF_NAMESPACE_ID::Message& other) {
-  ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom(other);
-}
-
-
-// ===================================================================
-
-Observation_EdgeValuesEntry_DoNotUse::Observation_EdgeValuesEntry_DoNotUse() {}
-Observation_EdgeValuesEntry_DoNotUse::Observation_EdgeValuesEntry_DoNotUse(::PROTOBUF_NAMESPACE_ID::Arena* arena)
-    : SuperType(arena) {}
-void Observation_EdgeValuesEntry_DoNotUse::MergeFrom(const Observation_EdgeValuesEntry_DoNotUse& other) {
-  MergeFromInternal(other);
-}
-::PROTOBUF_NAMESPACE_ID::Metadata Observation_EdgeValuesEntry_DoNotUse::GetMetadata() const {
-  return GetMetadataStatic();
-}
-void Observation_EdgeValuesEntry_DoNotUse::MergeFrom(
-    const ::PROTOBUF_NAMESPACE_ID::Message& other) {
-  ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom(other);
-}
-
 
 // ===================================================================
 
@@ -196,11 +91,8 @@ class Observation::_Internal {
  public:
 };
 
-void Observation::clear_node_values() {
-  node_values_.Clear();
-}
-void Observation::clear_edge_values() {
-  edge_values_.Clear();
+void Observation::clear_items() {
+  items_.Clear();
 }
 Observation::Observation()
   : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
@@ -209,10 +101,9 @@ Observation::Observation()
 }
 Observation::Observation(const Observation& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr) {
+      _internal_metadata_(nullptr),
+      items_(from.items_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  node_values_.MergeFrom(from.node_values_);
-  edge_values_.MergeFrom(from.edge_values_);
   // @@protoc_insertion_point(copy_constructor:energyplatform.Observation)
 }
 
@@ -243,8 +134,7 @@ void Observation::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  node_values_.Clear();
-  edge_values_.Clear();
+  items_.Clear();
   _internal_metadata_.Clear();
 }
 
@@ -256,28 +146,16 @@ const char* Observation::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // map<int32, .energyplatform.Node> node_values = 1;
+      // repeated .energyplatform.PhysicalParam items = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
           ptr -= 1;
           do {
             ptr += 1;
-            ptr = ctx->ParseMessage(&node_values_, ptr);
+            ptr = ctx->ParseMessage(add_items(), ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
           } while (::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint8>(ptr) == 10);
-        } else goto handle_unusual;
-        continue;
-      // map<int32, .energyplatform.Edge> edge_values = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
-          ptr -= 1;
-          do {
-            ptr += 1;
-            ptr = ctx->ParseMessage(&edge_values_, ptr);
-            CHK_(ptr);
-            if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint8>(ptr) == 18);
         } else goto handle_unusual;
         continue;
       default: {
@@ -310,36 +188,11 @@ bool Observation::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // map<int32, .energyplatform.Node> node_values = 1;
+      // repeated .energyplatform.PhysicalParam items = 1;
       case 1: {
         if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (10 & 0xFF)) {
-          Observation_NodeValuesEntry_DoNotUse::Parser< ::PROTOBUF_NAMESPACE_ID::internal::MapField<
-              Observation_NodeValuesEntry_DoNotUse,
-              ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Node,
-              ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32,
-              ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_MESSAGE,
-              0 >,
-            ::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Node > > parser(&node_values_);
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessageNoVirtual(
-              input, &parser));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // map<int32, .energyplatform.Edge> edge_values = 2;
-      case 2: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (18 & 0xFF)) {
-          Observation_EdgeValuesEntry_DoNotUse::Parser< ::PROTOBUF_NAMESPACE_ID::internal::MapField<
-              Observation_EdgeValuesEntry_DoNotUse,
-              ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Edge,
-              ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32,
-              ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_MESSAGE,
-              0 >,
-            ::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Edge > > parser(&edge_values_);
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessageNoVirtual(
-              input, &parser));
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
+                input, add_items()));
         } else {
           goto handle_unusual;
         }
@@ -373,66 +226,13 @@ void Observation::SerializeWithCachedSizes(
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // map<int32, .energyplatform.Node> node_values = 1;
-  if (!this->node_values().empty()) {
-    typedef ::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Node >::const_pointer
-        ConstPtr;
-    typedef ::PROTOBUF_NAMESPACE_ID::internal::SortItem< ::PROTOBUF_NAMESPACE_ID::int32, ConstPtr > SortItem;
-    typedef ::PROTOBUF_NAMESPACE_ID::internal::CompareByFirstField<SortItem> Less;
-
-    if (output->IsSerializationDeterministic() &&
-        this->node_values().size() > 1) {
-      ::std::unique_ptr<SortItem[]> items(
-          new SortItem[this->node_values().size()]);
-      typedef ::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Node >::size_type size_type;
-      size_type n = 0;
-      for (::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Node >::const_iterator
-          it = this->node_values().begin();
-          it != this->node_values().end(); ++it, ++n) {
-        items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
-      }
-      ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
-      for (size_type i = 0; i < n; i++) {
-        Observation_NodeValuesEntry_DoNotUse::Funcs::SerializeToCodedStream(1, items[static_cast<ptrdiff_t>(i)].second->first, items[static_cast<ptrdiff_t>(i)].second->second, output);
-      }
-    } else {
-      for (::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Node >::const_iterator
-          it = this->node_values().begin();
-          it != this->node_values().end(); ++it) {
-        Observation_NodeValuesEntry_DoNotUse::Funcs::SerializeToCodedStream(1, it->first, it->second, output);
-      }
-    }
-  }
-
-  // map<int32, .energyplatform.Edge> edge_values = 2;
-  if (!this->edge_values().empty()) {
-    typedef ::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Edge >::const_pointer
-        ConstPtr;
-    typedef ::PROTOBUF_NAMESPACE_ID::internal::SortItem< ::PROTOBUF_NAMESPACE_ID::int32, ConstPtr > SortItem;
-    typedef ::PROTOBUF_NAMESPACE_ID::internal::CompareByFirstField<SortItem> Less;
-
-    if (output->IsSerializationDeterministic() &&
-        this->edge_values().size() > 1) {
-      ::std::unique_ptr<SortItem[]> items(
-          new SortItem[this->edge_values().size()]);
-      typedef ::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Edge >::size_type size_type;
-      size_type n = 0;
-      for (::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Edge >::const_iterator
-          it = this->edge_values().begin();
-          it != this->edge_values().end(); ++it, ++n) {
-        items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
-      }
-      ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
-      for (size_type i = 0; i < n; i++) {
-        Observation_EdgeValuesEntry_DoNotUse::Funcs::SerializeToCodedStream(2, items[static_cast<ptrdiff_t>(i)].second->first, items[static_cast<ptrdiff_t>(i)].second->second, output);
-      }
-    } else {
-      for (::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Edge >::const_iterator
-          it = this->edge_values().begin();
-          it != this->edge_values().end(); ++it) {
-        Observation_EdgeValuesEntry_DoNotUse::Funcs::SerializeToCodedStream(2, it->first, it->second, output);
-      }
-    }
+  // repeated .energyplatform.PhysicalParam items = 1;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->items_size()); i < n; i++) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1,
+      this->items(static_cast<int>(i)),
+      output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -448,66 +248,12 @@ void Observation::SerializeWithCachedSizes(
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // map<int32, .energyplatform.Node> node_values = 1;
-  if (!this->node_values().empty()) {
-    typedef ::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Node >::const_pointer
-        ConstPtr;
-    typedef ::PROTOBUF_NAMESPACE_ID::internal::SortItem< ::PROTOBUF_NAMESPACE_ID::int32, ConstPtr > SortItem;
-    typedef ::PROTOBUF_NAMESPACE_ID::internal::CompareByFirstField<SortItem> Less;
-
-    if (false &&
-        this->node_values().size() > 1) {
-      ::std::unique_ptr<SortItem[]> items(
-          new SortItem[this->node_values().size()]);
-      typedef ::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Node >::size_type size_type;
-      size_type n = 0;
-      for (::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Node >::const_iterator
-          it = this->node_values().begin();
-          it != this->node_values().end(); ++it, ++n) {
-        items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
-      }
-      ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
-      for (size_type i = 0; i < n; i++) {
-        target = Observation_NodeValuesEntry_DoNotUse::Funcs::SerializeToArray(1, items[static_cast<ptrdiff_t>(i)].second->first, items[static_cast<ptrdiff_t>(i)].second->second, target);
-      }
-    } else {
-      for (::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Node >::const_iterator
-          it = this->node_values().begin();
-          it != this->node_values().end(); ++it) {
-        target = Observation_NodeValuesEntry_DoNotUse::Funcs::SerializeToArray(1, it->first, it->second, target);
-      }
-    }
-  }
-
-  // map<int32, .energyplatform.Edge> edge_values = 2;
-  if (!this->edge_values().empty()) {
-    typedef ::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Edge >::const_pointer
-        ConstPtr;
-    typedef ::PROTOBUF_NAMESPACE_ID::internal::SortItem< ::PROTOBUF_NAMESPACE_ID::int32, ConstPtr > SortItem;
-    typedef ::PROTOBUF_NAMESPACE_ID::internal::CompareByFirstField<SortItem> Less;
-
-    if (false &&
-        this->edge_values().size() > 1) {
-      ::std::unique_ptr<SortItem[]> items(
-          new SortItem[this->edge_values().size()]);
-      typedef ::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Edge >::size_type size_type;
-      size_type n = 0;
-      for (::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Edge >::const_iterator
-          it = this->edge_values().begin();
-          it != this->edge_values().end(); ++it, ++n) {
-        items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
-      }
-      ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
-      for (size_type i = 0; i < n; i++) {
-        target = Observation_EdgeValuesEntry_DoNotUse::Funcs::SerializeToArray(2, items[static_cast<ptrdiff_t>(i)].second->first, items[static_cast<ptrdiff_t>(i)].second->second, target);
-      }
-    } else {
-      for (::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Edge >::const_iterator
-          it = this->edge_values().begin();
-          it != this->edge_values().end(); ++it) {
-        target = Observation_EdgeValuesEntry_DoNotUse::Funcs::SerializeToArray(2, it->first, it->second, target);
-      }
-    }
+  // repeated .energyplatform.PhysicalParam items = 1;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->items_size()); i < n; i++) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        1, this->items(static_cast<int>(i)), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -531,22 +277,15 @@ size_t Observation::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // map<int32, .energyplatform.Node> node_values = 1;
-  total_size += 1 *
-      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->node_values_size());
-  for (::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Node >::const_iterator
-      it = this->node_values().begin();
-      it != this->node_values().end(); ++it) {
-    total_size += Observation_NodeValuesEntry_DoNotUse::Funcs::ByteSizeLong(it->first, it->second);
-  }
-
-  // map<int32, .energyplatform.Edge> edge_values = 2;
-  total_size += 1 *
-      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->edge_values_size());
-  for (::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, ::energyplatform::Edge >::const_iterator
-      it = this->edge_values().begin();
-      it != this->edge_values().end(); ++it) {
-    total_size += Observation_EdgeValuesEntry_DoNotUse::Funcs::ByteSizeLong(it->first, it->second);
+  // repeated .energyplatform.PhysicalParam items = 1;
+  {
+    unsigned int count = static_cast<unsigned int>(this->items_size());
+    total_size += 1UL * count;
+    for (unsigned int i = 0; i < count; i++) {
+      total_size +=
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+          this->items(static_cast<int>(i)));
+    }
   }
 
   int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
@@ -576,8 +315,7 @@ void Observation::MergeFrom(const Observation& from) {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  node_values_.MergeFrom(from.node_values_);
-  edge_values_.MergeFrom(from.edge_values_);
+  items_.MergeFrom(from.items_);
 }
 
 void Observation::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -601,8 +339,7 @@ bool Observation::IsInitialized() const {
 void Observation::InternalSwap(Observation* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  node_values_.Swap(&other->node_values_);
-  edge_values_.Swap(&other->edge_values_);
+  CastToBase(&items_)->InternalSwap(CastToBase(&other->items_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata Observation::GetMetadata() const {
@@ -613,12 +350,6 @@ void Observation::InternalSwap(Observation* other) {
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace energyplatform
 PROTOBUF_NAMESPACE_OPEN
-template<> PROTOBUF_NOINLINE ::energyplatform::Observation_NodeValuesEntry_DoNotUse* Arena::CreateMaybeMessage< ::energyplatform::Observation_NodeValuesEntry_DoNotUse >(Arena* arena) {
-  return Arena::CreateInternal< ::energyplatform::Observation_NodeValuesEntry_DoNotUse >(arena);
-}
-template<> PROTOBUF_NOINLINE ::energyplatform::Observation_EdgeValuesEntry_DoNotUse* Arena::CreateMaybeMessage< ::energyplatform::Observation_EdgeValuesEntry_DoNotUse >(Arena* arena) {
-  return Arena::CreateInternal< ::energyplatform::Observation_EdgeValuesEntry_DoNotUse >(arena);
-}
 template<> PROTOBUF_NOINLINE ::energyplatform::Observation* Arena::CreateMaybeMessage< ::energyplatform::Observation >(Arena* arena) {
   return Arena::CreateInternal< ::energyplatform::Observation >(arena);
 }

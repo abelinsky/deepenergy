@@ -73,14 +73,6 @@ class EnvService final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::energyplatform::LoadDataResponse>> PrepareAsyncLoadData(::grpc::ClientContext* context, const ::energyplatform::LoadDataRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::energyplatform::LoadDataResponse>>(PrepareAsyncLoadDataRaw(context, request, cq));
     }
-    // Loads data and returns environment description. Data location must be already set.
-    virtual ::grpc::Status GetEnvDescription(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest& request, ::energyplatform::GetEnvDescriptionResponse* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::energyplatform::GetEnvDescriptionResponse>> AsyncGetEnvDescription(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::energyplatform::GetEnvDescriptionResponse>>(AsyncGetEnvDescriptionRaw(context, request, cq));
-    }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::energyplatform::GetEnvDescriptionResponse>> PrepareAsyncGetEnvDescription(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::energyplatform::GetEnvDescriptionResponse>>(PrepareAsyncGetEnvDescriptionRaw(context, request, cq));
-    }
     //  Sets current task 
     virtual ::grpc::Status SetCurrentTask(::grpc::ClientContext* context, const ::energyplatform::SetCurrentTaskRequest& request, ::energyplatform::SetCurrentTaskResponse* response) = 0;
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::energyplatform::SetCurrentTaskResponse>> AsyncSetCurrentTask(::grpc::ClientContext* context, const ::energyplatform::SetCurrentTaskRequest& request, ::grpc::CompletionQueue* cq) {
@@ -88,6 +80,14 @@ class EnvService final {
     }
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::energyplatform::SetCurrentTaskResponse>> PrepareAsyncSetCurrentTask(::grpc::ClientContext* context, const ::energyplatform::SetCurrentTaskRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::energyplatform::SetCurrentTaskResponse>>(PrepareAsyncSetCurrentTaskRaw(context, request, cq));
+    }
+    // Loads data and returns environment description. Data location must be already set.
+    virtual ::grpc::Status GetEnvDescription(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest& request, ::energyplatform::GetEnvDescriptionResponse* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::energyplatform::GetEnvDescriptionResponse>> AsyncGetEnvDescription(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::energyplatform::GetEnvDescriptionResponse>>(AsyncGetEnvDescriptionRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::energyplatform::GetEnvDescriptionResponse>> PrepareAsyncGetEnvDescription(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::energyplatform::GetEnvDescriptionResponse>>(PrepareAsyncGetEnvDescriptionRaw(context, request, cq));
     }
     //  Returns the list of control parameters (possible agent's actions)
     virtual ::grpc::Status GetOptimizationParams(::grpc::ClientContext* context, const ::energyplatform::GetOptimizationParamsRequest& request, ::energyplatform::GetOptimizationParamsResponse* response) = 0;
@@ -129,16 +129,16 @@ class EnvService final {
       virtual void LoadData(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::energyplatform::LoadDataResponse* response, std::function<void(::grpc::Status)>) = 0;
       virtual void LoadData(::grpc::ClientContext* context, const ::energyplatform::LoadDataRequest* request, ::energyplatform::LoadDataResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
       virtual void LoadData(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::energyplatform::LoadDataResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
-      // Loads data and returns environment description. Data location must be already set.
-      virtual void GetEnvDescription(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest* request, ::energyplatform::GetEnvDescriptionResponse* response, std::function<void(::grpc::Status)>) = 0;
-      virtual void GetEnvDescription(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::energyplatform::GetEnvDescriptionResponse* response, std::function<void(::grpc::Status)>) = 0;
-      virtual void GetEnvDescription(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest* request, ::energyplatform::GetEnvDescriptionResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
-      virtual void GetEnvDescription(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::energyplatform::GetEnvDescriptionResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
       //  Sets current task 
       virtual void SetCurrentTask(::grpc::ClientContext* context, const ::energyplatform::SetCurrentTaskRequest* request, ::energyplatform::SetCurrentTaskResponse* response, std::function<void(::grpc::Status)>) = 0;
       virtual void SetCurrentTask(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::energyplatform::SetCurrentTaskResponse* response, std::function<void(::grpc::Status)>) = 0;
       virtual void SetCurrentTask(::grpc::ClientContext* context, const ::energyplatform::SetCurrentTaskRequest* request, ::energyplatform::SetCurrentTaskResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
       virtual void SetCurrentTask(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::energyplatform::SetCurrentTaskResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      // Loads data and returns environment description. Data location must be already set.
+      virtual void GetEnvDescription(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest* request, ::energyplatform::GetEnvDescriptionResponse* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void GetEnvDescription(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::energyplatform::GetEnvDescriptionResponse* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void GetEnvDescription(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest* request, ::energyplatform::GetEnvDescriptionResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      virtual void GetEnvDescription(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::energyplatform::GetEnvDescriptionResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
       //  Returns the list of control parameters (possible agent's actions)
       virtual void GetOptimizationParams(::grpc::ClientContext* context, const ::energyplatform::GetOptimizationParamsRequest* request, ::energyplatform::GetOptimizationParamsResponse* response, std::function<void(::grpc::Status)>) = 0;
       virtual void GetOptimizationParams(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::energyplatform::GetOptimizationParamsResponse* response, std::function<void(::grpc::Status)>) = 0;
@@ -164,10 +164,10 @@ class EnvService final {
   private:
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::energyplatform::LoadDataResponse>* AsyncLoadDataRaw(::grpc::ClientContext* context, const ::energyplatform::LoadDataRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::energyplatform::LoadDataResponse>* PrepareAsyncLoadDataRaw(::grpc::ClientContext* context, const ::energyplatform::LoadDataRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::energyplatform::GetEnvDescriptionResponse>* AsyncGetEnvDescriptionRaw(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::energyplatform::GetEnvDescriptionResponse>* PrepareAsyncGetEnvDescriptionRaw(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::energyplatform::SetCurrentTaskResponse>* AsyncSetCurrentTaskRaw(::grpc::ClientContext* context, const ::energyplatform::SetCurrentTaskRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::energyplatform::SetCurrentTaskResponse>* PrepareAsyncSetCurrentTaskRaw(::grpc::ClientContext* context, const ::energyplatform::SetCurrentTaskRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::energyplatform::GetEnvDescriptionResponse>* AsyncGetEnvDescriptionRaw(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::energyplatform::GetEnvDescriptionResponse>* PrepareAsyncGetEnvDescriptionRaw(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::energyplatform::GetOptimizationParamsResponse>* AsyncGetOptimizationParamsRaw(::grpc::ClientContext* context, const ::energyplatform::GetOptimizationParamsRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::energyplatform::GetOptimizationParamsResponse>* PrepareAsyncGetOptimizationParamsRaw(::grpc::ClientContext* context, const ::energyplatform::GetOptimizationParamsRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::energyplatform::ResetResponse>* AsyncResetRaw(::grpc::ClientContext* context, const ::energyplatform::ResetRequest& request, ::grpc::CompletionQueue* cq) = 0;
@@ -187,19 +187,19 @@ class EnvService final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::energyplatform::LoadDataResponse>> PrepareAsyncLoadData(::grpc::ClientContext* context, const ::energyplatform::LoadDataRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::energyplatform::LoadDataResponse>>(PrepareAsyncLoadDataRaw(context, request, cq));
     }
-    ::grpc::Status GetEnvDescription(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest& request, ::energyplatform::GetEnvDescriptionResponse* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::energyplatform::GetEnvDescriptionResponse>> AsyncGetEnvDescription(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::energyplatform::GetEnvDescriptionResponse>>(AsyncGetEnvDescriptionRaw(context, request, cq));
-    }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::energyplatform::GetEnvDescriptionResponse>> PrepareAsyncGetEnvDescription(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::energyplatform::GetEnvDescriptionResponse>>(PrepareAsyncGetEnvDescriptionRaw(context, request, cq));
-    }
     ::grpc::Status SetCurrentTask(::grpc::ClientContext* context, const ::energyplatform::SetCurrentTaskRequest& request, ::energyplatform::SetCurrentTaskResponse* response) override;
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::energyplatform::SetCurrentTaskResponse>> AsyncSetCurrentTask(::grpc::ClientContext* context, const ::energyplatform::SetCurrentTaskRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::energyplatform::SetCurrentTaskResponse>>(AsyncSetCurrentTaskRaw(context, request, cq));
     }
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::energyplatform::SetCurrentTaskResponse>> PrepareAsyncSetCurrentTask(::grpc::ClientContext* context, const ::energyplatform::SetCurrentTaskRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::energyplatform::SetCurrentTaskResponse>>(PrepareAsyncSetCurrentTaskRaw(context, request, cq));
+    }
+    ::grpc::Status GetEnvDescription(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest& request, ::energyplatform::GetEnvDescriptionResponse* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::energyplatform::GetEnvDescriptionResponse>> AsyncGetEnvDescription(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::energyplatform::GetEnvDescriptionResponse>>(AsyncGetEnvDescriptionRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::energyplatform::GetEnvDescriptionResponse>> PrepareAsyncGetEnvDescription(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::energyplatform::GetEnvDescriptionResponse>>(PrepareAsyncGetEnvDescriptionRaw(context, request, cq));
     }
     ::grpc::Status GetOptimizationParams(::grpc::ClientContext* context, const ::energyplatform::GetOptimizationParamsRequest& request, ::energyplatform::GetOptimizationParamsResponse* response) override;
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::energyplatform::GetOptimizationParamsResponse>> AsyncGetOptimizationParams(::grpc::ClientContext* context, const ::energyplatform::GetOptimizationParamsRequest& request, ::grpc::CompletionQueue* cq) {
@@ -236,14 +236,14 @@ class EnvService final {
       void LoadData(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::energyplatform::LoadDataResponse* response, std::function<void(::grpc::Status)>) override;
       void LoadData(::grpc::ClientContext* context, const ::energyplatform::LoadDataRequest* request, ::energyplatform::LoadDataResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
       void LoadData(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::energyplatform::LoadDataResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
-      void GetEnvDescription(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest* request, ::energyplatform::GetEnvDescriptionResponse* response, std::function<void(::grpc::Status)>) override;
-      void GetEnvDescription(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::energyplatform::GetEnvDescriptionResponse* response, std::function<void(::grpc::Status)>) override;
-      void GetEnvDescription(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest* request, ::energyplatform::GetEnvDescriptionResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
-      void GetEnvDescription(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::energyplatform::GetEnvDescriptionResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
       void SetCurrentTask(::grpc::ClientContext* context, const ::energyplatform::SetCurrentTaskRequest* request, ::energyplatform::SetCurrentTaskResponse* response, std::function<void(::grpc::Status)>) override;
       void SetCurrentTask(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::energyplatform::SetCurrentTaskResponse* response, std::function<void(::grpc::Status)>) override;
       void SetCurrentTask(::grpc::ClientContext* context, const ::energyplatform::SetCurrentTaskRequest* request, ::energyplatform::SetCurrentTaskResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
       void SetCurrentTask(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::energyplatform::SetCurrentTaskResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
+      void GetEnvDescription(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest* request, ::energyplatform::GetEnvDescriptionResponse* response, std::function<void(::grpc::Status)>) override;
+      void GetEnvDescription(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::energyplatform::GetEnvDescriptionResponse* response, std::function<void(::grpc::Status)>) override;
+      void GetEnvDescription(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest* request, ::energyplatform::GetEnvDescriptionResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
+      void GetEnvDescription(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::energyplatform::GetEnvDescriptionResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
       void GetOptimizationParams(::grpc::ClientContext* context, const ::energyplatform::GetOptimizationParamsRequest* request, ::energyplatform::GetOptimizationParamsResponse* response, std::function<void(::grpc::Status)>) override;
       void GetOptimizationParams(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::energyplatform::GetOptimizationParamsResponse* response, std::function<void(::grpc::Status)>) override;
       void GetOptimizationParams(::grpc::ClientContext* context, const ::energyplatform::GetOptimizationParamsRequest* request, ::energyplatform::GetOptimizationParamsResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
@@ -273,10 +273,10 @@ class EnvService final {
     class experimental_async async_stub_{this};
     ::grpc::ClientAsyncResponseReader< ::energyplatform::LoadDataResponse>* AsyncLoadDataRaw(::grpc::ClientContext* context, const ::energyplatform::LoadDataRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::energyplatform::LoadDataResponse>* PrepareAsyncLoadDataRaw(::grpc::ClientContext* context, const ::energyplatform::LoadDataRequest& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::energyplatform::GetEnvDescriptionResponse>* AsyncGetEnvDescriptionRaw(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::energyplatform::GetEnvDescriptionResponse>* PrepareAsyncGetEnvDescriptionRaw(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::energyplatform::SetCurrentTaskResponse>* AsyncSetCurrentTaskRaw(::grpc::ClientContext* context, const ::energyplatform::SetCurrentTaskRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::energyplatform::SetCurrentTaskResponse>* PrepareAsyncSetCurrentTaskRaw(::grpc::ClientContext* context, const ::energyplatform::SetCurrentTaskRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::energyplatform::GetEnvDescriptionResponse>* AsyncGetEnvDescriptionRaw(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::energyplatform::GetEnvDescriptionResponse>* PrepareAsyncGetEnvDescriptionRaw(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::energyplatform::GetOptimizationParamsResponse>* AsyncGetOptimizationParamsRaw(::grpc::ClientContext* context, const ::energyplatform::GetOptimizationParamsRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::energyplatform::GetOptimizationParamsResponse>* PrepareAsyncGetOptimizationParamsRaw(::grpc::ClientContext* context, const ::energyplatform::GetOptimizationParamsRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::energyplatform::ResetResponse>* AsyncResetRaw(::grpc::ClientContext* context, const ::energyplatform::ResetRequest& request, ::grpc::CompletionQueue* cq) override;
@@ -286,8 +286,8 @@ class EnvService final {
     ::grpc::ClientAsyncResponseReader< ::energyplatform::StopResponse>* AsyncStopRaw(::grpc::ClientContext* context, const ::energyplatform::StopRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::energyplatform::StopResponse>* PrepareAsyncStopRaw(::grpc::ClientContext* context, const ::energyplatform::StopRequest& request, ::grpc::CompletionQueue* cq) override;
     const ::grpc::internal::RpcMethod rpcmethod_LoadData_;
-    const ::grpc::internal::RpcMethod rpcmethod_GetEnvDescription_;
     const ::grpc::internal::RpcMethod rpcmethod_SetCurrentTask_;
+    const ::grpc::internal::RpcMethod rpcmethod_GetEnvDescription_;
     const ::grpc::internal::RpcMethod rpcmethod_GetOptimizationParams_;
     const ::grpc::internal::RpcMethod rpcmethod_Reset_;
     const ::grpc::internal::RpcMethod rpcmethod_Step_;
@@ -301,10 +301,10 @@ class EnvService final {
     virtual ~Service();
     // Loads data.
     virtual ::grpc::Status LoadData(::grpc::ServerContext* context, const ::energyplatform::LoadDataRequest* request, ::energyplatform::LoadDataResponse* response);
-    // Loads data and returns environment description. Data location must be already set.
-    virtual ::grpc::Status GetEnvDescription(::grpc::ServerContext* context, const ::energyplatform::GetEnvDescriptionRequest* request, ::energyplatform::GetEnvDescriptionResponse* response);
     //  Sets current task 
     virtual ::grpc::Status SetCurrentTask(::grpc::ServerContext* context, const ::energyplatform::SetCurrentTaskRequest* request, ::energyplatform::SetCurrentTaskResponse* response);
+    // Loads data and returns environment description. Data location must be already set.
+    virtual ::grpc::Status GetEnvDescription(::grpc::ServerContext* context, const ::energyplatform::GetEnvDescriptionRequest* request, ::energyplatform::GetEnvDescriptionResponse* response);
     //  Returns the list of control parameters (possible agent's actions)
     virtual ::grpc::Status GetOptimizationParams(::grpc::ServerContext* context, const ::energyplatform::GetOptimizationParamsRequest* request, ::energyplatform::GetOptimizationParamsResponse* response);
     // Resets the state of the environment (the simulator state) and returns an initial observation.
@@ -335,32 +335,12 @@ class EnvService final {
     }
   };
   template <class BaseClass>
-  class WithAsyncMethod_GetEnvDescription : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
-   public:
-    WithAsyncMethod_GetEnvDescription() {
-      ::grpc::Service::MarkMethodAsync(1);
-    }
-    ~WithAsyncMethod_GetEnvDescription() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status GetEnvDescription(::grpc::ServerContext* context, const ::energyplatform::GetEnvDescriptionRequest* request, ::energyplatform::GetEnvDescriptionResponse* response) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    void RequestGetEnvDescription(::grpc::ServerContext* context, ::energyplatform::GetEnvDescriptionRequest* request, ::grpc::ServerAsyncResponseWriter< ::energyplatform::GetEnvDescriptionResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
-    }
-  };
-  template <class BaseClass>
   class WithAsyncMethod_SetCurrentTask : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_SetCurrentTask() {
-      ::grpc::Service::MarkMethodAsync(2);
+      ::grpc::Service::MarkMethodAsync(1);
     }
     ~WithAsyncMethod_SetCurrentTask() override {
       BaseClassMustBeDerivedFromService(this);
@@ -371,6 +351,26 @@ class EnvService final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestSetCurrentTask(::grpc::ServerContext* context, ::energyplatform::SetCurrentTaskRequest* request, ::grpc::ServerAsyncResponseWriter< ::energyplatform::SetCurrentTaskResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_GetEnvDescription : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithAsyncMethod_GetEnvDescription() {
+      ::grpc::Service::MarkMethodAsync(2);
+    }
+    ~WithAsyncMethod_GetEnvDescription() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status GetEnvDescription(::grpc::ServerContext* context, const ::energyplatform::GetEnvDescriptionRequest* request, ::energyplatform::GetEnvDescriptionResponse* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestGetEnvDescription(::grpc::ServerContext* context, ::energyplatform::GetEnvDescriptionRequest* request, ::grpc::ServerAsyncResponseWriter< ::energyplatform::GetEnvDescriptionResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
@@ -454,7 +454,7 @@ class EnvService final {
       ::grpc::Service::RequestAsyncUnary(6, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_LoadData<WithAsyncMethod_GetEnvDescription<WithAsyncMethod_SetCurrentTask<WithAsyncMethod_GetOptimizationParams<WithAsyncMethod_Reset<WithAsyncMethod_Step<WithAsyncMethod_Stop<Service > > > > > > > AsyncService;
+  typedef WithAsyncMethod_LoadData<WithAsyncMethod_SetCurrentTask<WithAsyncMethod_GetEnvDescription<WithAsyncMethod_GetOptimizationParams<WithAsyncMethod_Reset<WithAsyncMethod_Step<WithAsyncMethod_Stop<Service > > > > > > > AsyncService;
   template <class BaseClass>
   class ExperimentalWithCallbackMethod_LoadData : public BaseClass {
    private:
@@ -487,43 +487,12 @@ class EnvService final {
     virtual void LoadData(::grpc::ServerContext* context, const ::energyplatform::LoadDataRequest* request, ::energyplatform::LoadDataResponse* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
-  class ExperimentalWithCallbackMethod_GetEnvDescription : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
-   public:
-    ExperimentalWithCallbackMethod_GetEnvDescription() {
-      ::grpc::Service::experimental().MarkMethodCallback(1,
-        new ::grpc::internal::CallbackUnaryHandler< ::energyplatform::GetEnvDescriptionRequest, ::energyplatform::GetEnvDescriptionResponse>(
-          [this](::grpc::ServerContext* context,
-                 const ::energyplatform::GetEnvDescriptionRequest* request,
-                 ::energyplatform::GetEnvDescriptionResponse* response,
-                 ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   return this->GetEnvDescription(context, request, response, controller);
-                 }));
-    }
-    void SetMessageAllocatorFor_GetEnvDescription(
-        ::grpc::experimental::MessageAllocator< ::energyplatform::GetEnvDescriptionRequest, ::energyplatform::GetEnvDescriptionResponse>* allocator) {
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::energyplatform::GetEnvDescriptionRequest, ::energyplatform::GetEnvDescriptionResponse>*>(
-          ::grpc::Service::experimental().GetHandler(1))
-              ->SetMessageAllocator(allocator);
-    }
-    ~ExperimentalWithCallbackMethod_GetEnvDescription() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status GetEnvDescription(::grpc::ServerContext* context, const ::energyplatform::GetEnvDescriptionRequest* request, ::energyplatform::GetEnvDescriptionResponse* response) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    virtual void GetEnvDescription(::grpc::ServerContext* context, const ::energyplatform::GetEnvDescriptionRequest* request, ::energyplatform::GetEnvDescriptionResponse* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
-  };
-  template <class BaseClass>
   class ExperimentalWithCallbackMethod_SetCurrentTask : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithCallbackMethod_SetCurrentTask() {
-      ::grpc::Service::experimental().MarkMethodCallback(2,
+      ::grpc::Service::experimental().MarkMethodCallback(1,
         new ::grpc::internal::CallbackUnaryHandler< ::energyplatform::SetCurrentTaskRequest, ::energyplatform::SetCurrentTaskResponse>(
           [this](::grpc::ServerContext* context,
                  const ::energyplatform::SetCurrentTaskRequest* request,
@@ -535,7 +504,7 @@ class EnvService final {
     void SetMessageAllocatorFor_SetCurrentTask(
         ::grpc::experimental::MessageAllocator< ::energyplatform::SetCurrentTaskRequest, ::energyplatform::SetCurrentTaskResponse>* allocator) {
       static_cast<::grpc::internal::CallbackUnaryHandler< ::energyplatform::SetCurrentTaskRequest, ::energyplatform::SetCurrentTaskResponse>*>(
-          ::grpc::Service::experimental().GetHandler(2))
+          ::grpc::Service::experimental().GetHandler(1))
               ->SetMessageAllocator(allocator);
     }
     ~ExperimentalWithCallbackMethod_SetCurrentTask() override {
@@ -547,6 +516,37 @@ class EnvService final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     virtual void SetCurrentTask(::grpc::ServerContext* context, const ::energyplatform::SetCurrentTaskRequest* request, ::energyplatform::SetCurrentTaskResponse* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  template <class BaseClass>
+  class ExperimentalWithCallbackMethod_GetEnvDescription : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithCallbackMethod_GetEnvDescription() {
+      ::grpc::Service::experimental().MarkMethodCallback(2,
+        new ::grpc::internal::CallbackUnaryHandler< ::energyplatform::GetEnvDescriptionRequest, ::energyplatform::GetEnvDescriptionResponse>(
+          [this](::grpc::ServerContext* context,
+                 const ::energyplatform::GetEnvDescriptionRequest* request,
+                 ::energyplatform::GetEnvDescriptionResponse* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   return this->GetEnvDescription(context, request, response, controller);
+                 }));
+    }
+    void SetMessageAllocatorFor_GetEnvDescription(
+        ::grpc::experimental::MessageAllocator< ::energyplatform::GetEnvDescriptionRequest, ::energyplatform::GetEnvDescriptionResponse>* allocator) {
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::energyplatform::GetEnvDescriptionRequest, ::energyplatform::GetEnvDescriptionResponse>*>(
+          ::grpc::Service::experimental().GetHandler(2))
+              ->SetMessageAllocator(allocator);
+    }
+    ~ExperimentalWithCallbackMethod_GetEnvDescription() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status GetEnvDescription(::grpc::ServerContext* context, const ::energyplatform::GetEnvDescriptionRequest* request, ::energyplatform::GetEnvDescriptionResponse* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void GetEnvDescription(::grpc::ServerContext* context, const ::energyplatform::GetEnvDescriptionRequest* request, ::energyplatform::GetEnvDescriptionResponse* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
   class ExperimentalWithCallbackMethod_GetOptimizationParams : public BaseClass {
@@ -672,7 +672,7 @@ class EnvService final {
     }
     virtual void Stop(::grpc::ServerContext* context, const ::energyplatform::StopRequest* request, ::energyplatform::StopResponse* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
-  typedef ExperimentalWithCallbackMethod_LoadData<ExperimentalWithCallbackMethod_GetEnvDescription<ExperimentalWithCallbackMethod_SetCurrentTask<ExperimentalWithCallbackMethod_GetOptimizationParams<ExperimentalWithCallbackMethod_Reset<ExperimentalWithCallbackMethod_Step<ExperimentalWithCallbackMethod_Stop<Service > > > > > > > ExperimentalCallbackService;
+  typedef ExperimentalWithCallbackMethod_LoadData<ExperimentalWithCallbackMethod_SetCurrentTask<ExperimentalWithCallbackMethod_GetEnvDescription<ExperimentalWithCallbackMethod_GetOptimizationParams<ExperimentalWithCallbackMethod_Reset<ExperimentalWithCallbackMethod_Step<ExperimentalWithCallbackMethod_Stop<Service > > > > > > > ExperimentalCallbackService;
   template <class BaseClass>
   class WithGenericMethod_LoadData : public BaseClass {
    private:
@@ -691,35 +691,35 @@ class EnvService final {
     }
   };
   template <class BaseClass>
-  class WithGenericMethod_GetEnvDescription : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
-   public:
-    WithGenericMethod_GetEnvDescription() {
-      ::grpc::Service::MarkMethodGeneric(1);
-    }
-    ~WithGenericMethod_GetEnvDescription() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status GetEnvDescription(::grpc::ServerContext* context, const ::energyplatform::GetEnvDescriptionRequest* request, ::energyplatform::GetEnvDescriptionResponse* response) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-  };
-  template <class BaseClass>
   class WithGenericMethod_SetCurrentTask : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_SetCurrentTask() {
-      ::grpc::Service::MarkMethodGeneric(2);
+      ::grpc::Service::MarkMethodGeneric(1);
     }
     ~WithGenericMethod_SetCurrentTask() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
     ::grpc::Status SetCurrentTask(::grpc::ServerContext* context, const ::energyplatform::SetCurrentTaskRequest* request, ::energyplatform::SetCurrentTaskResponse* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_GetEnvDescription : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithGenericMethod_GetEnvDescription() {
+      ::grpc::Service::MarkMethodGeneric(2);
+    }
+    ~WithGenericMethod_GetEnvDescription() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status GetEnvDescription(::grpc::ServerContext* context, const ::energyplatform::GetEnvDescriptionRequest* request, ::energyplatform::GetEnvDescriptionResponse* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -813,32 +813,12 @@ class EnvService final {
     }
   };
   template <class BaseClass>
-  class WithRawMethod_GetEnvDescription : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
-   public:
-    WithRawMethod_GetEnvDescription() {
-      ::grpc::Service::MarkMethodRaw(1);
-    }
-    ~WithRawMethod_GetEnvDescription() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status GetEnvDescription(::grpc::ServerContext* context, const ::energyplatform::GetEnvDescriptionRequest* request, ::energyplatform::GetEnvDescriptionResponse* response) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    void RequestGetEnvDescription(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
-    }
-  };
-  template <class BaseClass>
   class WithRawMethod_SetCurrentTask : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_SetCurrentTask() {
-      ::grpc::Service::MarkMethodRaw(2);
+      ::grpc::Service::MarkMethodRaw(1);
     }
     ~WithRawMethod_SetCurrentTask() override {
       BaseClassMustBeDerivedFromService(this);
@@ -849,6 +829,26 @@ class EnvService final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestSetCurrentTask(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_GetEnvDescription : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithRawMethod_GetEnvDescription() {
+      ::grpc::Service::MarkMethodRaw(2);
+    }
+    ~WithRawMethod_GetEnvDescription() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status GetEnvDescription(::grpc::ServerContext* context, const ::energyplatform::GetEnvDescriptionRequest* request, ::energyplatform::GetEnvDescriptionResponse* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestGetEnvDescription(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
@@ -958,37 +958,12 @@ class EnvService final {
     virtual void LoadData(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
-  class ExperimentalWithRawCallbackMethod_GetEnvDescription : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
-   public:
-    ExperimentalWithRawCallbackMethod_GetEnvDescription() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(1,
-        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
-          [this](::grpc::ServerContext* context,
-                 const ::grpc::ByteBuffer* request,
-                 ::grpc::ByteBuffer* response,
-                 ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->GetEnvDescription(context, request, response, controller);
-                 }));
-    }
-    ~ExperimentalWithRawCallbackMethod_GetEnvDescription() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status GetEnvDescription(::grpc::ServerContext* context, const ::energyplatform::GetEnvDescriptionRequest* request, ::energyplatform::GetEnvDescriptionResponse* response) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    virtual void GetEnvDescription(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
-  };
-  template <class BaseClass>
   class ExperimentalWithRawCallbackMethod_SetCurrentTask : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     ExperimentalWithRawCallbackMethod_SetCurrentTask() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(2,
+      ::grpc::Service::experimental().MarkMethodRawCallback(1,
         new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
           [this](::grpc::ServerContext* context,
                  const ::grpc::ByteBuffer* request,
@@ -1006,6 +981,31 @@ class EnvService final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     virtual void SetCurrentTask(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  template <class BaseClass>
+  class ExperimentalWithRawCallbackMethod_GetEnvDescription : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithRawCallbackMethod_GetEnvDescription() {
+      ::grpc::Service::experimental().MarkMethodRawCallback(2,
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+          [this](::grpc::ServerContext* context,
+                 const ::grpc::ByteBuffer* request,
+                 ::grpc::ByteBuffer* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   this->GetEnvDescription(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithRawCallbackMethod_GetEnvDescription() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status GetEnvDescription(::grpc::ServerContext* context, const ::energyplatform::GetEnvDescriptionRequest* request, ::energyplatform::GetEnvDescriptionResponse* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void GetEnvDescription(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
   class ExperimentalWithRawCallbackMethod_GetOptimizationParams : public BaseClass {
@@ -1128,32 +1128,12 @@ class EnvService final {
     virtual ::grpc::Status StreamedLoadData(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::energyplatform::LoadDataRequest,::energyplatform::LoadDataResponse>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
-  class WithStreamedUnaryMethod_GetEnvDescription : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service *service) {}
-   public:
-    WithStreamedUnaryMethod_GetEnvDescription() {
-      ::grpc::Service::MarkMethodStreamed(1,
-        new ::grpc::internal::StreamedUnaryHandler< ::energyplatform::GetEnvDescriptionRequest, ::energyplatform::GetEnvDescriptionResponse>(std::bind(&WithStreamedUnaryMethod_GetEnvDescription<BaseClass>::StreamedGetEnvDescription, this, std::placeholders::_1, std::placeholders::_2)));
-    }
-    ~WithStreamedUnaryMethod_GetEnvDescription() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable regular version of this method
-    ::grpc::Status GetEnvDescription(::grpc::ServerContext* context, const ::energyplatform::GetEnvDescriptionRequest* request, ::energyplatform::GetEnvDescriptionResponse* response) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedGetEnvDescription(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::energyplatform::GetEnvDescriptionRequest,::energyplatform::GetEnvDescriptionResponse>* server_unary_streamer) = 0;
-  };
-  template <class BaseClass>
   class WithStreamedUnaryMethod_SetCurrentTask : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_SetCurrentTask() {
-      ::grpc::Service::MarkMethodStreamed(2,
+      ::grpc::Service::MarkMethodStreamed(1,
         new ::grpc::internal::StreamedUnaryHandler< ::energyplatform::SetCurrentTaskRequest, ::energyplatform::SetCurrentTaskResponse>(std::bind(&WithStreamedUnaryMethod_SetCurrentTask<BaseClass>::StreamedSetCurrentTask, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_SetCurrentTask() override {
@@ -1166,6 +1146,26 @@ class EnvService final {
     }
     // replace default version of method with streamed unary
     virtual ::grpc::Status StreamedSetCurrentTask(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::energyplatform::SetCurrentTaskRequest,::energyplatform::SetCurrentTaskResponse>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_GetEnvDescription : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithStreamedUnaryMethod_GetEnvDescription() {
+      ::grpc::Service::MarkMethodStreamed(2,
+        new ::grpc::internal::StreamedUnaryHandler< ::energyplatform::GetEnvDescriptionRequest, ::energyplatform::GetEnvDescriptionResponse>(std::bind(&WithStreamedUnaryMethod_GetEnvDescription<BaseClass>::StreamedGetEnvDescription, this, std::placeholders::_1, std::placeholders::_2)));
+    }
+    ~WithStreamedUnaryMethod_GetEnvDescription() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status GetEnvDescription(::grpc::ServerContext* context, const ::energyplatform::GetEnvDescriptionRequest* request, ::energyplatform::GetEnvDescriptionResponse* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedGetEnvDescription(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::energyplatform::GetEnvDescriptionRequest,::energyplatform::GetEnvDescriptionResponse>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
   class WithStreamedUnaryMethod_GetOptimizationParams : public BaseClass {
@@ -1247,9 +1247,9 @@ class EnvService final {
     // replace default version of method with streamed unary
     virtual ::grpc::Status StreamedStop(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::energyplatform::StopRequest,::energyplatform::StopResponse>* server_unary_streamer) = 0;
   };
-  typedef WithStreamedUnaryMethod_LoadData<WithStreamedUnaryMethod_GetEnvDescription<WithStreamedUnaryMethod_SetCurrentTask<WithStreamedUnaryMethod_GetOptimizationParams<WithStreamedUnaryMethod_Reset<WithStreamedUnaryMethod_Step<WithStreamedUnaryMethod_Stop<Service > > > > > > > StreamedUnaryService;
+  typedef WithStreamedUnaryMethod_LoadData<WithStreamedUnaryMethod_SetCurrentTask<WithStreamedUnaryMethod_GetEnvDescription<WithStreamedUnaryMethod_GetOptimizationParams<WithStreamedUnaryMethod_Reset<WithStreamedUnaryMethod_Step<WithStreamedUnaryMethod_Stop<Service > > > > > > > StreamedUnaryService;
   typedef Service SplitStreamedService;
-  typedef WithStreamedUnaryMethod_LoadData<WithStreamedUnaryMethod_GetEnvDescription<WithStreamedUnaryMethod_SetCurrentTask<WithStreamedUnaryMethod_GetOptimizationParams<WithStreamedUnaryMethod_Reset<WithStreamedUnaryMethod_Step<WithStreamedUnaryMethod_Stop<Service > > > > > > > StreamedService;
+  typedef WithStreamedUnaryMethod_LoadData<WithStreamedUnaryMethod_SetCurrentTask<WithStreamedUnaryMethod_GetEnvDescription<WithStreamedUnaryMethod_GetOptimizationParams<WithStreamedUnaryMethod_Reset<WithStreamedUnaryMethod_Step<WithStreamedUnaryMethod_Stop<Service > > > > > > > StreamedService;
 };
 
 }  // namespace energyplatform

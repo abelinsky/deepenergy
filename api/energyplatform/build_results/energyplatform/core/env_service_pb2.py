@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='energyplatform',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n%energyplatform/core/env_service.proto\x12\x0e\x65nergyplatform\x1a/energyplatform/core/env_service_functions.proto2\xe8\x04\n\nEnvService\x12M\n\x08LoadData\x12\x1f.energyplatform.LoadDataRequest\x1a .energyplatform.LoadDataResponse\x12h\n\x11GetEnvDescription\x12(.energyplatform.GetEnvDescriptionRequest\x1a).energyplatform.GetEnvDescriptionResponse\x12_\n\x0eSetCurrentTask\x12%.energyplatform.SetCurrentTaskRequest\x1a&.energyplatform.SetCurrentTaskResponse\x12t\n\x15GetOptimizationParams\x12,.energyplatform.GetOptimizationParamsRequest\x1a-.energyplatform.GetOptimizationParamsResponse\x12\x44\n\x05Reset\x12\x1c.energyplatform.ResetRequest\x1a\x1d.energyplatform.ResetResponse\x12\x41\n\x04Step\x12\x1b.energyplatform.StepRequest\x1a\x1c.energyplatform.StepResponse\x12\x41\n\x04Stop\x12\x1b.energyplatform.StopRequest\x1a\x1c.energyplatform.StopResponseb\x06proto3')
+  serialized_pb=_b('\n%energyplatform/core/env_service.proto\x12\x0e\x65nergyplatform\x1a/energyplatform/core/env_service_functions.proto2\xe8\x04\n\nEnvService\x12M\n\x08LoadData\x12\x1f.energyplatform.LoadDataRequest\x1a .energyplatform.LoadDataResponse\x12_\n\x0eSetCurrentTask\x12%.energyplatform.SetCurrentTaskRequest\x1a&.energyplatform.SetCurrentTaskResponse\x12h\n\x11GetEnvDescription\x12(.energyplatform.GetEnvDescriptionRequest\x1a).energyplatform.GetEnvDescriptionResponse\x12t\n\x15GetOptimizationParams\x12,.energyplatform.GetOptimizationParamsRequest\x1a-.energyplatform.GetOptimizationParamsResponse\x12\x44\n\x05Reset\x12\x1c.energyplatform.ResetRequest\x1a\x1d.energyplatform.ResetResponse\x12\x41\n\x04Step\x12\x1b.energyplatform.StepRequest\x1a\x1c.energyplatform.StepResponse\x12\x41\n\x04Stop\x12\x1b.energyplatform.StopRequest\x1a\x1c.energyplatform.StopResponseb\x06proto3')
   ,
   dependencies=[energyplatform_dot_core_dot_env__service__functions__pb2.DESCRIPTOR,])
 
@@ -50,21 +50,21 @@ _ENVSERVICE = _descriptor.ServiceDescriptor(
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
-    name='GetEnvDescription',
-    full_name='energyplatform.EnvService.GetEnvDescription',
-    index=1,
-    containing_service=None,
-    input_type=energyplatform_dot_core_dot_env__service__functions__pb2._GETENVDESCRIPTIONREQUEST,
-    output_type=energyplatform_dot_core_dot_env__service__functions__pb2._GETENVDESCRIPTIONRESPONSE,
-    serialized_options=None,
-  ),
-  _descriptor.MethodDescriptor(
     name='SetCurrentTask',
     full_name='energyplatform.EnvService.SetCurrentTask',
-    index=2,
+    index=1,
     containing_service=None,
     input_type=energyplatform_dot_core_dot_env__service__functions__pb2._SETCURRENTTASKREQUEST,
     output_type=energyplatform_dot_core_dot_env__service__functions__pb2._SETCURRENTTASKRESPONSE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetEnvDescription',
+    full_name='energyplatform.EnvService.GetEnvDescription',
+    index=2,
+    containing_service=None,
+    input_type=energyplatform_dot_core_dot_env__service__functions__pb2._GETENVDESCRIPTIONREQUEST,
+    output_type=energyplatform_dot_core_dot_env__service__functions__pb2._GETENVDESCRIPTIONRESPONSE,
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(

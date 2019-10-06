@@ -108,43 +108,33 @@ namespace SimulationServer
 	Status SimulationServerImpl::Step(::grpc::ServerContext* context, const ::energyplatform::StepRequest* request,
 		::energyplatform::StepResponse* response)
 	{
-		//// xxx
-		//for (int i = 0; i < request->actions_size(); i++)
-		//{
-		//	energyplatform::Action action = request->actions(i);
-		//	
-		//	// temp
-		//	RManagedParam *pParam = GetModel()->m_ControlParams[action.uid()];
-		//	if (gData.GetCurrentTask() && !gData.GetCurrentTask()->Is(CTrainingTask::SIMPLE))
-		//	{
-		//		double value = action.float_value();
-		//		pParam->Set(value);
-		//	}
-		//	else
-		//	{
-		//		double value =  double(action.int_value()) * 0.01 + LOW_ACTION_VALUE;
-		//		pParam->Set(value);
-		//		DoLogForced("Step with action " + ftos(value));
-		//	}			
-		//}
-		//SimulationStepResults Results;
+		string log = "Step with action: ";
+		for (int i = 0; i < request->action().optimization_params_size(); i++)
+		{
+			energyplatform::OptimizationParameter eParam = request->action().optimization_params(i);
+			RManagedParam *pParam = GetModel()->m_ControlParams[eParam.id()];
+			pParam->Set(eParam.float_value());
+			
+			log += ftos(eParam.float_value()) + " ";
+		}
+		DoLog(log);
+		
+		SimulationStepResults Results;
 
-		//bool bResult = m_pEnv->Step(&Results);
-		//response->set_info(Results.m_Info);
-		//response->set_reward(Results.m_Reward);
-		//response->set_done(Results.m_bDone);
+		bool bResult = m_pEnv->Step(&Results);
 
-		//if (!Results.m_bDone)
-		//{
-		//	energyplatform::Observation* pObservation = new energyplatform::Observation;
-		//	ServerMapper::CurrentObservationToProtobuf(pObservation);
-		//	response->set_allocated_observation(pObservation);
-		//}
+		response->set_reward(Results.m_Reward);
+		response->set_done(Results.m_bDone);
+		response->set_info(Results.m_Info);
+
+		if (!Results.m_bDone)
+		{
+			energyplatform::Observation* pObservation = new energyplatform::Observation;
+			ServerMapper::CurrentObservationToProtobuf(pObservation);
+			response->set_allocated_observation(pObservation);
+		}
 
 		return Status::OK;
-		/*return bResult
-			? Status::OK
-			: Status(::grpc::StatusCode::INTERNAL, "Simulation failed. See logs.");*/
 	}
 
 	Status SimulationServerImpl::Stop(::grpc::ServerContext* context, const ::energyplatform::StopRequest* request,

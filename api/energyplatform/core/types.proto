@@ -60,8 +60,10 @@ enum PhysicalValueType {
 
 // Protocol buffer representing physical param.
 message PhysicalParam {
+    // Unique id of the param
+    string id = 1;
     // Type of the param
-    PhysicalValueType type = 1;
+    PhysicalValueType type = 2;
     // Value of the param
-    float value = 2;
+    float value = 3;
 }

@@ -21,8 +21,8 @@ namespace energyplatform {
 
 static const char* EnvService_method_names[] = {
   "/energyplatform.EnvService/LoadData",
-  "/energyplatform.EnvService/GetEnvDescription",
   "/energyplatform.EnvService/SetCurrentTask",
+  "/energyplatform.EnvService/GetEnvDescription",
   "/energyplatform.EnvService/GetOptimizationParams",
   "/energyplatform.EnvService/Reset",
   "/energyplatform.EnvService/Step",
@@ -37,8 +37,8 @@ std::unique_ptr< EnvService::Stub> EnvService::NewStub(const std::shared_ptr< ::
 
 EnvService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel)
   : channel_(channel), rpcmethod_LoadData_(EnvService_method_names[0], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_GetEnvDescription_(EnvService_method_names[1], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_SetCurrentTask_(EnvService_method_names[2], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_SetCurrentTask_(EnvService_method_names[1], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_GetEnvDescription_(EnvService_method_names[2], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_GetOptimizationParams_(EnvService_method_names[3], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_Reset_(EnvService_method_names[4], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_Step_(EnvService_method_names[5], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
@@ -73,34 +73,6 @@ void EnvService::Stub::experimental_async::LoadData(::grpc::ClientContext* conte
   return ::grpc::internal::ClientAsyncResponseReaderFactory< ::energyplatform::LoadDataResponse>::Create(channel_.get(), cq, rpcmethod_LoadData_, context, request, false);
 }
 
-::grpc::Status EnvService::Stub::GetEnvDescription(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest& request, ::energyplatform::GetEnvDescriptionResponse* response) {
-  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_GetEnvDescription_, context, request, response);
-}
-
-void EnvService::Stub::experimental_async::GetEnvDescription(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest* request, ::energyplatform::GetEnvDescriptionResponse* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_GetEnvDescription_, context, request, response, std::move(f));
-}
-
-void EnvService::Stub::experimental_async::GetEnvDescription(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::energyplatform::GetEnvDescriptionResponse* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_GetEnvDescription_, context, request, response, std::move(f));
-}
-
-void EnvService::Stub::experimental_async::GetEnvDescription(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest* request, ::energyplatform::GetEnvDescriptionResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
-  ::grpc::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_GetEnvDescription_, context, request, response, reactor);
-}
-
-void EnvService::Stub::experimental_async::GetEnvDescription(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::energyplatform::GetEnvDescriptionResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
-  ::grpc::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_GetEnvDescription_, context, request, response, reactor);
-}
-
-::grpc::ClientAsyncResponseReader< ::energyplatform::GetEnvDescriptionResponse>* EnvService::Stub::AsyncGetEnvDescriptionRaw(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::energyplatform::GetEnvDescriptionResponse>::Create(channel_.get(), cq, rpcmethod_GetEnvDescription_, context, request, true);
-}
-
-::grpc::ClientAsyncResponseReader< ::energyplatform::GetEnvDescriptionResponse>* EnvService::Stub::PrepareAsyncGetEnvDescriptionRaw(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::energyplatform::GetEnvDescriptionResponse>::Create(channel_.get(), cq, rpcmethod_GetEnvDescription_, context, request, false);
-}
-
 ::grpc::Status EnvService::Stub::SetCurrentTask(::grpc::ClientContext* context, const ::energyplatform::SetCurrentTaskRequest& request, ::energyplatform::SetCurrentTaskResponse* response) {
   return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_SetCurrentTask_, context, request, response);
 }
@@ -127,6 +99,34 @@ void EnvService::Stub::experimental_async::SetCurrentTask(::grpc::ClientContext*
 
 ::grpc::ClientAsyncResponseReader< ::energyplatform::SetCurrentTaskResponse>* EnvService::Stub::PrepareAsyncSetCurrentTaskRaw(::grpc::ClientContext* context, const ::energyplatform::SetCurrentTaskRequest& request, ::grpc::CompletionQueue* cq) {
   return ::grpc::internal::ClientAsyncResponseReaderFactory< ::energyplatform::SetCurrentTaskResponse>::Create(channel_.get(), cq, rpcmethod_SetCurrentTask_, context, request, false);
+}
+
+::grpc::Status EnvService::Stub::GetEnvDescription(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest& request, ::energyplatform::GetEnvDescriptionResponse* response) {
+  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_GetEnvDescription_, context, request, response);
+}
+
+void EnvService::Stub::experimental_async::GetEnvDescription(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest* request, ::energyplatform::GetEnvDescriptionResponse* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_GetEnvDescription_, context, request, response, std::move(f));
+}
+
+void EnvService::Stub::experimental_async::GetEnvDescription(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::energyplatform::GetEnvDescriptionResponse* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_GetEnvDescription_, context, request, response, std::move(f));
+}
+
+void EnvService::Stub::experimental_async::GetEnvDescription(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest* request, ::energyplatform::GetEnvDescriptionResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_GetEnvDescription_, context, request, response, reactor);
+}
+
+void EnvService::Stub::experimental_async::GetEnvDescription(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::energyplatform::GetEnvDescriptionResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_GetEnvDescription_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::energyplatform::GetEnvDescriptionResponse>* EnvService::Stub::AsyncGetEnvDescriptionRaw(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::energyplatform::GetEnvDescriptionResponse>::Create(channel_.get(), cq, rpcmethod_GetEnvDescription_, context, request, true);
+}
+
+::grpc::ClientAsyncResponseReader< ::energyplatform::GetEnvDescriptionResponse>* EnvService::Stub::PrepareAsyncGetEnvDescriptionRaw(::grpc::ClientContext* context, const ::energyplatform::GetEnvDescriptionRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::energyplatform::GetEnvDescriptionResponse>::Create(channel_.get(), cq, rpcmethod_GetEnvDescription_, context, request, false);
 }
 
 ::grpc::Status EnvService::Stub::GetOptimizationParams(::grpc::ClientContext* context, const ::energyplatform::GetOptimizationParamsRequest& request, ::energyplatform::GetOptimizationParamsResponse* response) {
@@ -250,13 +250,13 @@ EnvService::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       EnvService_method_names[1],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< EnvService::Service, ::energyplatform::GetEnvDescriptionRequest, ::energyplatform::GetEnvDescriptionResponse>(
-          std::mem_fn(&EnvService::Service::GetEnvDescription), this)));
+      new ::grpc::internal::RpcMethodHandler< EnvService::Service, ::energyplatform::SetCurrentTaskRequest, ::energyplatform::SetCurrentTaskResponse>(
+          std::mem_fn(&EnvService::Service::SetCurrentTask), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       EnvService_method_names[2],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< EnvService::Service, ::energyplatform::SetCurrentTaskRequest, ::energyplatform::SetCurrentTaskResponse>(
-          std::mem_fn(&EnvService::Service::SetCurrentTask), this)));
+      new ::grpc::internal::RpcMethodHandler< EnvService::Service, ::energyplatform::GetEnvDescriptionRequest, ::energyplatform::GetEnvDescriptionResponse>(
+          std::mem_fn(&EnvService::Service::GetEnvDescription), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       EnvService_method_names[3],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
@@ -289,14 +289,14 @@ EnvService::Service::~Service() {
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status EnvService::Service::GetEnvDescription(::grpc::ServerContext* context, const ::energyplatform::GetEnvDescriptionRequest* request, ::energyplatform::GetEnvDescriptionResponse* response) {
+::grpc::Status EnvService::Service::SetCurrentTask(::grpc::ServerContext* context, const ::energyplatform::SetCurrentTaskRequest* request, ::energyplatform::SetCurrentTaskResponse* response) {
   (void) context;
   (void) request;
   (void) response;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status EnvService::Service::SetCurrentTask(::grpc::ServerContext* context, const ::energyplatform::SetCurrentTaskRequest* request, ::energyplatform::SetCurrentTaskResponse* response) {
+::grpc::Status EnvService::Service::GetEnvDescription(::grpc::ServerContext* context, const ::energyplatform::GetEnvDescriptionRequest* request, ::energyplatform::GetEnvDescriptionResponse* response) {
   (void) context;
   (void) request;
   (void) response;
