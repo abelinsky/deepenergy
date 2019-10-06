@@ -128,7 +128,7 @@ class EnvGas(gym.Env):
 
         # print(f"Action: {action}")
         acs = action
-        if (type(action) is not np.array):
+        if (type(action) is not np.ndarray):
             acs = np.array([acs])
 
         for i in range(len(acs)):
