@@ -72,7 +72,7 @@ def inference(data_location, model_location):
 def main():
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument('--data', type=str, default='data/')
+    parser.add_argument('--data', type=str, default='data2/')
     parser.add_argument('--inf', action='store_true')
     parser.add_argument('--model', type=str)
     args = parser.parse_args()
