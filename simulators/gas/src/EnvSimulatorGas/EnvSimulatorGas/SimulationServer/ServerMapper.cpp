@@ -58,9 +58,10 @@ namespace SimulationServer
 
 	inline void operator << (energyplatform::OptimizationParameter &eParam, Objects::OptimizationParam &iParam)
 	{
-		eParam.set_id(iParam.GetUId());
+			eParam.set_id(iParam.GetUId());
 
-		eParam.mutable_metadata()->set_type(iParam.IsDiscrete() 
+		bool bDiscrete = true; // iParam.IsDiscrete();
+		eParam.mutable_metadata()->set_type(bDiscrete
 			? energyplatform::ParameterType::PT_DISCRETE
 			: energyplatform::ParameterType::PT_CONTINUOUS);
 
@@ -75,7 +76,7 @@ namespace SimulationServer
 		}
 		eParam.mutable_metadata()->set_physical_type(vtype);
 
-		if (!iParam.IsDiscrete())
+		if (!bDiscrete)
 		{
 			double min = 0, max = 0;
 			iParam.GetParamBorders(min, max);
@@ -86,7 +87,13 @@ namespace SimulationServer
 		}
 		else
 		{
-			// TODO: discrete type
+			// temp, test discrete space
+			double min = 0, max = 0;
+			iParam.GetParamBorders(min, max);
+			int n = int((max - min) * 100);
+			eParam.mutable_metadata()->mutable_discrete_space()->set_n(n);
+			// Set value
+			eParam.set_int_value(0);
 		}
 
 		eParam.set_info(iParam.GetInfo());

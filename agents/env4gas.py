@@ -29,21 +29,30 @@ class EnvGas(gym.Env):
         self._optimization_params = [] # list of ids of optimization params
         self._observation_map = {} # maps external nodes identifiers from virtual simulator to internal ids of observation
         
+        self._is_discrete = False
         # self._compile()
         self._max_reward = 0
 
     def compile(self, task):
         self._current_task = task
         self.env_service.LoadData(envservice.LoadDataRequest(data_path=self._data_location))
+        self.env_service.SetCurrentTask(envservice.SetCurrentTaskRequest(task=task))
         env_info = self.env_service.GetEnvDescription(envservice.GetEnvDescriptionRequest())
         opt_params_response = self.env_service.GetOptimizationParams(envservice.GetOptimizationParamsRequest())
+
+        print(opt_params_response)
+
         self._is_discrete = env_info.is_discrete 
 
         self._optimization_params = [param.id for param in opt_params_response.optimization_params]
         print("Optimization params ids: ", self._optimization_params)
 
         if env_info.is_discrete:
-            return NotImplementedError
+            if (len(self._optimization_params) == 1):
+                self.action_space = spaces.Discrete(opt_params_response.optimization_params[0].metadata.discrete_space.n)
+            elif (len(self._optimization_params) > 1):
+                space = [param.metadata.discrete_space.n for param in opt_params_response.optimization_params]
+                self.action_space = spaces.MultiDiscrete(nvec=space)
         else:
             low_values = [
                 param.metadata.continuos_space.low_value 
@@ -118,23 +127,22 @@ class EnvGas(gym.Env):
         env_service_action = Action()
 
         # print(f"Action: {action}")
+        acs = action
+        if (type(action) is not np.array):
+            acs = np.array([acs])
 
-        if self._is_discrete:
-            return NotImplementedError
-            # for i in range(len(action)):
-            #     proto_action = self._action_map[i]  # Env_pb2.Action
-            #     proto_action.float_value = action[i]
-            #     step_params.actions.append(proto_action)
-        else:
-            # temp
-            for i in range(len(action)):
-                sid = self._optimization_params[i]
-                
-                opt_param = OptimizationParameter()
-                opt_param.id = sid
-                opt_param.float_value = action[i]
-                
-                env_service_action.optimization_params.append(opt_param)
+        for i in range(len(acs)):
+            sid = self._optimization_params[i]
+            
+            opt_param = OptimizationParameter()
+            opt_param.id = sid
+
+            if self._is_discrete:
+                opt_param.int_value = acs[i]
+            else:
+                opt_param.float_value = acs[i]
+            
+            env_service_action.optimization_params.append(opt_param)
                 
 
         if self.log_steps:

@@ -227,6 +227,7 @@ namespace Core
 		list<OptimizationParam*> optParams;
 		GetOptimizationParams(optParams);
 
+		m_EnvDescription.m_bDiscrete = true;
 		m_EnvDescription.m_OpimizationParamsNumber = optParams.size();
 		m_EnvDescription.m_ObservationSpace = GetModel()->m_Ins.size() + GetModel()->m_Outs.size();
 		return true;
@@ -287,8 +288,13 @@ namespace Core
 
 	bool CGasEnv::Reset(string& info)
 	{
+		assert(gData.GetCurrentTask());
 		if (!gData.GetCurrentTask())
-			gData.SetCurrentTask(CTrainingTask::MAX_THROUGHPUT);
+		{
+			info = "Task to be solved was not set.";
+			return false;
+		}
+
 		gData.GetCurrentTask()->Reset();
 
 		ClearErrorFiles(m_SimulatorData.m_DataDir);

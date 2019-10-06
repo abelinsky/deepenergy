@@ -34,32 +34,15 @@ namespace Tasks
 
 		double rq = CalcCurrentThroughput();
 		double delta = rq - m_PrevThroughput;
-
-		// double eps = 0.1;
+		
 		double multiplier = 1;
-		//if (rq > 30. && m_StepsCount != 0)
-		//{
-		//	// foster min steps count for the goal
-		//	multiplier = 1. + 1./float(m_StepsCount);
-		//}
-
-		return delta >= 0
+		double reward = delta >= 0
 			? multiplier * exp(delta)
 			: -exp(abs(delta));
 
+		DoLogForced("   reward is " + ftos(reward) + " ______ prew q = " + ftos(m_PrevThroughput) + ", current q = " + ftos(rq));
 
-		//double eps = 0.1;
-		//return delta > eps
-		//	? sgn(delta) * exp(abs(delta))
-		//	: 0;
-
-		//return delta > 0
-		//	? exp(delta)
-		//	: -exp(abs(delta));
-
-		//return (delta > 0.1) // we increased throughput over than 0.1 % ?
-		//	? exp(delta)
-		//	: 0;
+		return reward;
 	}
 
 	string CSimpleTask::GetAdditionalInfo()
@@ -74,6 +57,7 @@ namespace Tasks
 
 	bool CSimpleTask::IsDone()
 	{
+		return m_PrevThroughput > CalcCurrentThroughput();
 		// TODO: define the rule of finishing this task in config
 		//double rq = CalcCurrentThroughput();
 		//if (rq > 30)
