@@ -16,21 +16,30 @@ class EnvGas(gym.Env):
     """
     metadata = {'render.modes': ['human']}
     
+    """ Initializes environment.
+    
+        Args:
+            env_service: grpc service of environment
+            data_location: location of data about the system under optimization
+            log_steps: indicates whether to make output to stdout
+            symmetrize_actions: indicates whether to make actions symmetrical (some algorithms of stable_baseline need it)
+    """
     def __init__(self, 
                 env_service,
                 data_location,
-                log_steps=False
+                log_steps=False,
+                symmetrize_actions=False
         ):
         super(EnvGas, self).__init__()
         self.env_service = env_service
         self._data_location = data_location
         self.log_steps = log_steps
+        self.symmetrize_actions = symmetrize_actions
 
         self._optimization_params = [] # list of ids of optimization params
         self._observation_map = {} # maps external nodes identifiers from virtual simulator to internal ids of observation
         
         self._is_discrete = False
-        # self._compile()
         self._max_reward = 0
 
     def compile(self, task):
@@ -62,10 +71,20 @@ class EnvGas(gym.Env):
                 param.metadata.continuos_space.high_value 
                     for param in opt_params_response.optimization_params
             ]
+            self.initial_low_values, self.initial_high_values = np.array(low_values), np.array(high_values)
+
+            if self.symmetrize_actions and not (np.abs(low_values) == high_values).all():
+                low_values =  [-1.0] * len(low_values)
+                high_values = [1.0]  * len(high_values)
+            else:
+                self.symmetrize_actions = False
+
             self.action_space = spaces.Box(
                 low=np.array(low_values), 
                 high=np.array(high_values), 
                 dtype=np.float16)
+
+        print("*** Action space is: ", self.action_space)
 
         self.observation_space = spaces.Box(
             low=-float('inf'), 
@@ -119,6 +138,10 @@ class EnvGas(gym.Env):
             whether episode is finished
             additional info
         """
+        if self.symmetrize_actions:
+            actions_range = self.initial_high_values - self.initial_low_values
+            action = (action + 1.) / 2. * actions_range + self.initial_low_values
+
         assert self._current_task is not None, "Current task was not set"
         # print("**************** Action is", action)
 
@@ -131,7 +154,9 @@ class EnvGas(gym.Env):
         if (type(action) is not np.ndarray):
             acs = np.array([acs])
 
-        for i in range(len(acs)):
+        # for i in range(len(acs)):
+
+        for i in range(acs.size):
             sid = self._optimization_params[i]
             
             opt_param = OptimizationParameter()

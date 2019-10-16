@@ -16,6 +16,7 @@ import grpc
 from env4gas import EnvGas
 
 from stable_baselines.common.policies import MlpPolicy
+# from stable_baselines.sac.policies import MlpPolicy
 from stable_baselines.common.vec_env import DummyVecEnv
 from stable_baselines import TD3, DDPG, A2C, PPO2, SAC, TRPO
 from stable_baselines.ddpg import AdaptiveParamNoiseSpec
@@ -30,15 +31,17 @@ def train_agent(data_location):
     # ================== Train model ================== #
     
     # The algorithms require a vectorized environment to run
-    env = EnvGas(EnvServiceStub(channel), data_location, log_steps=True)
+    env = EnvGas(EnvServiceStub(channel), data_location, log_steps=True, symmetrize_actions=True)
     env.compile(task=tasks.SIMPLE)
 
     env = DummyVecEnv([lambda: env])
 
     # Because we use parameter noise, we should use a MlpPolicy with layer normalization
     tb_log_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'model_tensorboard')
-    model = PPO2(MlpPolicy, env, verbose=1, tensorboard_log=tb_log_dir)
-    model.learn(total_timesteps=100000)
+
+#    model = SAC(MlpPolicy, env, verbose=1, tensorboard_log=tb_log_dir)
+    model = TRPO(MlpPolicy, env, verbose=1, tensorboard_log=tb_log_dir)
+    model.learn(total_timesteps=1000000)
 
     # save model
     model_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'models')
@@ -60,7 +63,7 @@ def inference(data_location, model_location):
 
     # Use trained agent
     ob = env.reset()
-    for i in range(1000):
+    for _ in range(1000):
         action, _states = model.predict(ob)
         ob, _, done, _ = env.step(action)
         env.render()
@@ -72,7 +75,7 @@ def inference(data_location, model_location):
 def main():
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument('--data', type=str, default='data2/')
+    parser.add_argument('--data', type=str, default='Simulation/')
     parser.add_argument('--inf', action='store_true')
     parser.add_argument('--model', type=str)
     args = parser.parse_args()

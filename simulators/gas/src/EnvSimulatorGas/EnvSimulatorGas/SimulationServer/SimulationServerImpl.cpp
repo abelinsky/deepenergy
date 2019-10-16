@@ -113,7 +113,8 @@ namespace SimulationServer
 		{
 			energyplatform::OptimizationParameter eParam = request->action().optimization_params(i);
 			RManagedParam *pParam = GetModel()->m_ControlParams[eParam.id()];
-			bool bDiscrete = eParam.metadata().type() == energyplatform::ParameterType::PT_DISCRETE;
+			// bool bDiscrete = eParam.metadata().type() == energyplatform::ParameterType::PT_DISCRETE;
+			bool bDiscrete = pParam->IsDiscrete();
 
 			double min = 0, max = 0;
 			pParam->GetParamBorders(min, max);
