@@ -227,7 +227,7 @@ namespace Core
 		list<OptimizationParam*> optParams;
 		GetOptimizationParams(optParams);
 
-		m_EnvDescription.m_bDiscrete = true;
+		m_EnvDescription.m_bDiscrete = false;
 		m_EnvDescription.m_OpimizationParamsNumber = optParams.size();
 		m_EnvDescription.m_ObservationSpace = GetModel()->m_Ins.size() + GetModel()->m_Outs.size();
 		return true;

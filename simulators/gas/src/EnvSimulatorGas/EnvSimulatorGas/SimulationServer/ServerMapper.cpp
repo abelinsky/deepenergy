@@ -60,7 +60,7 @@ namespace SimulationServer
 	{
 			eParam.set_id(iParam.GetUId());
 
-		bool bDiscrete = true; // iParam.IsDiscrete();
+		bool bDiscrete = iParam.IsDiscrete();
 		eParam.mutable_metadata()->set_type(bDiscrete
 			? energyplatform::ParameterType::PT_DISCRETE
 			: energyplatform::ParameterType::PT_CONTINUOUS);
@@ -76,24 +76,22 @@ namespace SimulationServer
 		}
 		eParam.mutable_metadata()->set_physical_type(vtype);
 
-		if (!bDiscrete)
-		{
-			double min = 0, max = 0;
-			iParam.GetParamBorders(min, max);
-			eParam.mutable_metadata()->mutable_continuos_space()->set_low_value(min);
-			eParam.mutable_metadata()->mutable_continuos_space()->set_high_value(max);
-			// Set value
-			eParam.set_float_value(iParam.Get());
-		}
-		else
+		if (bDiscrete)
 		{
 			// temp, test discrete space
 			double min = 0, max = 0;
 			iParam.GetParamBorders(min, max);
 			int n = int((max - min) * 100);
 			eParam.mutable_metadata()->mutable_discrete_space()->set_n(n);
-			// Set value
 			eParam.set_int_value(0);
+		}
+		else
+		{
+			double min = 0., max = 0.;
+			iParam.GetParamBorders(min, max);
+			eParam.mutable_metadata()->mutable_continuos_space()->set_low_value(min);
+			eParam.mutable_metadata()->mutable_continuos_space()->set_high_value(max);
+			eParam.set_float_value(iParam.Get());
 		}
 
 		eParam.set_info(iParam.GetInfo());
