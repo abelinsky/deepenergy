@@ -52,7 +52,7 @@ namespace SimulationServer
 	::grpc::Status SimulationServerImpl::GetEnvDescription(::grpc::ServerContext* context,
 		const ::energyplatform::GetEnvDescriptionRequest* request, ::energyplatform::GetEnvDescriptionResponse* response)
 	{
-		const EnvDescription envDescription = m_pEnv->GetEnvDescription();
+		EnvDescription envDescription = m_pEnv->GetEnvDescription();
 		
 		response->set_action_space_dimension(envDescription.m_OpimizationParamsNumber);
 		response->set_is_discrete(envDescription.m_bDiscrete);
@@ -113,14 +113,15 @@ namespace SimulationServer
 		{
 			energyplatform::OptimizationParameter eParam = request->action().optimization_params(i);
 			RManagedParam *pParam = GetModel()->m_ControlParams[eParam.id()];
-			// bool bDiscrete = eParam.metadata().type() == energyplatform::ParameterType::PT_DISCRETE;
-			bool bDiscrete = pParam->IsDiscrete();
+			eParam >> (*pParam);
+			
+			/*bool bDiscrete = pParam->IsDiscrete();
 
 			double min = 0, max = 0;
 			pParam->GetParamBorders(min, max);
 			pParam->Set(bDiscrete
 				? min + float(eParam.int_value())/100.
-				: eParam.float_value());
+				: eParam.float_value());*/
 			
 			log += ftos(pParam->Get()) + " ";
 		}

@@ -16,6 +16,12 @@
 #define DoLog(x) DoLogForced(x)
 #endif
 
+#ifndef _FORCE_DISCRETE_ACTIONS
+#define _FORCE_DISCRETE_ACTIONS
+#endif
+
+constexpr auto EXPERIMENT = 2;
+
 namespace Core
 {
 	class CAlert

@@ -17,9 +17,14 @@
 # Visual Studio Files
 EnvSimulatorGas/Debug
 EnvSimulatorGas/Release
+EnvSimulatorGas/unpublished_release
+unpublished_release
 Debug
 Release
 
+*.pdb
+*.ipdb
+*.iobj
 *.suo
 *.csproj.user
 *.vbproj.user

@@ -84,13 +84,15 @@ class EnvGas(gym.Env):
                 high=np.array(high_values), 
                 dtype=np.float16)
 
-        print("*** Action space is: ", self.action_space)
-
         self.observation_space = spaces.Box(
             low=-float('inf'), 
             high=float('inf'), 
             shape=(env_info.observation_space_dimension,), 
             dtype=np.float16)
+
+        print("*** Observation space is: ", self.observation_space)
+        print("      observation dimension is: ", env_info.observation_space_dimension)
+
 
     def _map_observation(self, env_observation):
         """ Maps from Env_pb2.Observation to tensor.
