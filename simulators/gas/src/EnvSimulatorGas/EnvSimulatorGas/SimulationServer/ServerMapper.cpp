@@ -2,6 +2,7 @@
 #include "ServerMapper.h"
 #include "BIn.h"
 #include "BOut.h"
+#include "BShop.h"
 
 namespace SimulationServer
 {
@@ -30,6 +31,23 @@ namespace SimulationServer
 			pParam->set_type(energyplatform::PhysicalValueType::PV_PRESSURE);
 			pParam->set_value(pOut->m_rP);
 		}
+
+		if (EXPERIMENT > 1) {
+			for (auto pObject : GetModel()->m_Shops)
+			{
+				energyplatform::PhysicalParam *pParam = pObservation->add_items();
+				string sid = (boost::format("%d__Pin") % pObject->m_ID).str();
+				pParam->set_id(sid);
+				pParam->set_type(energyplatform::PhysicalValueType::PV_PRESSURE);
+				pParam->set_value(pObject->m_rPin);
+
+				pParam = pObservation->add_items();
+				sid = (boost::format("%d__Pout") % pObject->m_ID).str();
+				pParam->set_id(sid);
+				pParam->set_type(energyplatform::PhysicalValueType::PV_PRESSURE);
+				pParam->set_value(pObject->m_rPout);
+			}
+		}
 	}
 
 	CTrainingTask::TaskType ServerMapper::ProtoTaskToInternalTask(energyplatform::SystemTask ProtoTask)
@@ -56,9 +74,9 @@ namespace SimulationServer
 		return Task;
 	}
 
-	inline void operator << (energyplatform::OptimizationParameter &eParam, Objects::OptimizationParam &iParam)
+	inline void operator<<(energyplatform::OptimizationParameter &eParam, Objects::OptimizationParam &iParam)
 	{
-			eParam.set_id(iParam.GetUId());
+		eParam.set_id(iParam.GetUId());
 
 		bool bDiscrete = iParam.IsDiscrete();
 		eParam.mutable_metadata()->set_type(bDiscrete
@@ -95,5 +113,16 @@ namespace SimulationServer
 		}
 
 		eParam.set_info(iParam.GetInfo());
+	}
+
+	void operator>>(energyplatform::OptimizationParameter &eParam, Objects::OptimizationParam &iParam)
+	{
+		bool discrete = iParam.IsDiscrete();
+
+		double min = 0, max = 0;
+		iParam.GetParamBorders(min, max);
+		iParam.Set(discrete
+			? min + float(eParam.int_value()) / 100.
+			: eParam.float_value());
 	}
 }

@@ -67,16 +67,13 @@ namespace Core
 		// reset the events for Calc.exe
 		void ResetEvents();
 
-		// loads data and calculates env description params
-		bool RecalculateEnvDescriptionParams();
-
 	public:
 
 		// Loads data
 		bool LoadData(const string& FullPath);
 
 		// Returns env description
-		const EnvDescription& GetEnvDescription();
+		EnvDescription GetEnvDescription();
 
 		// Loads data, resets simulations
 		bool Reset(string& info);
@@ -99,9 +96,6 @@ namespace Core
 		HANDLE m_hDynRunEvent;
 		HANDLE m_hDynConfirmEvent;
 		std::thread* m_pCalcThread;
-
-	protected:
-		EnvDescription m_EnvDescription;
 	};
 
 }

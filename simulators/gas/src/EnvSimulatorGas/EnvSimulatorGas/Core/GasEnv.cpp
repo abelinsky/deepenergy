@@ -216,23 +216,6 @@ namespace Core
 		ExportOperativeShopData(DataDir, bExportAll);
 	}
 
-	bool CGasEnv::RecalculateEnvDescriptionParams()
-	{
-		// load / reload data
-		if (!GetModel()->IsLoaded())
-		{
-			DoLogForced("Failed to get env description because data was not loaded.");
-			return false;
-		}
-		list<OptimizationParam*> optParams;
-		GetOptimizationParams(optParams);
-
-		m_EnvDescription.m_bDiscrete = false;
-		m_EnvDescription.m_OpimizationParamsNumber = optParams.size();
-		m_EnvDescription.m_ObservationSpace = GetModel()->m_Ins.size() + GetModel()->m_Outs.size();
-		return true;
-	}
-
 	// =================== Public methods =============================/
 
 	bool CGasEnv::LoadData(const string& FullPath)
@@ -271,10 +254,31 @@ namespace Core
 		gData.SetCurrentTask(Task);
 	}
 
-	const EnvDescription& CGasEnv::GetEnvDescription()
+	EnvDescription CGasEnv::GetEnvDescription()
 	{
-		RecalculateEnvDescriptionParams();
-		return m_EnvDescription;
+		EnvDescription description;
+		if (!GetModel()->IsLoaded())
+		{
+			DoLogForced("Failed to get env description because data was not loaded.");
+			return description;
+		}
+		list<OptimizationParam*> optParams;
+		GetOptimizationParams(optParams);
+
+		description.m_bDiscrete = false;
+
+#ifdef _FORCE_DISCRETE_ACTIONS
+		description.m_bDiscrete = true;
+#endif
+
+		description.m_OpimizationParamsNumber = optParams.size();
+		description.m_ObservationSpace = GetModel()->m_Ins.size() + GetModel()->m_Outs.size();
+		
+		if (EXPERIMENT > 1) {
+			description.m_ObservationSpace += 2 * GetModel()->m_Shops.size(); // Pin and Pout for every shop
+		}
+
+		return description;
 	}
 
 	void CGasEnv::GetOptimizationParams(list<OptimizationParam*>& optParams)

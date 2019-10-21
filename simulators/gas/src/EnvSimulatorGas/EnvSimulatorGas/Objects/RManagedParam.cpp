@@ -66,6 +66,9 @@ namespace Objects {
 
 	bool RManagedParam::IsDiscrete()
 	{
+#ifdef _FORCE_DISCRETE_ACTIONS
+		return true;
+#endif
 		return false;
 	}
 }

@@ -19,4 +19,5 @@ namespace SimulationServer
 
 
 	extern void operator << (energyplatform::OptimizationParameter&, Objects::OptimizationParam&);
+	extern void operator >> (energyplatform::OptimizationParameter&, Objects::OptimizationParam&);
 }

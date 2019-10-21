@@ -31,7 +31,7 @@ def train_agent(data_location):
     # ================== Train model ================== #
     
     # The algorithms require a vectorized environment to run
-    env = EnvGas(EnvServiceStub(channel), data_location, log_steps=True, symmetrize_actions=True)
+    env = EnvGas(EnvServiceStub(channel), data_location, log_steps=True, symmetrize_actions=False)
     env.compile(task=tasks.SIMPLE)
 
     env = DummyVecEnv([lambda: env])
@@ -40,8 +40,8 @@ def train_agent(data_location):
     tb_log_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'model_tensorboard')
 
 #    model = SAC(MlpPolicy, env, verbose=1, tensorboard_log=tb_log_dir)
-    model = TRPO(MlpPolicy, env, verbose=1, tensorboard_log=tb_log_dir)
-    model.learn(total_timesteps=1000000)
+    model = PPO2(MlpPolicy, env, verbose=1, tensorboard_log=tb_log_dir)
+    model.learn(total_timesteps=100000)
 
     # save model
     model_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'models')
