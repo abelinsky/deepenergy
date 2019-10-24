@@ -216,24 +216,56 @@ void RunKafkaConsumer()
 #pragma comment(linker, "/subsystem:console")
 int main(int argc, char* argv[])
 {
-	RunKafkaConsumer();
-	return 0;
+	//RunKafkaConsumer();
+	//return 0;
 
-	/* ==================================================================== */
-	char buff[MAX_PATH];
-	GetModuleFileName(NULL, buff, MAX_PATH);
-	SetCurrentDirectory(fs::path(buff).parent_path().string().c_str());
+#ifdef _DEBUG
+	
+	string arg0 = string(argv[0]);
+	delete [] argv;
+
+
+	argc = 3;
+	string args[3] = { string(arg0), "101", "Data\\" };
+	argv = new char*[3];
+	for (int i = 0; i < 3; i++) {
+		int sz = args[i].size();
+		argv[i] = new char[args[i].size()];
+		strcpy_s(argv[i], std::strlen(args[i].c_str())+1, args[i].c_str());
+	}
+
+#endif
 
 	for (int i = 0; i < argc; i++)
 		std::cout << "Param " << i << ": " << argv[i] << std::endl;
 
-	if (argc > 1 && argv[1] == "serve")
+	std::cout << "argv[1] is " << argv[1] << " cmp is " << strcmp(argv[1], "serve") << endl;
+	
+	if (argc >= 2)
 	{
-		// serving
-		RunKafkaConsumer();
+		char buff[MAX_PATH];
+		GetCurrentDirectory(MAX_PATH, buff);
+		string current_dir(buff);
+		
+		gData.m_DataDir = (fs::path(current_dir)/fs::path(argv[2])).string();
+		DoLogForced("Fetching data from " + gData.m_DataDir);
+
+		gData.m_Mode = Mode::RECOMMENDATION_SERVICE;
+		std::cout << "Serving trained model..." << endl;
+		
+		std::unique_ptr<CGasEnv> env(new CGasEnv);
+		
+		env->ServeTrainedModel();
 	}
 	else
 	{
+		char buff[MAX_PATH];
+		GetModuleFileName(NULL, buff, MAX_PATH);
+		SetCurrentDirectory(fs::path(buff).parent_path().string().c_str());
+
+		gData.m_Mode = Mode::TRAINING_SERVICE;
+		std::cout << "Training model..." << endl;
+
 		// training 
 		RunSimulationServer();
 	}

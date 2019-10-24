@@ -18,6 +18,9 @@ namespace Objects
 		virtual bool IsIn() { return true; }
 		virtual void SummA(double *pA, OptEnums::TypeA type);
 
+		void ExportDynamicsData() override;
+
+
 	public:
 		int m_Node; // узел схемы
 		double m_P;

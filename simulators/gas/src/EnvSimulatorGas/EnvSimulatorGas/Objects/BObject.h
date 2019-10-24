@@ -2,6 +2,12 @@
 
 #include "pch.h"
 #include "BManagedObject.h"
+#include "DMapFile.h"
+
+namespace Utils
+{
+	class DMapFile;
+}
 
 namespace Objects
 {
@@ -25,6 +31,12 @@ namespace Objects
 		virtual void InitForExport();
 		virtual bool CanExport();
 		virtual void PrintExportData(ostream&){}
+
+		/** Exports dynamics data to shared memory file
+			It is assumed that Memory Map file already has approproate position (offset has been already set).
+		*/
+		virtual void ExportDynamicsData() {}
+
 		/* “ип ребра - (0 Ц открытый кран ,1 Ц труба, 2 Ц  ÷, 3 Ц кран регул€тор или байпас, 
 						4 Ц объект локальных потерь давлени€). ƒл€ расчета √“—, состо€щей из 
 						одного объекта (ребра) можно использовать также следующие объекты:
@@ -85,5 +97,7 @@ namespace Objects
 		double m_rRo_out; // ќтносительна€ плотность газа на выходе объекта
 		double m_rHout; // Ќизша€ теплотв. —пособн. газа на выходе объекта [кƒж/м3]
 		double m_rQout;	// –асход газа на выходе объекта [млн.м3/сут]
+
+		DMapFile* m_pMap;
 	};	
 }

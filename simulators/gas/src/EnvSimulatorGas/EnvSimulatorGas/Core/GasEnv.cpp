@@ -9,11 +9,12 @@ namespace Core
 {
 	CGasEnv::CGasEnv()
 	{
-		m_pCalcThread = NULL;
 		m_hCalcProcess = NULL;
 
 		m_hDynRunEvent = CreateEvent(NULL, true, false, "VestaDynRun");
 		m_hDynConfirmEvent = CreateEvent(NULL, true, false, "VestaDynConfirm");
+		//m_hEmergencyEvent = CreateEvent(NULL, true, false, "VestaPisecRun");
+		//m_hDynErrorEvent = CreateEvent(NULL, true, false, "VestaDynError");
 	}
 
 	CGasEnv::~CGasEnv()
@@ -349,5 +350,42 @@ namespace Core
 
 		DoLog(bResult ? "Simulation step succeded" : "Simulation step failed");
 		return bResult;
+	}
+
+	void CGasEnv::ServeTrainedModel()
+	{
+		string Errors, Warnings;
+
+		if (!GetModel()->LoadData(gData.m_DataDir, Errors, Warnings))
+		{
+			DoLogForced("Data path doesn't contain appropriate dataset.");
+			DoLogForced("(" + gData.m_DataDir + ")");
+			if (!Errors.empty())
+				DoLogForced("Errors: " + Errors);
+			if (!Warnings.empty())
+				DoLogForced("Warnings: " + Warnings);
+			return;
+		}
+
+		GetModel()->DynPrepare(gData.m_DataDir);
+
+		int current_stratum = 0;
+		while (true) {
+			// do smth
+			DoLogForced("For next timestep type n (q for exit) ...");
+
+			char c;
+			std::cin >> c;
+			if (c == 'q')
+				break;
+			
+			GetModel()->DynExport(current_stratum++);
+
+			ResetEvent(m_hDynRunEvent);
+			SetEvent(m_hDynConfirmEvent);
+			WaitForSingleObject(m_hDynRunEvent, INFINITE);
+			
+			std::cout << "New event has been processed" << endl;
+		}
 	}
 }

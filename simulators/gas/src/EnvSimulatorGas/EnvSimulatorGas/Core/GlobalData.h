@@ -22,8 +22,14 @@
 
 constexpr auto EXPERIMENT = 2;
 
-namespace Core
+namespace Core 
 {
+	enum Mode
+	{
+		TRAINING_SERVICE,
+		RECOMMENDATION_SERVICE
+	};
+
 	class CAlert
 	{
 	public:
@@ -51,6 +57,9 @@ namespace Core
 		void SetTMode(OptEnums::TMode tMode); // задать признак расчета АВО		
 
 	public:
+
+		Mode m_Mode;
+
 		CObjectsModel m_Model;
 		CTrainingTask* m_pCurrentTask;
 		//OptEnums::Tasks m_CurrentTask;

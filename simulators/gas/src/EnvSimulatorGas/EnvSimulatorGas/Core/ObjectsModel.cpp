@@ -465,6 +465,64 @@ bool CObjectsModel::LoadData(const string& DataDir, string &Error, string &Warni
 	return bSuccess;
 }
 
+bool CObjectsModel::DynPrepare(const string& DataDir)
+{
+	CFileSystem fs;
+	string ss = fs.GetCurrentDirectory();
+
+	char fName[256];
+	
+	DoLogForced("gData.m_DataDir is: " + gData.m_DataDir);
+
+	sprintf_s(fName, "%sInOutGRSMap.dat", DataDir.c_str());
+	m_InOutMap.Open(fName);
+
+	return true;
+}
+
+bool CObjectsModel::DynExport(int stratum)
+{
+	if (!m_InOutMap.IsOpened())
+	{
+		DoLog("Failed to CObjectsModel::DynExport because m_InOutMap is not opened.");
+		return false;
+	}
+
+	m_InOutMap.SetPosition(0);
+	int stratums_number = 0;
+	m_InOutMap >> stratums_number;
+	
+	int order = 0;
+	for (auto pObject : m_Ins) 
+	{
+		// <test>
+		dynamic_cast<BIn*>(pObject)->m_rQ = stratum;
+		dynamic_cast<BIn*>(pObject)->m_rP = stratum;
+		dynamic_cast<BIn*>(pObject)->m_rT = stratum;
+		dynamic_cast<BIn*>(pObject)->m_rRo = stratum;
+		// </test>
+
+		m_InOutMap.SetPosition(sizeof(int) + sizeof(float)*4*(order*stratums_number + stratum));
+		pObject->ExportDynamicsData();
+
+
+		// check
+		//m_InOutMap.SetPosition(sizeof(int) + sizeof(float) * 4 * (order*stratums_number + stratum));
+		//double f = 0;
+		//DMapFile &MapFile = *pObject->m_pMap;
+		//MapFile >> f;
+		//MapFile >> f;
+		//MapFile >> f;
+		//MapFile >> f; // TODO check the necessity of multiplication 1.20445
+		/////////////////
+
+		++order;
+	}
+	
+	
+	return true;
+}
+
 void CObjectsModel::DefineControlParams()
 {
 	for (auto pObject : m_GPAs)

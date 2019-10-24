@@ -68,6 +68,7 @@ namespace Core
 		void ResetEvents();
 
 	public:
+		/* Model training */
 
 		// Loads data
 		bool LoadData(const string& FullPath);
@@ -91,11 +92,16 @@ namespace Core
 		void GetOptimizationParams(list<OptimizationParam*>& optParams);
 		
 
+
+		/* Trained model serving */
+		void ServeTrainedModel();
+
 	public:
 		HANDLE m_hCalcProcess;
 		HANDLE m_hDynRunEvent;
 		HANDLE m_hDynConfirmEvent;
-		std::thread* m_pCalcThread;
+		//HANDLE m_hEmergencyEvent;
+		//HANDLE m_hDynErrorEvent;
 	};
 
 }

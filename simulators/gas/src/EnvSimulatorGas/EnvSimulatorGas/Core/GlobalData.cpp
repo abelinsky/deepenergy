@@ -70,6 +70,7 @@ namespace Core
 	/* CGlobalData */
 	CGlobalData::CGlobalData()
 	{
+		m_Mode = Mode::TRAINING_SERVICE;
 		m_bOptimisation = false;
 		m_bControlRestrictions = true;
 		m_bVariationsTask = false;
