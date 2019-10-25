@@ -7,7 +7,7 @@ from energyplatform.core import env_service_functions_pb2 as energyplatform_dot_
 class EnvServiceStub(object):
   """//////////////////////////////////////////////////////////////////////////////
 
-  Env defines a service that executes different operations on an Environment (see class definition).
+  EnvService defines a service that executes different operations on an Environment (see class definition).
 
   //////////////////////////////////////////////////////////////////////////////
 
@@ -61,7 +61,7 @@ class EnvServiceStub(object):
 class EnvServiceServicer(object):
   """//////////////////////////////////////////////////////////////////////////////
 
-  Env defines a service that executes different operations on an Environment (see class definition).
+  EnvService defines a service that executes different operations on an Environment (see class definition).
 
   //////////////////////////////////////////////////////////////////////////////
 

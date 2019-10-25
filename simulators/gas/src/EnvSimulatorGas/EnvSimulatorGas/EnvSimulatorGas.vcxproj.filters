@@ -183,6 +183,12 @@
     <ClInclude Include="Tasks\ServingModelTask.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="energyplatform\core\predictor_service.grpc.pb.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="energyplatform\core\predictor_service.pb.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -336,6 +342,12 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Tasks\ServingModelTask.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="energyplatform\core\predictor_service.grpc.pb.cc">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="energyplatform\core\predictor_service.pb.cc">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

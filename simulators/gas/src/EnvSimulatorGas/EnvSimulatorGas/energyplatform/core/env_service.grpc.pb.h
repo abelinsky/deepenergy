@@ -51,7 +51,7 @@ namespace energyplatform {
 
 // //////////////////////////////////////////////////////////////////////////////
 //
-// Env defines a service that executes different operations on an Environment (see class definition).
+// EnvService defines a service that executes different operations on an Environment (see class definition).
 //
 // //////////////////////////////////////////////////////////////////////////////
 //

@@ -6,6 +6,10 @@
 #include "BShopGPA.h"
 #include "BIn.h"
 
+#include <grpcpp/grpcpp.h>
+#include "energyplatform/core/predictor_service.grpc.pb.h"
+#include "ServerMapper.h"
+
 namespace Core
 {
 	CGasEnv::CGasEnv()
@@ -359,6 +363,7 @@ namespace Core
 		return bResult;
 	}
 
+
 	void CGasEnv::ServeTrainedModel()
 	{
 		gData.SetCurrentTask(CTrainingTask::SERVING_MODEL);
@@ -379,6 +384,12 @@ namespace Core
 		string info;
 		Reset(info);
 
+		// Initialize predictor service client
+		std::shared_ptr<grpc::Channel> channel = grpc::CreateChannel("localhost:50052",
+			grpc::InsecureChannelCredentials());
+		std::unique_ptr<energyplatform::PredictorService::Stub> predictor_stub = energyplatform::PredictorService::NewStub(channel);
+		grpc::ClientContext context;
+
 		int current_stratum = 0;
 		while (true) {
 			print_stdout("For next timestep type n (q for exit) ...");
@@ -392,6 +403,24 @@ namespace Core
 			p = dynamic_cast<BIn*>(GetModel()->m_Ins[0])->m_P;
 			GetModel()->m_bSchemeChanged = true;
 
+			// Get actions from Predictor service
+			energyplatform::PredictRequest predict_request;
+			SimulationServer::ServerMapper::CurrentObservationToProtobuf(predict_request.mutable_observation());
+
+			energyplatform::PredictReponse predict_response;
+			grpc::Status status = predictor_stub->Predict(&context, predict_request, &predict_response);
+			if (!status.ok()) {
+				print_stdout(status.error_message());
+			}
+			else {
+				// todo: we got params [33, 31]
+				// translate them to gpa frequency and apply
+
+				for (auto param : predict_response.action().optimization_params()) {
+					print_stdout("Got opt param: " + param.id() + " with value: " + ftos(param.float_value()));
+				}
+			}
+			
 			// make one step
 			SimulationStepResults Results;
 			bool bResult = Step(&Results);
