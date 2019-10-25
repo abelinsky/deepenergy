@@ -20,10 +20,15 @@ class CAgentsBrokerApp : public CWinApp
 public:
 	CAgentsBrokerApp();
 
+	bool StartTraining();
+	bool StartServing();
+
+protected:
 	HANDLE StartSimulationService();
-	HANDLE StartTraining();
+	HANDLE StartTrainingService();
 	HANDLE StartTensorBoard();
 
+	HANDLE StartServingService();
 	
 protected:
 	CString m_IniPath;
@@ -32,7 +37,9 @@ protected:
 	CString m_SimulationService;
 	CString m_PythonInterpreter;
 	CString m_TrainingScript;
+	CString m_PredictorService;
 
+	CString GetServingServiceCmdParams();
 	CString GetSimulationServiceCmdParams();
 	CString GetTrainingServiceCmdParams();
 
@@ -40,6 +47,8 @@ private:
 	HANDLE m_hSimulationProcess;
 	HANDLE m_hTrainingProcess;
 	HANDLE m_hTensorBoardProcess;
+
+	HANDLE m_hServingProcess;
 
 // Overrides
 public:

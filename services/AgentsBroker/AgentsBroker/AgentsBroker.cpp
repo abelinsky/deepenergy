@@ -24,9 +24,10 @@ CAgentsBrokerApp::CAgentsBrokerApp()
 	// support Restart Manager
 	m_dwRestartManagerSupportFlags = AFX_RESTART_MANAGER_SUPPORT_RESTART;
 
-	m_hSimulationProcess = NULL;
-	m_hTrainingProcess = NULL;
-	m_hTensorBoardProcess = NULL;
+	m_hSimulationProcess = nullptr;
+	m_hTrainingProcess = nullptr;
+	m_hTensorBoardProcess = nullptr;
+	m_hServingProcess = nullptr;
 }
 
 // The one and only CAgentsBrokerApp object
@@ -35,6 +36,43 @@ CAgentsBrokerApp theApp;
 
 
 // CAgentsBrokerApp initialization
+
+bool CAgentsBrokerApp::StartTraining()
+{
+	fs::path localDataPath(fs::path(m_SimulationService.GetString()).parent_path() / fs::path(m_LocalDataDir.GetString()));
+	if (fs::is_directory(localDataPath))
+		fs::remove_all(localDataPath);
+	fs::create_directory(localDataPath);
+
+	// copy files from initial data location to local location
+	fs::copy(fs::path(m_FullDataPath.GetString()), localDataPath);
+
+	m_hSimulationProcess = StartSimulationService();
+	if (!m_hSimulationProcess)
+	{
+		AfxMessageBox("Failed to start simulation service.");
+		return false;
+	}
+
+	m_hTrainingProcess = StartTrainingService();
+	if (!m_hTrainingProcess)
+	{
+		AfxMessageBox("Failed to start training.");
+		return false;
+	}
+	return true;
+}
+
+bool CAgentsBrokerApp::StartServing()
+{
+	m_hServingProcess = StartServingService();
+	if (!m_hServingProcess)
+	{
+		AfxMessageBox("Failed to start serving service.");
+		return false;
+	}
+	return true;
+}
 
 BOOL CAgentsBrokerApp::InitInstance()
 {
@@ -87,6 +125,8 @@ BOOL CAgentsBrokerApp::InitInstance()
 			++pszParam;
 		}
 		cmdParams.Add(pszParam);
+
+		// AfxMessageBox(_T(pszParam));
 	}
 
 #ifdef _DEBUG
@@ -101,6 +141,8 @@ BOOL CAgentsBrokerApp::InitInstance()
 		return FALSE;
 	}
 
+	// Read inin params
+
 	TCHAR currentDir[MAX_PATH];
 	GetCurrentDirectory(sizeof(currentDir), currentDir);
 	m_FullDataPath.Format("%s\\%s", currentDir, cmdParams[1]);
@@ -108,7 +150,7 @@ BOOL CAgentsBrokerApp::InitInstance()
 	TCHAR buffer[MAX_PATH];
 	GetPrivateProfileString("setup", "SimulationService", NULL, buffer, sizeof(buffer), m_IniPath);
 	m_SimulationService = buffer;
-	
+
 	GetPrivateProfileString("setup", "PythonInterpreter", NULL, buffer, sizeof(buffer), m_IniPath);
 	m_PythonInterpreter = buffer;
 
@@ -118,34 +160,23 @@ BOOL CAgentsBrokerApp::InitInstance()
 	GetPrivateProfileString("setup", "LocalSimulationDataDir", NULL, buffer, sizeof(buffer), m_IniPath);
 	m_LocalDataDir = buffer;
 
-	fs::path localDataPath(fs::path(m_SimulationService.GetString()).parent_path()/fs::path(m_LocalDataDir.GetString()));
-	if (fs::is_directory(localDataPath))
-		fs::remove_all(localDataPath);
-	fs::create_directory(localDataPath);
+	GetPrivateProfileString("setup", "PredictorService", NULL, buffer, sizeof(buffer), m_IniPath);
+	m_PredictorService = buffer;
 
-	// copy files from initial data location to local location
-	fs::copy(fs::path(m_FullDataPath.GetString()), localDataPath);
-
-	m_hSimulationProcess = StartSimulationService();
-	if (!m_hSimulationProcess)
+	int task = atoi(cmdParams[0]);
+	switch (task) // task
 	{
-		AfxMessageBox("Failed to start simulation service.");
-		return false;
+	case 1: // forward calc of regime
+		break;
+	case 101: // serve model
+		if (!StartServing())
+			return FALSE;
+		break;
+	case 106: // AI training
+		if (!StartTraining())
+			return FALSE;
+		break;
 	}
-
-	m_hTrainingProcess = StartTraining();
-	if (!m_hTrainingProcess)
-	{
-		AfxMessageBox("Failed to start training.");
-		return false;
-	}
-
-	//m_hTensorBoardProcess = StartTensorBoard();
-	//if (!m_hTensorBoardProcess)
-	//{
-	//	AfxMessageBox("Failed to start training.");
-	//	return false;
-	//}
 
 	CAgentsBrokerDlg dlg;
 	m_pMainWnd = &dlg;
@@ -195,6 +226,13 @@ CString CAgentsBrokerApp::GetTrainingServiceCmdParams()
 	return params;
 }
 
+CString CAgentsBrokerApp::GetServingServiceCmdParams()
+{
+	CString params;
+	params.Format("%s serve %s", m_PredictorService, m_FullDataPath);
+	return params;
+}
+
 HANDLE CAgentsBrokerApp::StartSimulationService()
 {
 	STARTUPINFO si;
@@ -211,7 +249,7 @@ HANDLE CAgentsBrokerApp::StartSimulationService()
 	return pi.hProcess;
 }
 
-HANDLE CAgentsBrokerApp::StartTraining()
+HANDLE CAgentsBrokerApp::StartTrainingService()
 {
 	STARTUPINFO si;
 	PROCESS_INFORMATION pi;
@@ -220,6 +258,21 @@ HANDLE CAgentsBrokerApp::StartTraining()
 	si.dwFlags = STARTF_USESHOWWINDOW;
 	si.wShowWindow = SW_SHOW;
 	if (!CreateProcess(NULL, GetTrainingServiceCmdParams().GetBuffer(_MAX_PATH * 2), NULL, NULL, FALSE, CREATE_NEW_CONSOLE, NULL, NULL, &si, &pi))
+		return NULL;
+	CloseHandle(pi.hThread);
+	WaitForInputIdle(pi.hProcess, INFINITE);
+	return pi.hProcess;
+}
+
+HANDLE CAgentsBrokerApp::StartServingService()
+{
+	STARTUPINFO si;
+	PROCESS_INFORMATION pi;
+	ZeroMemory(&si, sizeof(si));
+	si.cb = sizeof(si);
+	si.dwFlags = STARTF_USESHOWWINDOW;
+	si.wShowWindow = SW_SHOW;
+	if (!CreateProcess(NULL, GetServingServiceCmdParams().GetBuffer(_MAX_PATH * 2), NULL, NULL, FALSE, CREATE_NEW_CONSOLE, NULL, NULL, &si, &pi))
 		return NULL;
 	CloseHandle(pi.hThread);
 	WaitForInputIdle(pi.hProcess, INFINITE);

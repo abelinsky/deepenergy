@@ -9,6 +9,7 @@ BObject::BObject(void)
 	m_ID = 0;
 	m_NodeStart = -1;
 	m_NodeEnd = -1;
+	m_pMap = NULL;
 	ClearResults();
 }
 

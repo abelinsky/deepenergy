@@ -49,6 +49,8 @@ namespace Objects
 		virtual void SetCalculated(bool bCalculated = true);
 		virtual void SummA(double *pA, OptEnums::TypeA type);
 		
+		void ExportDynamicsData() override;
+
 	public:
 		static unordered_map <int, int> sLoadingMap; // допустимое количество "Всего ГПА в КЦ - количество резервных"
 

@@ -177,6 +177,12 @@
     <ClInclude Include="energyplatform\core\types.pb.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="utils\DMapFile.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Tasks\ServingModelTask.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -324,6 +330,12 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="energyplatform\core\types.pb.cc">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\DMapFile.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Tasks\ServingModelTask.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

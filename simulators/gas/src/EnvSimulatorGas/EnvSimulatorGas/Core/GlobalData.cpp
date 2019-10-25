@@ -3,6 +3,7 @@
 #include <boost/filesystem.hpp>
 #include "MaxThroughputTask.h"
 #include "SimpleTask.h"
+#include "ServingModelTask.h"
 
 namespace Core
 {
@@ -30,6 +31,12 @@ namespace Core
 		if (gData.m_AlertsMap.find(AlertType) != gData.m_AlertsMap.end())
 			return &gData.m_AlertsMap[AlertType];
 		return NULL;
+	}
+
+	void print_stdout(const string& s)
+	{
+		string outstr = (boost::format("%s: %s") % GetCurrentTimeStr() % s).str();
+		std::cout << outstr.c_str() << endl;
 	}
 
 	void DoLogForced(const string& s, bool bReset)
@@ -70,6 +77,7 @@ namespace Core
 	/* CGlobalData */
 	CGlobalData::CGlobalData()
 	{
+		m_Mode = Mode::TRAINING_SERVICE;
 		m_bOptimisation = false;
 		m_bControlRestrictions = true;
 		m_bVariationsTask = false;
@@ -116,6 +124,8 @@ namespace Core
 		case CTrainingTask::TaskType::SIMPLE:
 			m_pCurrentTask = new CSimpleTask;
 			break;
+		case CTrainingTask::TaskType::SERVING_MODEL:
+			m_pCurrentTask = new CServingModelTask;
 		default:
 			break;
 		}

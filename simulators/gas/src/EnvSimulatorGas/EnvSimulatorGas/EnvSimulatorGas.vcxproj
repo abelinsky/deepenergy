@@ -125,14 +125,14 @@
       <PreprocessorDefinitions>_WIN32_WINNT=0x600;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>D:\apps\tools\gRPC\vcpkg\installed\x86-windows-static\include;D:\apps\tools\gRPC\vcpkg\installed\x86-windows-static\include\boost;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Core;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Objects;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\NSI;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Connections;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\utils;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\SimulationServer;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Tasks;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\apps\tools\gRPC\vcpkg\installed\x86-windows-static\include;D:\apps\tools\gRPC\vcpkg\installed\x86-windows-static\include\boost;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Core;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Objects;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\NSI;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Connections;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\utils;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\SimulationServer;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Tasks;D:\apps\tools\librdkafka.redist.1.2.1\build\native\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\apps\tools\gRPC\vcpkg\installed\x86-windows-static\debug\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libeay32.lib;ssleay32.lib;zlibd.lib;libprotobufd.lib;ws2_32.lib;grpc.lib;gpr.lib;grpc++.lib;address_sorting.lib;cares.lib;bcrypt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\apps\tools\gRPC\vcpkg\installed\x86-windows-static\debug\lib;D:\apps\tools\librdkafka.redist.1.2.1\build\native\lib\win\x86\win-x86-Release\v120;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libeay32.lib;ssleay32.lib;zlibd.lib;libprotobufd.lib;ws2_32.lib;grpc.lib;gpr.lib;grpc++.lib;address_sorting.lib;cares.lib;bcrypt.lib;librdkafkacpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -161,7 +161,7 @@
       <PreprocessorDefinitions>_WIN32_WINNT=0x600;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>D:\apps\tools\gRPC\vcpkg\installed\x86-windows-static\include;D:\apps\tools\gRPC\vcpkg\installed\x86-windows-static\include\boost;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Core;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Objects;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\NSI;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Connections;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\utils;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\SimulationServer;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Tasks;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\apps\tools\gRPC\vcpkg\installed\x86-windows-static\include;D:\apps\tools\gRPC\vcpkg\installed\x86-windows-static\include\boost;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Core;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Objects;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\NSI;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Connections;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\utils;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\SimulationServer;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Tasks;D:\apps\tools\librdkafka.redist.1.2.1\build\native\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -169,8 +169,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\apps\tools\gRPC\vcpkg\installed\x86-windows-static\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libeay32.lib;ssleay32.lib;zlib.lib;libprotobuf.lib;ws2_32.lib;grpc.lib;gpr.lib;grpc++.lib;address_sorting.lib;cares.lib;bcrypt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\apps\tools\gRPC\vcpkg\installed\x86-windows-static\lib;D:\apps\tools\librdkafka.redist.1.2.1\build\native\lib\win\x86\win-x86-Release\v120;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libeay32.lib;ssleay32.lib;zlib.lib;libprotobuf.lib;ws2_32.lib;grpc.lib;gpr.lib;grpc++.lib;address_sorting.lib;cares.lib;bcrypt.lib;librdkafkacpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>..\..\..\publish.cmd</Command>
@@ -291,9 +291,11 @@
     <ClInclude Include="SimulationServer\ServerMapper.h" />
     <ClInclude Include="SimulationServer\SimulationServerImpl.h" />
     <ClInclude Include="Tasks\MaxThroughputTask.h" />
+    <ClInclude Include="Tasks\ServingModelTask.h" />
     <ClInclude Include="Tasks\SimpleTask.h" />
     <ClInclude Include="Tasks\TrainingTask.h" />
     <ClInclude Include="utils.h" />
+    <ClInclude Include="utils\DMapFile.h" />
     <ClInclude Include="utils\FileSystem.h" />
     <ClInclude Include="utils\StringUtils.h" />
   </ItemGroup>
@@ -351,8 +353,10 @@
     <ClCompile Include="SimulationServer\ServerMapper.cpp" />
     <ClCompile Include="SimulationServer\SimulationServerImpl.cpp" />
     <ClCompile Include="Tasks\MaxThroughputTask.cpp" />
+    <ClCompile Include="Tasks\ServingModelTask.cpp" />
     <ClCompile Include="Tasks\SimpleTask.cpp" />
     <ClCompile Include="Tasks\TrainingTask.cpp" />
+    <ClCompile Include="utils\DMapFile.cpp" />
     <ClCompile Include="utils\FileSystem.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

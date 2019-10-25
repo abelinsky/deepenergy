@@ -465,6 +465,61 @@ bool CObjectsModel::LoadData(const string& DataDir, string &Error, string &Warni
 	return bSuccess;
 }
 
+bool CObjectsModel::DynPrepare(const string& DataDir)
+{
+	CFileSystem fs;
+	string ss = fs.GetCurrentDirectory();
+
+	char fName[256];
+	
+	DoLogForced("gData.m_DataDir is: " + gData.m_DataDir);
+
+	sprintf_s(fName, "%sInOutGRSMap.dat", DataDir.c_str());
+	m_InOutMap.Open(fName);
+
+	sprintf_s(fName, "%sCompressorShopMap.dat", DataDir.c_str());
+	m_ShopMap.Open(fName);
+
+	return true;
+}
+
+bool CObjectsModel::DynExport(int stratum)
+{
+	if (!m_InOutMap.IsOpened() || !m_ShopMap.IsOpened())
+	{
+		DoLog("Failed to CObjectsModel::DynExport because m_InOutMap and/or m_ShopMap are not opened.");
+		return false;
+	}
+
+	m_InOutMap.SetPosition(0);
+	int stratums_number = 0;
+	m_InOutMap >> stratums_number;
+	
+	int order = 0;
+	for (auto pObject : m_Ins) 
+	{
+		m_InOutMap.SetPosition(sizeof(int) + sizeof(float)*4*(order*stratums_number + stratum));
+		pObject->ExportDynamicsData();
+		++order;
+	}
+	for (auto pObject : m_Outs)
+	{
+		m_InOutMap.SetPosition(sizeof(int) + sizeof(float) * 4 * (order*stratums_number + stratum));
+		pObject->ExportDynamicsData();
+		++order;
+	}
+	
+	order = 0;
+	for (auto pShop : m_Shops)
+	{
+		m_ShopMap.SetPosition(sizeof(float) * 6 * (order*stratums_number + stratum));
+		pShop->ExportDynamicsData();
+		++order;
+	}
+
+	return true;
+}
+
 void CObjectsModel::DefineControlParams()
 {
 	for (auto pObject : m_GPAs)

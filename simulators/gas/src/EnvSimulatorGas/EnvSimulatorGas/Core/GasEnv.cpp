@@ -4,29 +4,37 @@
 #include "utils.h"
 #include "FileSystem.h"
 #include "BShopGPA.h"
+#include "BIn.h"
 
 namespace Core
 {
 	CGasEnv::CGasEnv()
 	{
-		m_pCalcThread = NULL;
 		m_hCalcProcess = NULL;
+		
+		m_hDynRunEvent_calc = CreateEvent(NULL, true, false, "VestaDynRun");
+		m_hDynConfirmEvent_calc = CreateEvent(NULL, true, false, "VestaDynConfirm");
 
-		m_hDynRunEvent = CreateEvent(NULL, true, false, "VestaDynRun");
-		m_hDynConfirmEvent = CreateEvent(NULL, true, false, "VestaDynConfirm");
+		m_hServingRunEvent = CreateEvent(NULL, true, false, "AIDynRun");
+		m_hServingConfirmEvent = CreateEvent(NULL, true, false, "AIDynConfirm");
+		m_hServingForceCloseEvent = CreateEvent(NULL, false, false, "AIForceClose");
 	}
 
 	CGasEnv::~CGasEnv()
 	{
 		StopSimulations();
-		CloseHandle(m_hDynRunEvent);
-		CloseHandle(m_hDynConfirmEvent);
+		CloseHandle(m_hDynRunEvent_calc);
+		CloseHandle(m_hDynConfirmEvent_calc);
+		
+		CloseHandle(m_hServingRunEvent);
+		CloseHandle(m_hServingConfirmEvent);
+		CloseHandle(m_hServingForceCloseEvent);
 	}
 
-	void CGasEnv::ResetEvents()
+	void CGasEnv::ResetCalcEvents()
 	{
-		ResetEvent(m_hDynRunEvent);
-		ResetEvent(m_hDynConfirmEvent);
+		ResetEvent(m_hDynRunEvent_calc);
+		ResetEvent(m_hDynConfirmEvent_calc);
 	}
 
 	HANDLE CGasEnv::StartSimulator(const string& processParams)
@@ -69,13 +77,13 @@ namespace Core
 	{
 		ClearErrorFiles(m_SimulatorData.m_DataDir);
 		ClearResultFiles(m_SimulatorData.m_DataDir);
-		ResetEvents();
+		ResetCalcEvents();
 
 		DWORD dwCode = 1;
 		if (!m_SimulatorData.m_lpEvents[1]) // hProcess
 		{
 			DoLog("Trying to start virtual simulator...");
-			ResetEvents();
+			ResetCalcEvents();
 			// CObjectsModel *pModel = m_ThreadData.m_pModel;
 			m_SimulatorData.m_ProcessParams = "116 " + m_SimulatorData.m_DataDir;
 			HANDLE hProcess = StartSimulator(m_SimulatorData.m_ProcessParams);
@@ -86,17 +94,17 @@ namespace Core
 			}
 			DoLog("Simulator started");
 
-			m_SimulatorData.m_lpEvents[0] = m_hDynConfirmEvent;
+			m_SimulatorData.m_lpEvents[0] = m_hDynConfirmEvent_calc;
 			m_SimulatorData.m_lpEvents[1] = hProcess;
 			dwCode = WaitForMultipleObjects(2, m_SimulatorData.m_lpEvents, false, INFINITE);
 		}
 		else
 		{
-			SetEvent(m_hDynRunEvent);
+			SetEvent(m_hDynRunEvent_calc);
 			dwCode = (WaitForMultipleObjects(2, lpEvents, false, INFINITE) - WAIT_OBJECT_0);
 		}
 
-		ResetEvents();
+		ResetCalcEvents();
 		if (dwCode == 1)
 		{
 			StopSimulations();
@@ -303,7 +311,7 @@ namespace Core
 
 		ClearErrorFiles(m_SimulatorData.m_DataDir);
 		ClearResultFiles(m_SimulatorData.m_DataDir);
-		ResetEvents();
+		ResetCalcEvents();
 		// reload simulator
 		StopSimulations();
 
@@ -349,5 +357,72 @@ namespace Core
 
 		DoLog(bResult ? "Simulation step succeded" : "Simulation step failed");
 		return bResult;
+	}
+
+	void CGasEnv::ServeTrainedModel()
+	{
+		gData.SetCurrentTask(CTrainingTask::SERVING_MODEL);
+		string Errors, Warnings;
+
+		if (!GetModel()->LoadData(gData.m_DataDir, Errors, Warnings))
+		{
+			DoLogForced("Data path doesn't contain appropriate dataset.");
+			DoLogForced("(" + gData.m_DataDir + ")");
+			if (!Errors.empty())
+				DoLogForced("Errors: " + Errors);
+			if (!Warnings.empty())
+				DoLogForced("Warnings: " + Warnings);
+			return;
+		}
+
+		GetModel()->DynPrepare(gData.m_DataDir);
+		string info;
+		Reset(info);
+
+		int current_stratum = 0;
+		while (true) {
+			print_stdout("For next timestep type n (q for exit) ...");
+
+			// temp: perturb P in in end process
+			double p = dynamic_cast<BIn*>(GetModel()->m_Ins[0])->m_P;
+
+			double r = double(rand() % 100 - rand() % 100) / 100;
+			dynamic_cast<BIn*>(GetModel()->m_Ins[0])->m_P = dynamic_cast<BIn*>(GetModel()->m_Ins[0])->m_P + r;
+				
+			p = dynamic_cast<BIn*>(GetModel()->m_Ins[0])->m_P;
+			GetModel()->m_bSchemeChanged = true;
+
+			// make one step
+			SimulationStepResults Results;
+			bool bResult = Step(&Results);
+			if (bResult) {
+				GetModel()->ExportResults(gData.m_DataDir);				
+			}
+			
+			GetModel()->DynExport(current_stratum++);
+
+			ResetEvent(m_hServingRunEvent);
+			SetEvent(m_hServingConfirmEvent);
+
+			HANDLE hArray[2];
+			hArray[0] = m_hServingRunEvent;
+			hArray[1] = m_hServingForceCloseEvent;
+
+			DWORD dwCode = WaitForMultipleObjects(2, hArray, false, INFINITE);
+			switch (dwCode)
+			{
+			case WAIT_OBJECT_0:
+				break;
+			case WAIT_OBJECT_0 + 1:
+				print_stdout("Serving stopped");
+				StopSimulations();
+				return;
+				break;
+			default:
+				break;
+			}
+			
+			print_stdout("New event has been processed");
+		}
 	}
 }

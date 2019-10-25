@@ -7,6 +7,7 @@
 #include "BNSIGPA.h"
 #include "BNSIAVO.h"
 #include "ConnectionsMatrix.h"
+#include "DMapFile.h"
 
 namespace Core
 {
@@ -41,6 +42,13 @@ namespace Core
 		void Clear();
 		bool LoadData(const string& DataDir, string& Errors, string &Warnings);
 		void ExportData(const string& DataDir);
+		
+		// Prepares to IO in real time
+		bool DynPrepare(const string& DataDir);
+		
+		// Export current data to specified stratum of shared memory files
+		bool DynExport(int stratum);
+
 		bool ImportResults(const string& ResultsDir);
 		void ExportResults(const string& Dir);
 		void AddObject(BObject*);
@@ -85,6 +93,9 @@ namespace Core
 		
 		// группы параллельных КЦ
 		vector <RShopsGroup*> m_ParallelShops;
+
+		DMapFile m_InOutMap;
+		DMapFile m_ShopMap;
 
 		int m_nMaxNSIID;
 
