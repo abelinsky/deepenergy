@@ -96,4 +96,5 @@ namespace Core
 	list<CAlert*>* GetAlerts(OptEnums::AlertType AlertType);
 
 	void DoLogForced(const string& s, bool bReset = false);
+	void print_stdout(const string& s);
 }

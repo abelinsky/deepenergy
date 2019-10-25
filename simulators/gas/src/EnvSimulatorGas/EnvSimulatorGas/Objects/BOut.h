@@ -19,6 +19,8 @@ namespace Objects
 		virtual void ResultsToObject(); // экспорт результатов расчетов в параметры потребителя
 		virtual void SummA(double *pA, OptEnums::TypeA type);
 
+		void ExportDynamicsData() override;
+
 	public:
 		int m_Node; // узел схемы
 		int m_nThread; // идентификатор нитки

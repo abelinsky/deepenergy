@@ -65,7 +65,7 @@ namespace Core
 		void ExportShopData(const string& DataDir);
 
 		// reset the events for Calc.exe
-		void ResetEvents();
+		void ResetCalcEvents();
 
 	public:
 		/* Model training */
@@ -98,10 +98,16 @@ namespace Core
 
 	public:
 		HANDLE m_hCalcProcess;
-		HANDLE m_hDynRunEvent;
-		HANDLE m_hDynConfirmEvent;
-		//HANDLE m_hEmergencyEvent;
-		//HANDLE m_hDynErrorEvent;
+
+		// Training mode interprocess sync events
+		HANDLE m_hDynRunEvent_calc;
+		HANDLE m_hDynConfirmEvent_calc;
+
+		// Serving mode interprocess sync events
+		HANDLE m_hServingRunEvent;
+		HANDLE m_hServingConfirmEvent;
+		HANDLE m_hServingForceCloseEvent;
+
 	};
 
 }

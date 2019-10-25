@@ -291,6 +291,7 @@
     <ClInclude Include="SimulationServer\ServerMapper.h" />
     <ClInclude Include="SimulationServer\SimulationServerImpl.h" />
     <ClInclude Include="Tasks\MaxThroughputTask.h" />
+    <ClInclude Include="Tasks\ServingModelTask.h" />
     <ClInclude Include="Tasks\SimpleTask.h" />
     <ClInclude Include="Tasks\TrainingTask.h" />
     <ClInclude Include="utils.h" />
@@ -352,6 +353,7 @@
     <ClCompile Include="SimulationServer\ServerMapper.cpp" />
     <ClCompile Include="SimulationServer\SimulationServerImpl.cpp" />
     <ClCompile Include="Tasks\MaxThroughputTask.cpp" />
+    <ClCompile Include="Tasks\ServingModelTask.cpp" />
     <ClCompile Include="Tasks\SimpleTask.cpp" />
     <ClCompile Include="Tasks\TrainingTask.cpp" />
     <ClCompile Include="utils\DMapFile.cpp" />

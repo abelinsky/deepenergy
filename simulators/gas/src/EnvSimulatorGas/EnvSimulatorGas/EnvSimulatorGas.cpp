@@ -234,6 +234,8 @@ int main(int argc, char* argv[])
 		strcpy_s(argv[i], std::strlen(args[i].c_str())+1, args[i].c_str());
 	}
 
+	SetCurrentDirectory("C:\\Users\\ab\\AppData\\Roaming\\Vesta\\");
+
 #endif
 
 	for (int i = 0; i < argc; i++)

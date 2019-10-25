@@ -165,7 +165,7 @@ namespace Objects {
 		double P = m_P;
 		bool bSurplusParams = (m_Q && m_P);
 		if (bSurplusParams)
-			Q = 0;		
+			Q = 0;
 		P *= gData.m_kP;
 
 		out <<

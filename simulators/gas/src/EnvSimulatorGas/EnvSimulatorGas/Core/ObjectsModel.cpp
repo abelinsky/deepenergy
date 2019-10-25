@@ -495,27 +495,14 @@ bool CObjectsModel::DynExport(int stratum)
 	int order = 0;
 	for (auto pObject : m_Ins) 
 	{
-		// <test>
-		dynamic_cast<BIn*>(pObject)->m_rQ = stratum;
-		dynamic_cast<BIn*>(pObject)->m_rP = stratum;
-		dynamic_cast<BIn*>(pObject)->m_rT = stratum;
-		dynamic_cast<BIn*>(pObject)->m_rRo = stratum;
-		// </test>
-
 		m_InOutMap.SetPosition(sizeof(int) + sizeof(float)*4*(order*stratums_number + stratum));
 		pObject->ExportDynamicsData();
-
-
-		// check
-		//m_InOutMap.SetPosition(sizeof(int) + sizeof(float) * 4 * (order*stratums_number + stratum));
-		//double f = 0;
-		//DMapFile &MapFile = *pObject->m_pMap;
-		//MapFile >> f;
-		//MapFile >> f;
-		//MapFile >> f;
-		//MapFile >> f; // TODO check the necessity of multiplication 1.20445
-		/////////////////
-
+		++order;
+	}
+	for (auto pObject : m_Outs)
+	{
+		m_InOutMap.SetPosition(sizeof(int) + sizeof(float) * 4 * (order*stratums_number + stratum));
+		pObject->ExportDynamicsData();
 		++order;
 	}
 	
