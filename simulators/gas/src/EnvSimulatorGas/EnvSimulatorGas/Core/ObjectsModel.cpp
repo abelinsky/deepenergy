@@ -477,14 +477,17 @@ bool CObjectsModel::DynPrepare(const string& DataDir)
 	sprintf_s(fName, "%sInOutGRSMap.dat", DataDir.c_str());
 	m_InOutMap.Open(fName);
 
+	sprintf_s(fName, "%sCompressorShopMap.dat", DataDir.c_str());
+	m_ShopMap.Open(fName);
+
 	return true;
 }
 
 bool CObjectsModel::DynExport(int stratum)
 {
-	if (!m_InOutMap.IsOpened())
+	if (!m_InOutMap.IsOpened() || !m_ShopMap.IsOpened())
 	{
-		DoLog("Failed to CObjectsModel::DynExport because m_InOutMap is not opened.");
+		DoLog("Failed to CObjectsModel::DynExport because m_InOutMap and/or m_ShopMap are not opened.");
 		return false;
 	}
 
@@ -506,7 +509,14 @@ bool CObjectsModel::DynExport(int stratum)
 		++order;
 	}
 	
-	
+	order = 0;
+	for (auto pShop : m_Shops)
+	{
+		m_ShopMap.SetPosition(sizeof(float) * 6 * (order*stratums_number + stratum));
+		pShop->ExportDynamicsData();
+		++order;
+	}
+
 	return true;
 }
 

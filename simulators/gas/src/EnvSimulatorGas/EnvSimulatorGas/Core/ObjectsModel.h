@@ -95,6 +95,7 @@ namespace Core
 		vector <RShopsGroup*> m_ParallelShops;
 
 		DMapFile m_InOutMap;
+		DMapFile m_ShopMap;
 
 		int m_nMaxNSIID;
 
