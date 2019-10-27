@@ -114,22 +114,13 @@ namespace SimulationServer
 			energyplatform::OptimizationParameter eParam = request->action().optimization_params(i);
 			RManagedParam *pParam = GetModel()->m_ControlParams[eParam.id()];
 			eParam >> (*pParam);
-			
-			/*bool bDiscrete = pParam->IsDiscrete();
-
-			double min = 0, max = 0;
-			pParam->GetParamBorders(min, max);
-			pParam->Set(bDiscrete
-				? min + float(eParam.int_value())/100.
-				: eParam.float_value());*/
-			
 			log += ftos(pParam->Get()) + " ";
 		}
 		DoLogForced(log);
 		
 		SimulationStepResults Results;
 
-		bool bResult = m_pEnv->Step(&Results);
+		bool bResult = m_pEnv->Step(&Results, false);
 
 		response->set_reward(Results.m_Reward);
 		response->set_done(Results.m_bDone);

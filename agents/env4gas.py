@@ -42,6 +42,10 @@ class EnvGas(gym.Env):
         self._is_discrete = False
         self._max_reward = 0
 
+    @property
+    def action_ids(self):
+        return self._optimization_params
+        
     def compile(self, task):
         self._current_task = task
         self.env_service.LoadData(envservice.LoadDataRequest(data_path=self._data_location))

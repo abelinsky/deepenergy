@@ -221,28 +221,34 @@ int main(int argc, char* argv[])
 
 #ifdef _DEBUG
 	
-	string arg0 = string(argv[0]);
-	delete [] argv;
+	bool bServingMode = true;
 
+	if (bServingMode) {
+		// Test serving mode
+		string arg0 = string(argv[0]);
+		delete [] argv;
 
-	argc = 3;
-	string args[3] = { string(arg0), "101", "Data\\" };
-	argv = new char*[3];
-	for (int i = 0; i < 3; i++) {
-		int sz = args[i].size();
-		argv[i] = new char[args[i].size()];
-		strcpy_s(argv[i], std::strlen(args[i].c_str())+1, args[i].c_str());
+		argc = 3;
+		string args[3] = { string(arg0), "101", "Data\\" };
+		argv = new char*[3];
+		for (int i = 0; i < 3; i++) {
+			int sz = args[i].size();
+			argv[i] = new char[args[i].size()];
+			strcpy_s(argv[i], std::strlen(args[i].c_str())+1, args[i].c_str());
+		}
+
+		SetCurrentDirectory("C:\\Users\\ab\\AppData\\Roaming\\Vesta\\");
 	}
-
-	SetCurrentDirectory("C:\\Users\\ab\\AppData\\Roaming\\Vesta\\");
-
+	else {
+		// Test training mode
+		SetCurrentDirectory("C:\\Users\\ab\\AppData\\Roaming\\Vesta\\Data\\");
+	}
+	
 #endif
 
 	for (int i = 0; i < argc; i++)
 		std::cout << "Param " << i << ": " << argv[i] << std::endl;
 
-	std::cout << "argv[1] is " << argv[1] << " cmp is " << strcmp(argv[1], "serve") << endl;
-	
 	if (argc >= 2)
 	{
 		char buff[MAX_PATH];

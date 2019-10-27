@@ -9,6 +9,7 @@
 #include <grpcpp/grpcpp.h>
 #include "energyplatform/core/predictor_service.grpc.pb.h"
 #include "ServerMapper.h"
+using namespace SimulationServer;
 
 namespace Core
 {
@@ -316,15 +317,29 @@ namespace Core
 		ClearErrorFiles(m_SimulatorData.m_DataDir);
 		ClearResultFiles(m_SimulatorData.m_DataDir);
 		ResetCalcEvents();
+		
+		
 		// reload simulator
-		StopSimulations();
-
+		// StopSimulations();
 		// load / reload data
-		LoadData(gData.m_DataDir);
+		// LoadData(gData.m_DataDir);
 
-		// make one step
+		LoadData(gData.m_DataDir);
+		GetModel()->m_bSchemeChanged = true;
+
 		SimulationStepResults Results;
 		bool bResult = Step(&Results);
+		GetModel()->m_bSchemeChanged = false;
+
+		if (!bResult) {
+			DoLogForced("Reloading simulator...");
+			// reload simulator
+			StopSimulations();
+			// load / reload data
+			LoadData(gData.m_DataDir);
+			bResult = Step(&Results);
+		}
+
 		info = bResult 
 			? (boost::format("Environment has been reset successfully. Current state info: %s") % gData.GetCurrentTask()->GetAdditionalInfo()).str()
 			: "Environment reset failed. Probably, the initial dataset is not appropriate for system's modelling";
@@ -388,16 +403,21 @@ namespace Core
 		std::shared_ptr<grpc::Channel> channel = grpc::CreateChannel("localhost:50052",
 			grpc::InsecureChannelCredentials());
 		std::unique_ptr<energyplatform::PredictorService::Stub> predictor_stub = energyplatform::PredictorService::NewStub(channel);
-		grpc::ClientContext context;
+		
 
 		int current_stratum = 0;
 		while (true) {
-			print_stdout("For next timestep type n (q for exit) ...");
+			// print_stdout("Press any key to process timestep ...");
+			// char t;
+			// std::cin >> t;
 
 			// temp: perturb P in in end process
 			double p = dynamic_cast<BIn*>(GetModel()->m_Ins[0])->m_P;
 
-			double r = double(rand() % 100 - rand() % 100) / 100;
+			double range = 0.1; // perturbation range in ata
+			double r = double(rand() % int(range*100) - rand() % int(range * 100)) / 100.;
+			r = 0;
+
 			dynamic_cast<BIn*>(GetModel()->m_Ins[0])->m_P = dynamic_cast<BIn*>(GetModel()->m_Ins[0])->m_P + r;
 				
 			p = dynamic_cast<BIn*>(GetModel()->m_Ins[0])->m_P;
@@ -408,16 +428,21 @@ namespace Core
 			SimulationServer::ServerMapper::CurrentObservationToProtobuf(predict_request.mutable_observation());
 
 			energyplatform::PredictReponse predict_response;
+			grpc::ClientContext context;
 			grpc::Status status = predictor_stub->Predict(&context, predict_request, &predict_response);
 			if (!status.ok()) {
 				print_stdout(status.error_message());
 			}
 			else {
-				// todo: we got params [33, 31]
-				// translate them to gpa frequency and apply
+				for (auto eParam : predict_response.action().optimization_params()) {
+					print_stdout("Got opt param: " + eParam.id() + " with value: " + itos(eParam.int_value()));
 
-				for (auto param : predict_response.action().optimization_params()) {
-					print_stdout("Got opt param: " + param.id() + " with value: " + ftos(param.float_value()));
+					RManagedParam *pParam = GetModel()->m_ControlParams[eParam.id()];
+					if (!pParam) {
+						print_stdout("   Param with id <" + eParam.id() + "> was not found");
+						continue;
+					}
+					eParam >> (*pParam);
 				}
 			}
 			
@@ -437,7 +462,12 @@ namespace Core
 			hArray[0] = m_hServingRunEvent;
 			hArray[1] = m_hServingForceCloseEvent;
 
+#ifndef _DEBUG
 			DWORD dwCode = WaitForMultipleObjects(2, hArray, false, INFINITE);
+#else
+			DWORD dwCode = WAIT_OBJECT_0;
+#endif
+
 			switch (dwCode)
 			{
 			case WAIT_OBJECT_0:
