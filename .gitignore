@@ -3,3 +3,5 @@ simulators/gas/data/
 demo/
 Calc.dll
 docs/
+
+*.vst

@@ -170,7 +170,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>D:\apps\tools\gRPC\vcpkg\installed\x86-windows-static\lib;D:\apps\tools\librdkafka.redist.1.2.1\build\native\lib\win\x86\win-x86-Release\v120;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libeay32.lib;ssleay32.lib;zlib.lib;libprotobuf.lib;ws2_32.lib;grpc.lib;gpr.lib;grpc++.lib;address_sorting.lib;cares.lib;bcrypt.lib;librdkafkacpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libeay32.lib;ssleay32.lib;zlib.lib;libprotobuf.lib;ws2_32.lib;grpc.lib;gpr.lib;grpc++.lib;address_sorting.lib;cares.lib;bcrypt.lib;librdkafka.lib;librdkafkacpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>..\..\..\publish.cmd</Command>
@@ -261,6 +261,8 @@
     <ClInclude Include="energyplatform\core\observation.pb.h" />
     <ClInclude Include="energyplatform\core\optimization_param.grpc.pb.h" />
     <ClInclude Include="energyplatform\core\optimization_param.pb.h" />
+    <ClInclude Include="energyplatform\core\predictor_service.grpc.pb.h" />
+    <ClInclude Include="energyplatform\core\predictor_service.pb.h" />
     <ClInclude Include="energyplatform\core\tasks.grpc.pb.h" />
     <ClInclude Include="energyplatform\core\tasks.pb.h" />
     <ClInclude Include="energyplatform\core\types.grpc.pb.h" />
@@ -317,6 +319,8 @@
     <ClCompile Include="energyplatform\core\observation.pb.cc" />
     <ClCompile Include="energyplatform\core\optimization_param.grpc.pb.cc" />
     <ClCompile Include="energyplatform\core\optimization_param.pb.cc" />
+    <ClCompile Include="energyplatform\core\predictor_service.grpc.pb.cc" />
+    <ClCompile Include="energyplatform\core\predictor_service.pb.cc" />
     <ClCompile Include="energyplatform\core\tasks.grpc.pb.cc" />
     <ClCompile Include="energyplatform\core\tasks.pb.cc" />
     <ClCompile Include="energyplatform\core\types.grpc.pb.cc" />

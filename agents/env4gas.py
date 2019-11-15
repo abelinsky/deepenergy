@@ -28,8 +28,7 @@ class EnvGas(gym.Env):
                 env_service,
                 data_location,
                 log_steps=False,
-                symmetrize_actions=False
-        ):
+                symmetrize_actions=False):
         super(EnvGas, self).__init__()
         self.env_service = env_service
         self._data_location = data_location
@@ -42,6 +41,10 @@ class EnvGas(gym.Env):
         self._is_discrete = False
         self._max_reward = 0
 
+    @property
+    def action_ids(self):
+        return self._optimization_params
+        
     def compile(self, task):
         self._current_task = task
         self.env_service.LoadData(envservice.LoadDataRequest(data_path=self._data_location))
@@ -126,7 +129,7 @@ class EnvGas(gym.Env):
         ob = self._map_observation(result.observation)
         self.prev_ob = ob
 
-        return ob
+        return np.array(ob)
     
     def step(self, action):
         """ Performs one timestep of the environment's dynamics.

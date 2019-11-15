@@ -6,6 +6,11 @@
 #include "BShopGPA.h"
 #include "BIn.h"
 
+#include <grpcpp/grpcpp.h>
+#include "energyplatform/core/predictor_service.grpc.pb.h"
+#include "ServerMapper.h"
+using namespace SimulationServer;
+
 namespace Core
 {
 	CGasEnv::CGasEnv()
@@ -312,15 +317,29 @@ namespace Core
 		ClearErrorFiles(m_SimulatorData.m_DataDir);
 		ClearResultFiles(m_SimulatorData.m_DataDir);
 		ResetCalcEvents();
+		
+		
 		// reload simulator
-		StopSimulations();
-
+		// StopSimulations();
 		// load / reload data
-		LoadData(gData.m_DataDir);
+		// LoadData(gData.m_DataDir);
 
-		// make one step
+		LoadData(gData.m_DataDir);
+		GetModel()->m_bSchemeChanged = true;
+
 		SimulationStepResults Results;
 		bool bResult = Step(&Results);
+		GetModel()->m_bSchemeChanged = false;
+
+		if (!bResult) {
+			DoLogForced("Reloading simulator...");
+			// reload simulator
+			StopSimulations();
+			// load / reload data
+			LoadData(gData.m_DataDir);
+			bResult = Step(&Results);
+		}
+
 		info = bResult 
 			? (boost::format("Environment has been reset successfully. Current state info: %s") % gData.GetCurrentTask()->GetAdditionalInfo()).str()
 			: "Environment reset failed. Probably, the initial dataset is not appropriate for system's modelling";
@@ -359,7 +378,7 @@ namespace Core
 		return bResult;
 	}
 
-	void CGasEnv::ServeTrainedModel()
+	bool CGasEnv::PrepareForModelServing()
 	{
 		gData.SetCurrentTask(CTrainingTask::SERVING_MODEL);
 		string Errors, Warnings;
@@ -372,33 +391,52 @@ namespace Core
 				DoLogForced("Errors: " + Errors);
 			if (!Warnings.empty())
 				DoLogForced("Warnings: " + Warnings);
-			return;
+			return false;
 		}
 
 		GetModel()->DynPrepare(gData.m_DataDir);
 		string info;
 		Reset(info);
 
-		int current_stratum = 0;
-		while (true) {
-			print_stdout("For next timestep type n (q for exit) ...");
+		return true;
+	}
 
-			// temp: perturb P in in end process
-			double p = dynamic_cast<BIn*>(GetModel()->m_Ins[0])->m_P;
+	void CGasEnv::StepServingModel(std::unique_ptr<energyplatform::PredictorService::Stub> &predictor_service, int &current_stratum)
+	{
+		//cout << "Stratum " << current_stratum << endl; return;
 
-			double r = double(rand() % 100 - rand() % 100) / 100;
-			dynamic_cast<BIn*>(GetModel()->m_Ins[0])->m_P = dynamic_cast<BIn*>(GetModel()->m_Ins[0])->m_P + r;
-				
-			p = dynamic_cast<BIn*>(GetModel()->m_Ins[0])->m_P;
-			GetModel()->m_bSchemeChanged = true;
+		GetModel()->m_bSchemeChanged = true;
 
-			// make one step
-			SimulationStepResults Results;
-			bool bResult = Step(&Results);
-			if (bResult) {
-				GetModel()->ExportResults(gData.m_DataDir);				
+		// Get actions from Predictor service
+		energyplatform::PredictRequest predict_request;
+		SimulationServer::ServerMapper::CurrentObservationToProtobuf(predict_request.mutable_observation());
+
+		energyplatform::PredictReponse predict_response;
+		grpc::ClientContext context;
+		grpc::Status status = predictor_service->Predict(&context, predict_request, &predict_response);
+		if (!status.ok()) {
+			print_stdout(status.error_message());
+		}
+		else {
+			for (auto eParam : predict_response.action().optimization_params()) {
+				print_stdout("Got opt param: " + eParam.id() + " with value: " + itos(eParam.int_value()));
+
+				RManagedParam *pParam = GetModel()->m_ControlParams[eParam.id()];
+				if (!pParam) {
+					print_stdout("   Param with id <" + eParam.id() + "> was not found");
+					continue;
+				}
+				eParam >> (*pParam);
 			}
+		}
 			
+		// make one step
+		SimulationStepResults Results;
+		bool bResult = Step(&Results);
+
+
+		if (bResult) {
+			GetModel()->ExportResults(gData.m_DataDir);
 			GetModel()->DynExport(current_stratum++);
 
 			ResetEvent(m_hServingRunEvent);
@@ -408,7 +446,12 @@ namespace Core
 			hArray[0] = m_hServingRunEvent;
 			hArray[1] = m_hServingForceCloseEvent;
 
+#ifndef _DEBUG
 			DWORD dwCode = WaitForMultipleObjects(2, hArray, false, INFINITE);
+#else
+			DWORD dwCode = WAIT_OBJECT_0;
+#endif
+
 			switch (dwCode)
 			{
 			case WAIT_OBJECT_0:
@@ -421,8 +464,11 @@ namespace Core
 			default:
 				break;
 			}
-			
-			print_stdout("New event has been processed");
+
+			print_stdout("New event at startum " + itos(current_stratum-1) + " has been processed successfully");
+		}
+		else {
+			print_stdout("New event has not been processed because simulation with recommended params failed");
 		}
 	}
 }

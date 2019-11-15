@@ -113,6 +113,7 @@ class GasEnv(gym.Env):
         ob = self._map_observation(result.observation)
         self.prev_ob = ob
 
+        print("****** Ob type is ..", type(ob))
         return ob
     
     def step(self, action):
@@ -164,7 +165,7 @@ class GasEnv(gym.Env):
             ob = self.prev_ob
             if self.log_steps: 
                 print(f"Total reward in episode is {self.total_reward}")
-
+        print("****** Ob type is ..", type(ob))
         return ob, response.reward, response.done, response.info
 
     def render(self, mode='human', close=False):

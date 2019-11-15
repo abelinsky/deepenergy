@@ -40,7 +40,7 @@ namespace Tasks
 			? multiplier * exp(delta)
 			: -exp(abs(delta));
 
-		DoLogForced("   reward is " + ftos(reward) + " ______ prew q = " + ftos(m_PrevThroughput) + ", current q = " + ftos(rq));
+		DoLogForced("   ******************** reward is " + ftos(reward) + ", current q = " + ftos(rq));
 
 		return reward;
 	}

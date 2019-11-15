@@ -115,7 +115,7 @@ namespace SimulationServer
 		eParam.set_info(iParam.GetInfo());
 	}
 
-	void operator>>(energyplatform::OptimizationParameter &eParam, Objects::OptimizationParam &iParam)
+	void operator>>(const energyplatform::OptimizationParameter &eParam, Objects::OptimizationParam &iParam)
 	{
 		bool discrete = iParam.IsDiscrete();
 
