@@ -1,0 +1,36 @@
+# gitignore for C++
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.db
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+*.ilk
+*.pdb
+*.iobj
+*.ipdb
+*.exe
+*.dll
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+
+# Visual Studio Files
+telemetry3/Debug
+telemetry3/Release
+Debug
+Release
+
+*.suo
+*.csproj.user
+*.vbproj.user
+ipch
+*sdf
+
+google-services.json

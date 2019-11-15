@@ -378,8 +378,7 @@ namespace Core
 		return bResult;
 	}
 
-
-	void CGasEnv::ServeTrainedModel()
+	bool CGasEnv::PrepareForModelServing()
 	{
 		gData.SetCurrentTask(CTrainingTask::SERVING_MODEL);
 		string Errors, Warnings;
@@ -392,67 +391,52 @@ namespace Core
 				DoLogForced("Errors: " + Errors);
 			if (!Warnings.empty())
 				DoLogForced("Warnings: " + Warnings);
-			return;
+			return false;
 		}
 
 		GetModel()->DynPrepare(gData.m_DataDir);
 		string info;
 		Reset(info);
 
-		// Initialize predictor service client
-		std::shared_ptr<grpc::Channel> channel = grpc::CreateChannel("localhost:50052",
-			grpc::InsecureChannelCredentials());
-		std::unique_ptr<energyplatform::PredictorService::Stub> predictor_stub = energyplatform::PredictorService::NewStub(channel);
-		
+		return true;
+	}
 
-		int current_stratum = 0;
-		while (true) {
-			// print_stdout("Press any key to process timestep ...");
-			// char t;
-			// std::cin >> t;
+	void CGasEnv::StepServingModel(std::unique_ptr<energyplatform::PredictorService::Stub> &predictor_service, int &current_stratum)
+	{
+		//cout << "Stratum " << current_stratum << endl; return;
 
-			// temp: perturb P in in end process
-			double p = dynamic_cast<BIn*>(GetModel()->m_Ins[0])->m_P;
+		GetModel()->m_bSchemeChanged = true;
 
-			double range = 0.1; // perturbation range in ata
-			double r = double(rand() % int(range*100) - rand() % int(range * 100)) / 100.;
-			r = 0;
+		// Get actions from Predictor service
+		energyplatform::PredictRequest predict_request;
+		SimulationServer::ServerMapper::CurrentObservationToProtobuf(predict_request.mutable_observation());
 
-			dynamic_cast<BIn*>(GetModel()->m_Ins[0])->m_P = dynamic_cast<BIn*>(GetModel()->m_Ins[0])->m_P + r;
-				
-			p = dynamic_cast<BIn*>(GetModel()->m_Ins[0])->m_P;
-			GetModel()->m_bSchemeChanged = true;
+		energyplatform::PredictReponse predict_response;
+		grpc::ClientContext context;
+		grpc::Status status = predictor_service->Predict(&context, predict_request, &predict_response);
+		if (!status.ok()) {
+			print_stdout(status.error_message());
+		}
+		else {
+			for (auto eParam : predict_response.action().optimization_params()) {
+				print_stdout("Got opt param: " + eParam.id() + " with value: " + itos(eParam.int_value()));
 
-			// Get actions from Predictor service
-			energyplatform::PredictRequest predict_request;
-			SimulationServer::ServerMapper::CurrentObservationToProtobuf(predict_request.mutable_observation());
-
-			energyplatform::PredictReponse predict_response;
-			grpc::ClientContext context;
-			grpc::Status status = predictor_stub->Predict(&context, predict_request, &predict_response);
-			if (!status.ok()) {
-				print_stdout(status.error_message());
-			}
-			else {
-				for (auto eParam : predict_response.action().optimization_params()) {
-					print_stdout("Got opt param: " + eParam.id() + " with value: " + itos(eParam.int_value()));
-
-					RManagedParam *pParam = GetModel()->m_ControlParams[eParam.id()];
-					if (!pParam) {
-						print_stdout("   Param with id <" + eParam.id() + "> was not found");
-						continue;
-					}
-					eParam >> (*pParam);
+				RManagedParam *pParam = GetModel()->m_ControlParams[eParam.id()];
+				if (!pParam) {
+					print_stdout("   Param with id <" + eParam.id() + "> was not found");
+					continue;
 				}
+				eParam >> (*pParam);
 			}
+		}
 			
-			// make one step
-			SimulationStepResults Results;
-			bool bResult = Step(&Results);
-			if (bResult) {
-				GetModel()->ExportResults(gData.m_DataDir);				
-			}
-			
+		// make one step
+		SimulationStepResults Results;
+		bool bResult = Step(&Results);
+
+
+		if (bResult) {
+			GetModel()->ExportResults(gData.m_DataDir);
 			GetModel()->DynExport(current_stratum++);
 
 			ResetEvent(m_hServingRunEvent);
@@ -480,8 +464,11 @@ namespace Core
 			default:
 				break;
 			}
-			
-			print_stdout("New event has been processed");
+
+			print_stdout("New event at startum " + itos(current_stratum-1) + " has been processed successfully");
+		}
+		else {
+			print_stdout("New event has not been processed because simulation with recommended params failed");
 		}
 	}
 }

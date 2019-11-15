@@ -170,7 +170,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>D:\apps\tools\gRPC\vcpkg\installed\x86-windows-static\lib;D:\apps\tools\librdkafka.redist.1.2.1\build\native\lib\win\x86\win-x86-Release\v120;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libeay32.lib;ssleay32.lib;zlib.lib;libprotobuf.lib;ws2_32.lib;grpc.lib;gpr.lib;grpc++.lib;address_sorting.lib;cares.lib;bcrypt.lib;librdkafkacpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libeay32.lib;ssleay32.lib;zlib.lib;libprotobuf.lib;ws2_32.lib;grpc.lib;gpr.lib;grpc++.lib;address_sorting.lib;cares.lib;bcrypt.lib;librdkafka.lib;librdkafkacpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>..\..\..\publish.cmd</Command>
