@@ -7,7 +7,7 @@
 #include "BIn.h"
 
 #include <grpcpp/grpcpp.h>
-#include "energyplatform/core/predictor_service.grpc.pb.h"
+#include "unetwork/core/predictor_service.grpc.pb.h"
 #include "ServerMapper.h"
 using namespace SimulationServer;
 
@@ -401,17 +401,17 @@ namespace Core
 		return true;
 	}
 
-	void CGasEnv::StepServingModel(std::unique_ptr<energyplatform::PredictorService::Stub> &predictor_service, int &current_stratum)
+	void CGasEnv::StepServingModel(std::unique_ptr<unetwork::PredictorService::Stub> &predictor_service, int &current_stratum)
 	{
 		//cout << "Stratum " << current_stratum << endl; return;
 
 		GetModel()->m_bSchemeChanged = true;
 
 		// Get actions from Predictor service
-		energyplatform::PredictRequest predict_request;
+		unetwork::PredictRequest predict_request;
 		SimulationServer::ServerMapper::CurrentObservationToProtobuf(predict_request.mutable_observation());
 
-		energyplatform::PredictReponse predict_response;
+		unetwork::PredictReponse predict_response;
 		grpc::ClientContext context;
 		grpc::Status status = predictor_service->Predict(&context, predict_request, &predict_response);
 		if (!status.ok()) {

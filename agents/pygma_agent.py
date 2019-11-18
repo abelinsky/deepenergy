@@ -42,14 +42,14 @@ def train_agent(data_location):
     agent_ = agent.ReinforceAgent(env, max_rollout_length=100)
     agent_.run_training_loop(1000)
 
-    # save model
-    model_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'models')
-    if not (os.path.exists(model_path)):
-        os.makedirs(model_path)
+    # # save model
+    # model_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'models')
+    # if not (os.path.exists(model_path)):
+    #     os.makedirs(model_path)
     
-    model_name = time.strftime("%d-%m-%Y_%H-%M-%S")
-    model_file = os.path.join(model_path, model_name)
-    # model.save(model_file)
+    # model_name = time.strftime("%d-%m-%Y_%H-%M-%S")
+    # model_file = os.path.join(model_path, model_name)
+    # # model.save(model_file)
 
     with open(f'{model_file}.metadata.json', 'w') as metadata:
         json.dump(env.action_ids, metadata, indent=4)
@@ -57,27 +57,28 @@ def train_agent(data_location):
     channel.close()
 
 def inference(data_location, model_location):
-    channel = grpc.insecure_channel('localhost:50051')
-    env = EnvGas(EnvServiceStub(channel), data_location)
+    pass
+    # channel = grpc.insecure_channel('localhost:50051')
+    # env = EnvGas(EnvServiceStub(channel), data_location)
     
-    # Load the trained agent
-    # model = PPO2.load(model_location)
+    # # Load the trained agent
+    # # model = PPO2.load(model_location)
 
-    # Use trained agent
-    ob = env.reset()
-    for _ in range(1000):
-        # action, _states = model.predict(ob)
-        ob, _, done, _ = env.step(action)
-        env.render()
-        if done:
-            env.total_reward = 0
+    # # Use trained agent
+    # ob = env.reset()
+    # for _ in range(1000):
+    #     # action, _states = model.predict(ob)
+    #     ob, _, done, _ = env.step(action)
+    #     env.render()
+    #     if done:
+    #         env.total_reward = 0
     
-    channel.close()
+    # channel.close()
 
 def main():
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument('--data', type=str, default='Simulation/')
+    parser.add_argument('--data', type=str, default='data/')
     parser.add_argument('--inf', action='store_true')
     parser.add_argument('--model', type=str)
     args = parser.parse_args()

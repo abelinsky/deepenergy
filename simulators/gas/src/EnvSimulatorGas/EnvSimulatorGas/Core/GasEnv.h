@@ -1,6 +1,6 @@
 #pragma once
 #include <grpcpp/grpcpp.h>
-#include "energyplatform/core/predictor_service.grpc.pb.h"
+#include "unetwork/core/predictor_service.grpc.pb.h"
 
 namespace Core 
 {
@@ -98,7 +98,7 @@ namespace Core
 		/* Trained model serving */
 		bool PrepareForModelServing();
 		// Performs one ste on serving model
-		void StepServingModel(std::unique_ptr<energyplatform::PredictorService::Stub> &predictor_service, int &current_stratum);
+		void StepServingModel(std::unique_ptr<unetwork::PredictorService::Stub> &predictor_service, int &current_stratum);
 
 	public:
 		HANDLE m_hCalcProcess;

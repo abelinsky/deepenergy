@@ -11,7 +11,7 @@
 #include "SimulationServerImpl.h"
 
 #include <grpcpp/grpcpp.h>
-#include "energyplatform/core/predictor_service.grpc.pb.h"
+#include "unetwork/core/predictor_service.grpc.pb.h"
 #include "ServerMapper.h"
 #include "BIn.h"
 
@@ -126,7 +126,7 @@ bool msg_consume(RdKafka::Message* message, float& msg_value) {
 	return result;
 }
 
-void RunKafkaConsumer(CGasEnv* env, std::unique_ptr<energyplatform::PredictorService::Stub> &predictor_service)
+void RunKafkaConsumer(CGasEnv* env, std::unique_ptr<unetwork::PredictorService::Stub> &predictor_service)
 {
 	// std::string brokers = "localhost"; // localhost:9092
 	std::string brokers = "localhost:9092";
@@ -223,7 +223,7 @@ int main(int argc, char* argv[])
 	//return 0;
 #ifdef _DEBUG
 	
-	bool bServingMode = true;
+	bool bServingMode = false;
 
 	if (bServingMode) {
 		// Test serving mode
@@ -268,7 +268,7 @@ int main(int argc, char* argv[])
 		// Initialize predictor service client
 		std::shared_ptr<grpc::Channel> channel = grpc::CreateChannel("localhost:50052",
 			grpc::InsecureChannelCredentials());
-		std::unique_ptr<energyplatform::PredictorService::Stub> predictor_stub = energyplatform::PredictorService::NewStub(channel);
+		std::unique_ptr<unetwork::PredictorService::Stub> predictor_stub = unetwork::PredictorService::NewStub(channel);
 
 		// Create environment
 		CGasEnv *env = new CGasEnv;

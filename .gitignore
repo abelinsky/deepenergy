@@ -3,5 +3,6 @@ simulators/gas/data/
 demo/
 Calc.dll
 docs/
+pygma
 
 *.vst

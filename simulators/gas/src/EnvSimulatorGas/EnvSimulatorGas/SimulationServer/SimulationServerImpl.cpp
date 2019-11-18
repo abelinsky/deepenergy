@@ -18,8 +18,8 @@ namespace SimulationServer
 		delete m_pEnv;
 	}
 
-	Status SimulationServerImpl::LoadData(::grpc::ServerContext* context, const ::energyplatform::LoadDataRequest* request,
-		::energyplatform::LoadDataResponse* response)
+	Status SimulationServerImpl::LoadData(::grpc::ServerContext* context, const ::unetwork::LoadDataRequest* request,
+		::unetwork::LoadDataResponse* response)
 	{
 		DoLogForced("Seeking for data in: " + request->data_path());
 
@@ -40,8 +40,8 @@ namespace SimulationServer
 		bool bResult = m_pEnv->LoadData(path.string());
 
 		response->set_status(bResult
-			? energyplatform::LoadDataResponse::LoadDataStatus::LoadDataResponse_LoadDataStatus_OK
-			: energyplatform::LoadDataResponse::LoadDataStatus::LoadDataResponse_LoadDataStatus_FAILED
+			? unetwork::LoadDataResponse::LoadDataStatus::LoadDataResponse_LoadDataStatus_OK
+			: unetwork::LoadDataResponse::LoadDataStatus::LoadDataResponse_LoadDataStatus_FAILED
 		);
 
 		return bResult
@@ -50,7 +50,7 @@ namespace SimulationServer
 	}
 
 	::grpc::Status SimulationServerImpl::GetEnvDescription(::grpc::ServerContext* context,
-		const ::energyplatform::GetEnvDescriptionRequest* request, ::energyplatform::GetEnvDescriptionResponse* response)
+		const ::unetwork::GetEnvDescriptionRequest* request, ::unetwork::GetEnvDescriptionResponse* response)
 	{
 		EnvDescription envDescription = m_pEnv->GetEnvDescription();
 		
@@ -61,29 +61,29 @@ namespace SimulationServer
 		return Status::OK;
 	}
 
-	::grpc::Status SimulationServerImpl::SetCurrentTask(::grpc::ServerContext* context, const ::energyplatform::SetCurrentTaskRequest* request,
-		::energyplatform::SetCurrentTaskResponse* response)
+	::grpc::Status SimulationServerImpl::SetCurrentTask(::grpc::ServerContext* context, const ::unetwork::SetCurrentTaskRequest* request,
+		::unetwork::SetCurrentTaskResponse* response)
 	{
 		CTrainingTask::TaskType Task = ServerMapper::ProtoTaskToInternalTask(request->task());
 		m_pEnv->SetCurrentTask(Task);
 		return Status::OK;
 	}
 
-	Status SimulationServerImpl::GetOptimizationParams(::grpc::ServerContext* context, const ::energyplatform::GetOptimizationParamsRequest* request, 
-		::energyplatform::GetOptimizationParamsResponse* response)
+	Status SimulationServerImpl::GetOptimizationParams(::grpc::ServerContext* context, const ::unetwork::GetOptimizationParamsRequest* request,
+		::unetwork::GetOptimizationParamsResponse* response)
 	{
 		list<OptimizationParam*> optParams;
 		m_pEnv->GetOptimizationParams(optParams);
 		for (auto pOptParam : optParams)
 		{
-			energyplatform::OptimizationParameter *pParam = response->add_optimization_params();
+			unetwork::OptimizationParameter *pParam = response->add_optimization_params();
 			(*pParam) << (*pOptParam);
 		}
 		return Status::OK;
 	}
 
-	Status SimulationServerImpl::Reset(::grpc::ServerContext* context, const ::energyplatform::ResetRequest* request,
-		::energyplatform::ResetResponse* response)
+	Status SimulationServerImpl::Reset(::grpc::ServerContext* context, const ::unetwork::ResetRequest* request,
+		::unetwork::ResetResponse* response)
 	{
 		string info;
 		bool bResult = m_pEnv->Reset(info);
@@ -91,27 +91,27 @@ namespace SimulationServer
 
 		if (bResult)
 		{
-			energyplatform::Observation* pObservation = new energyplatform::Observation;
+			unetwork::Observation* pObservation = new unetwork::Observation;
 			ServerMapper::CurrentObservationToProtobuf(pObservation);
 			response->set_allocated_observation(pObservation);
 		}
 
 		response->set_reset_status(bResult ?
-			::energyplatform::ResetResponse_ResetStatus::ResetResponse_ResetStatus_READY_TO_SIMULATE
-			: energyplatform::ResetResponse_ResetStatus::ResetResponse_ResetStatus_RESET_FAILED);
+			::unetwork::ResetResponse_ResetStatus::ResetResponse_ResetStatus_READY_TO_SIMULATE
+			: unetwork::ResetResponse_ResetStatus::ResetResponse_ResetStatus_RESET_FAILED);
 
 		return bResult
 			? Status::OK
 			: Status(::grpc::StatusCode::INTERNAL, info);
 	}
 
-	Status SimulationServerImpl::Step(::grpc::ServerContext* context, const ::energyplatform::StepRequest* request,
-		::energyplatform::StepResponse* response)
+	Status SimulationServerImpl::Step(::grpc::ServerContext* context, const ::unetwork::StepRequest* request,
+		::unetwork::StepResponse* response)
 	{
 		string log = "Step with action: ";
 		for (int i = 0; i < request->action().optimization_params_size(); i++)
 		{
-			energyplatform::OptimizationParameter eParam = request->action().optimization_params(i);
+			unetwork::OptimizationParameter eParam = request->action().optimization_params(i);
 			RManagedParam *pParam = GetModel()->m_ControlParams[eParam.id()];
 			eParam >> (*pParam);
 			log += ftos(pParam->Get()) + " ";
@@ -128,7 +128,7 @@ namespace SimulationServer
 
 		if (!Results.m_bDone)
 		{
-			energyplatform::Observation* pObservation = new energyplatform::Observation;
+			unetwork::Observation* pObservation = new unetwork::Observation;
 			ServerMapper::CurrentObservationToProtobuf(pObservation);
 			response->set_allocated_observation(pObservation);
 		}
@@ -136,8 +136,8 @@ namespace SimulationServer
 		return Status::OK;
 	}
 
-	Status SimulationServerImpl::Stop(::grpc::ServerContext* context, const ::energyplatform::StopRequest* request,
-		::energyplatform::StopResponse* response)
+	Status SimulationServerImpl::Stop(::grpc::ServerContext* context, const ::unetwork::StopRequest* request,
+		::unetwork::StopResponse* response)
 	{
 		m_pEnv->StopSimulations();
 		return Status::OK;

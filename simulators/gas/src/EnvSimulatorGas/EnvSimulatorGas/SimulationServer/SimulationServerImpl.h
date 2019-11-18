@@ -1,7 +1,7 @@
 #pragma once
 
 #include <grpcpp/grpcpp.h>
-#include "energyplatform/core/env_service.grpc.pb.h"
+#include "unetwork/core/env_service.grpc.pb.h"
 #include "GasEnv.h"
 
 using namespace Core;
@@ -9,7 +9,7 @@ using grpc::Server;
 using grpc::ServerBuilder;
 using grpc::ServerContext;
 using grpc::Status;
-using energyplatform::EnvService;
+using unetwork::EnvService;
 
 namespace SimulationServer
 {
@@ -19,26 +19,26 @@ namespace SimulationServer
 		SimulationServerImpl();
 		~SimulationServerImpl();
 
-		virtual ::grpc::Status LoadData(::grpc::ServerContext* context, const ::energyplatform::LoadDataRequest* request, 
-			::energyplatform::LoadDataResponse* response) override;
+		virtual ::grpc::Status LoadData(::grpc::ServerContext* context, const ::unetwork::LoadDataRequest* request,
+			::unetwork::LoadDataResponse* response) override;
 
 		::grpc::Status GetEnvDescription(::grpc::ServerContext* context, 
-			const ::energyplatform::GetEnvDescriptionRequest* request, ::energyplatform::GetEnvDescriptionResponse* response) override;
+			const ::unetwork::GetEnvDescriptionRequest* request, ::unetwork::GetEnvDescriptionResponse* response) override;
 
-		::grpc::Status SetCurrentTask(::grpc::ServerContext* context, const ::energyplatform::SetCurrentTaskRequest* request,
-			::energyplatform::SetCurrentTaskResponse* response) override;
+		::grpc::Status SetCurrentTask(::grpc::ServerContext* context, const ::unetwork::SetCurrentTaskRequest* request,
+			::unetwork::SetCurrentTaskResponse* response) override;
 
 		virtual ::grpc::Status GetOptimizationParams(::grpc::ServerContext* context, 
-			const ::energyplatform::GetOptimizationParamsRequest* request, ::energyplatform::GetOptimizationParamsResponse* response) override;
+			const ::unetwork::GetOptimizationParamsRequest* request, ::unetwork::GetOptimizationParamsResponse* response) override;
 
-		::grpc::Status Reset(::grpc::ServerContext* context, const ::energyplatform::ResetRequest* request,
-			::energyplatform::ResetResponse* response) override;
+		::grpc::Status Reset(::grpc::ServerContext* context, const ::unetwork::ResetRequest* request,
+			::unetwork::ResetResponse* response) override;
 
-		::grpc::Status Step(::grpc::ServerContext* context, const ::energyplatform::StepRequest* request,
-			::energyplatform::StepResponse* response) override;
+		::grpc::Status Step(::grpc::ServerContext* context, const ::unetwork::StepRequest* request,
+			::unetwork::StepResponse* response) override;
 
-		virtual ::grpc::Status Stop(::grpc::ServerContext* context, const ::energyplatform::StopRequest* request,
-			::energyplatform::StopResponse* response) override;
+		virtual ::grpc::Status Stop(::grpc::ServerContext* context, const ::unetwork::StopRequest* request,
+			::unetwork::StopResponse* response) override;
 
 		CGasEnv* GetEnv() { return m_pEnv; }
 

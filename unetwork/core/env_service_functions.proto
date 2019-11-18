@@ -1,0 +1,153 @@
+/* Copyright 2019 Alexander Belinsky. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+==============================================================================*/
+
+syntax = "proto3";
+
+package unetwork;
+import "unetwork/core/tasks.proto";
+import "unetwork/core/action.proto";
+import "unetwork/core/observation.proto";
+import "unetwork/core/optimization_param.proto";
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// LoadData method request/response messages
+//
+// Loads data about simulated system from path.
+//
+////////////////////////////////////////////////////////////////////////////////
+message LoadDataRequest {
+     // path to simulated systems's data 
+    string data_path = 1; 
+}
+
+message LoadDataResponse {
+    enum LoadDataStatus {
+        OK = 0;
+        FAILED = 1;
+    }
+    LoadDataStatus status = 1;
+
+    string message = 2;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// GetEnvDescription method request/response messages
+//
+// Describes current system.
+//
+////////////////////////////////////////////////////////////////////////////////
+message GetEnvDescriptionRequest {}
+
+message GetEnvDescriptionResponse {
+    // The dimension of actions' space (==number of control parameters)
+    int32 action_space_dimension = 1;
+    
+    // The dimension of observations' space
+    int32 observation_space_dimension = 2; 
+    
+    // discrete actions?
+    bool is_discrete = 3;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// SetCurrentTask method request/response messages
+//
+// Sets system's task to be solved.
+//
+////////////////////////////////////////////////////////////////////////////////
+message SetCurrentTaskRequest {
+    SystemTask task = 1;
+}
+
+message SetCurrentTaskResponse {}
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// GetOptimizationParams method request/response messages
+//
+// Returns the list of optimization parameters (control parameters) - possible agent's actions.
+//
+////////////////////////////////////////////////////////////////////////////////
+message GetOptimizationParamsRequest {}
+
+message GetOptimizationParamsResponse {
+    // Controlled parameters list.  
+    repeated OptimizationParameter optimization_params = 1;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// Reset method request/response messages
+//
+// Resets the state of the environment (the simulator state) and returns an initial observation.
+//
+////////////////////////////////////////////////////////////////////////////////
+message ResetRequest {}
+
+message ResetResponse {
+    enum ResetStatus {
+        READY_TO_SIMULATE = 0;
+        RESET_FAILED = 1;
+    }
+    ResetStatus reset_status = 1;
+
+    // Initial observation.
+    Observation observation = 2;
+
+    // Additional info that can be useful for debugging.
+    string reset_info = 3;  
+}
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// Step method request/response messages
+//
+// Performs one timestep of the environment's dynamics.
+//
+////////////////////////////////////////////////////////////////////////////////
+message StepRequest {
+    // Action that is pushed on the system.
+    Action action = 1;
+}
+
+message StepResponse {
+    // Contains results from one simulation step.
+
+    // Agent's observation of the current environment.
+    Observation observation = 1;
+
+    // Amount of reward returned after applying  previous action.
+    float reward = 2; 
+    
+    // Indicates whether the episode has ended.
+    bool done = 3; 
+
+    // Auxiliary diagnostic information (can be useful for debugging purposes).
+    string info = 4; 
+}
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// Stops method request/response messages
+//
+// Stops simulations.
+//
+////////////////////////////////////////////////////////////////////////////////
+message StopRequest {}
+
+message StopResponse {}
+
+

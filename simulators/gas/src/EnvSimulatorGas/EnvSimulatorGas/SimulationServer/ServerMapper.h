@@ -1,7 +1,7 @@
 #pragma once
 
 #include <grpcpp/grpcpp.h>
-#include "energyplatform/core/env_service.grpc.pb.h"
+#include "unetwork/core/env_service.grpc.pb.h"
 
 namespace SimulationServer
 {
@@ -11,13 +11,13 @@ namespace SimulationServer
 	public:
 
 		// Converts current environment's observation (state) to protobuf 
-		static void CurrentObservationToProtobuf(energyplatform::Observation*);
+		static void CurrentObservationToProtobuf(unetwork::Observation*);
 
 		// Converts protobuf task type to internal task type
-		static CTrainingTask::TaskType ProtoTaskToInternalTask(energyplatform::SystemTask);
+		static CTrainingTask::TaskType ProtoTaskToInternalTask(unetwork::SystemTask);
 	};
 
 
-	extern void operator << (energyplatform::OptimizationParameter&, Objects::OptimizationParam&);
-	extern void operator >> (const energyplatform::OptimizationParameter&, Objects::OptimizationParam&);
+	extern void operator << (unetwork::OptimizationParameter&, Objects::OptimizationParam&);
+	extern void operator >> (const unetwork::OptimizationParameter&, Objects::OptimizationParam&);
 }

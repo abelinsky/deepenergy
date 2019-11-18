@@ -1,0 +1,69 @@
+/* Copyright 2019 Alexander Belinsky. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+==============================================================================*/
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// The definintions of specific types of the platform.
+//
+////////////////////////////////////////////////////////////////////////////////
+
+syntax = "proto3";
+
+package unetwork;
+
+// Indicates types of parameters.
+enum ParameterType {
+    // `DISCRETE`: discrete. Example: state of the equipment, off/on, 0 or 1.
+    PT_DISCRETE = 0;
+    // `CONTINUOUS`: continuous. Example: rotational speed, (0, 1].
+    PT_CONTINUOUS = 1;
+}
+
+// Protocol buffer representing discrete interval type in {0, 1, .., n-1}.
+message DiscreteInterval {
+    int32 n = 1;
+}
+
+// Protocol buffer representing continuous interval type.
+message ContinuousInterval {
+    double low_value = 1;
+    double high_value = 2;
+}
+
+// Indicates various physics parameters' types.
+enum PhysicalValueType {
+    // Not set type
+    PV_NOTYPE = 0;
+    // Physical state. Example: on/off.
+    PV_STATE = 1;
+    // Pressure
+    PV_PRESSURE = 2;
+    // Temperature
+    PV_TEMPERATURE = 3;
+    // Density 
+    PV_DENSITY = 4;
+    // Volume
+    PV_VOLUME = 5; 
+    // Frequency
+    PV_FREQUENCY = 6;
+}
+
+// Protocol buffer representing physical param.
+message PhysicalParam {
+    // Unique id of the param
+    string id = 1;
+    // Type of the param
+    PhysicalValueType type = 2;
+    // Value of the param
+    float value = 3;
+}

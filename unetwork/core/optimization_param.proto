@@ -1,0 +1,51 @@
+/* Copyright 2019 Alexander Belinsky. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+==============================================================================*/
+
+syntax = "proto3";
+
+package unetwork;
+import "unetwork/core/types.proto"; 
+
+// Protocol buffer representing metadata of controlled parameter.
+message OptimizationParameterMetadata {
+    // Parameter's type: discrete, countinuous.
+    ParameterType type = 1;
+
+    // Parameter's physical type: pressure, temperature, etc.
+    PhysicalValueType physical_type = 2;
+    
+    // Allowed space of the param's values.
+    oneof space {
+        unetwork.DiscreteInterval discrete_space = 3;
+        unetwork.ContinuousInterval continuos_space = 4;
+    }
+}
+
+// Protocol buffer representing controlled parameter of the system.
+message OptimizationParameter {
+    // Metadata of parameter.
+    OptimizationParameterMetadata metadata = 1;
+
+    // The id given to this parameter. Unique within a single system's graph.
+    string id = 2;
+
+    // The value of the parameter (depends on ParameterType).
+    oneof value {
+        float float_value = 3; 
+        int64 int_value = 4; 
+    }
+
+    // Additional info which can be associated with the parameter. 
+    // Useful for debug options.
+    string info = 5;
+}

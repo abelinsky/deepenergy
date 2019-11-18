@@ -125,7 +125,7 @@
       <PreprocessorDefinitions>_WIN32_WINNT=0x600;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>D:\apps\tools\gRPC\vcpkg\installed\x86-windows-static\include;D:\apps\tools\gRPC\vcpkg\installed\x86-windows-static\include\boost;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Core;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Objects;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\NSI;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Connections;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\utils;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\SimulationServer;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Tasks;D:\apps\tools\librdkafka.redist.1.2.1\build\native\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\apps\tools\gRPC\vcpkg\installed\x86-windows-static\include;D:\apps\tools\gRPC\vcpkg\installed\x86-windows-static\include\boost;D:\apps\Galatea\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas;D:\apps\Galatea\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Core;D:\apps\Galatea\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Objects;D:\apps\Galatea\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\NSI;D:\apps\Galatea\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Connections;D:\apps\Galatea\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\utils;D:\apps\Galatea\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\SimulationServer;D:\apps\Galatea\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Tasks;D:\apps\tools\librdkafka.redist.1.2.1\build\native\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -161,7 +161,7 @@
       <PreprocessorDefinitions>_WIN32_WINNT=0x600;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>D:\apps\tools\gRPC\vcpkg\installed\x86-windows-static\include;D:\apps\tools\gRPC\vcpkg\installed\x86-windows-static\include\boost;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Core;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Objects;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\NSI;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Connections;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\utils;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\SimulationServer;D:\apps\DeepEnergy\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Tasks;D:\apps\tools\librdkafka.redist.1.2.1\build\native\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\apps\tools\gRPC\vcpkg\installed\x86-windows-static\include;D:\apps\tools\gRPC\vcpkg\installed\x86-windows-static\include\boost;D:\apps\Galatea\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas;D:\apps\Galatea\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Core;D:\apps\Galatea\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Objects;D:\apps\Galatea\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\NSI;D:\apps\Galatea\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Connections;D:\apps\Galatea\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\utils;D:\apps\Galatea\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\SimulationServer;D:\apps\Galatea\simulators\gas\src\EnvSimulatorGas\EnvSimulatorGas\Tasks;D:\apps\tools\librdkafka.redist.1.2.1\build\native\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -249,24 +249,6 @@
     <ClInclude Include="Core\ObjectsModel.h" />
     <ClInclude Include="Core\OptDefines.h" />
     <ClInclude Include="Core\OptEnums.h" />
-    <ClInclude Include="energyplatform\core\action.grpc.pb.h" />
-    <ClInclude Include="energyplatform\core\action.pb.h" />
-    <ClInclude Include="energyplatform\core\env_service.grpc.pb.h" />
-    <ClInclude Include="energyplatform\core\env_service.pb.h" />
-    <ClInclude Include="energyplatform\core\env_service_functions.grpc.pb.h" />
-    <ClInclude Include="energyplatform\core\env_service_functions.pb.h" />
-    <ClInclude Include="energyplatform\core\graph.grpc.pb.h" />
-    <ClInclude Include="energyplatform\core\graph.pb.h" />
-    <ClInclude Include="energyplatform\core\observation.grpc.pb.h" />
-    <ClInclude Include="energyplatform\core\observation.pb.h" />
-    <ClInclude Include="energyplatform\core\optimization_param.grpc.pb.h" />
-    <ClInclude Include="energyplatform\core\optimization_param.pb.h" />
-    <ClInclude Include="energyplatform\core\predictor_service.grpc.pb.h" />
-    <ClInclude Include="energyplatform\core\predictor_service.pb.h" />
-    <ClInclude Include="energyplatform\core\tasks.grpc.pb.h" />
-    <ClInclude Include="energyplatform\core\tasks.pb.h" />
-    <ClInclude Include="energyplatform\core\types.grpc.pb.h" />
-    <ClInclude Include="energyplatform\core\types.pb.h" />
     <ClInclude Include="EnvSimulatorGas.h" />
     <ClInclude Include="NSI\BNSI.h" />
     <ClInclude Include="NSI\BNSIAVO.h" />
@@ -296,6 +278,24 @@
     <ClInclude Include="Tasks\ServingModelTask.h" />
     <ClInclude Include="Tasks\SimpleTask.h" />
     <ClInclude Include="Tasks\TrainingTask.h" />
+    <ClInclude Include="unetwork\core\action.grpc.pb.h" />
+    <ClInclude Include="unetwork\core\action.pb.h" />
+    <ClInclude Include="unetwork\core\env_service.grpc.pb.h" />
+    <ClInclude Include="unetwork\core\env_service.pb.h" />
+    <ClInclude Include="unetwork\core\env_service_functions.grpc.pb.h" />
+    <ClInclude Include="unetwork\core\env_service_functions.pb.h" />
+    <ClInclude Include="unetwork\core\graph.grpc.pb.h" />
+    <ClInclude Include="unetwork\core\graph.pb.h" />
+    <ClInclude Include="unetwork\core\observation.grpc.pb.h" />
+    <ClInclude Include="unetwork\core\observation.pb.h" />
+    <ClInclude Include="unetwork\core\optimization_param.grpc.pb.h" />
+    <ClInclude Include="unetwork\core\optimization_param.pb.h" />
+    <ClInclude Include="unetwork\core\predictor_service.grpc.pb.h" />
+    <ClInclude Include="unetwork\core\predictor_service.pb.h" />
+    <ClInclude Include="unetwork\core\tasks.grpc.pb.h" />
+    <ClInclude Include="unetwork\core\tasks.pb.h" />
+    <ClInclude Include="unetwork\core\types.grpc.pb.h" />
+    <ClInclude Include="unetwork\core\types.pb.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="utils\DMapFile.h" />
     <ClInclude Include="utils\FileSystem.h" />
@@ -307,24 +307,6 @@
     <ClCompile Include="Core\GasEnv.cpp" />
     <ClCompile Include="Core\GlobalData.cpp" />
     <ClCompile Include="Core\ObjectsModel.cpp" />
-    <ClCompile Include="energyplatform\core\action.grpc.pb.cc" />
-    <ClCompile Include="energyplatform\core\action.pb.cc" />
-    <ClCompile Include="energyplatform\core\env_service.grpc.pb.cc" />
-    <ClCompile Include="energyplatform\core\env_service.pb.cc" />
-    <ClCompile Include="energyplatform\core\env_service_functions.grpc.pb.cc" />
-    <ClCompile Include="energyplatform\core\env_service_functions.pb.cc" />
-    <ClCompile Include="energyplatform\core\graph.grpc.pb.cc" />
-    <ClCompile Include="energyplatform\core\graph.pb.cc" />
-    <ClCompile Include="energyplatform\core\observation.grpc.pb.cc" />
-    <ClCompile Include="energyplatform\core\observation.pb.cc" />
-    <ClCompile Include="energyplatform\core\optimization_param.grpc.pb.cc" />
-    <ClCompile Include="energyplatform\core\optimization_param.pb.cc" />
-    <ClCompile Include="energyplatform\core\predictor_service.grpc.pb.cc" />
-    <ClCompile Include="energyplatform\core\predictor_service.pb.cc" />
-    <ClCompile Include="energyplatform\core\tasks.grpc.pb.cc" />
-    <ClCompile Include="energyplatform\core\tasks.pb.cc" />
-    <ClCompile Include="energyplatform\core\types.grpc.pb.cc" />
-    <ClCompile Include="energyplatform\core\types.pb.cc" />
     <ClCompile Include="EnvSimulatorGas.cpp" />
     <ClCompile Include="NSI\BNSI.cpp" />
     <ClCompile Include="NSI\BNSIAVO.cpp" />
@@ -360,6 +342,24 @@
     <ClCompile Include="Tasks\ServingModelTask.cpp" />
     <ClCompile Include="Tasks\SimpleTask.cpp" />
     <ClCompile Include="Tasks\TrainingTask.cpp" />
+    <ClCompile Include="unetwork\core\action.grpc.pb.cc" />
+    <ClCompile Include="unetwork\core\action.pb.cc" />
+    <ClCompile Include="unetwork\core\env_service.grpc.pb.cc" />
+    <ClCompile Include="unetwork\core\env_service.pb.cc" />
+    <ClCompile Include="unetwork\core\env_service_functions.grpc.pb.cc" />
+    <ClCompile Include="unetwork\core\env_service_functions.pb.cc" />
+    <ClCompile Include="unetwork\core\graph.grpc.pb.cc" />
+    <ClCompile Include="unetwork\core\graph.pb.cc" />
+    <ClCompile Include="unetwork\core\observation.grpc.pb.cc" />
+    <ClCompile Include="unetwork\core\observation.pb.cc" />
+    <ClCompile Include="unetwork\core\optimization_param.grpc.pb.cc" />
+    <ClCompile Include="unetwork\core\optimization_param.pb.cc" />
+    <ClCompile Include="unetwork\core\predictor_service.grpc.pb.cc" />
+    <ClCompile Include="unetwork\core\predictor_service.pb.cc" />
+    <ClCompile Include="unetwork\core\tasks.grpc.pb.cc" />
+    <ClCompile Include="unetwork\core\tasks.pb.cc" />
+    <ClCompile Include="unetwork\core\types.grpc.pb.cc" />
+    <ClCompile Include="unetwork\core\types.pb.cc" />
     <ClCompile Include="utils\DMapFile.cpp" />
     <ClCompile Include="utils\FileSystem.cpp" />
   </ItemGroup>

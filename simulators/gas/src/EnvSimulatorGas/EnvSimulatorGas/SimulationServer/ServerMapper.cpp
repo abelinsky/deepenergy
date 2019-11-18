@@ -6,17 +6,17 @@
 
 namespace SimulationServer
 {
-	void ServerMapper::CurrentObservationToProtobuf(energyplatform::Observation *pObservation)
+	void ServerMapper::CurrentObservationToProtobuf(unetwork::Observation *pObservation)
 	{
 		for (auto pObject : GetModel()->m_Ins)
 		{
 			BIn *pIn = dynamic_cast<BIn*>(pObject);
 			assert(pIn);
 
-			energyplatform::PhysicalParam *pParam = pObservation->add_items();
+			unetwork::PhysicalParam *pParam = pObservation->add_items();
 			string sid = (boost::format("%d__P") % pIn->m_ID).str();
 			pParam->set_id(sid);
-			pParam->set_type(energyplatform::PhysicalValueType::PV_PRESSURE);
+			pParam->set_type(unetwork::PhysicalValueType::PV_PRESSURE);
 			pParam->set_value(pIn->m_rP);
 		}
 
@@ -25,46 +25,46 @@ namespace SimulationServer
 			BOut *pOut = dynamic_cast<BOut*>(pObject);
 			assert(pOut);
 
-			energyplatform::PhysicalParam *pParam = pObservation->add_items();
+			unetwork::PhysicalParam *pParam = pObservation->add_items();
 			string sid = (boost::format("%d__P") % pOut->m_ID).str();
 			pParam->set_id(sid);
-			pParam->set_type(energyplatform::PhysicalValueType::PV_PRESSURE);
+			pParam->set_type(unetwork::PhysicalValueType::PV_PRESSURE);
 			pParam->set_value(pOut->m_rP);
 		}
 
 		if (EXPERIMENT > 1) {
 			for (auto pObject : GetModel()->m_Shops)
 			{
-				energyplatform::PhysicalParam *pParam = pObservation->add_items();
+				unetwork::PhysicalParam *pParam = pObservation->add_items();
 				string sid = (boost::format("%d__Pin") % pObject->m_ID).str();
 				pParam->set_id(sid);
-				pParam->set_type(energyplatform::PhysicalValueType::PV_PRESSURE);
+				pParam->set_type(unetwork::PhysicalValueType::PV_PRESSURE);
 				pParam->set_value(pObject->m_rPin);
 
 				pParam = pObservation->add_items();
 				sid = (boost::format("%d__Pout") % pObject->m_ID).str();
 				pParam->set_id(sid);
-				pParam->set_type(energyplatform::PhysicalValueType::PV_PRESSURE);
+				pParam->set_type(unetwork::PhysicalValueType::PV_PRESSURE);
 				pParam->set_value(pObject->m_rPout);
 			}
 		}
 	}
 
-	CTrainingTask::TaskType ServerMapper::ProtoTaskToInternalTask(energyplatform::SystemTask ProtoTask)
+	CTrainingTask::TaskType ServerMapper::ProtoTaskToInternalTask(unetwork::SystemTask ProtoTask)
 	{
 		CTrainingTask::TaskType Task;
 		switch (ProtoTask)
 		{
-		case energyplatform::SystemTask::FEED_FORWARD:
+		case unetwork::SystemTask::FEED_FORWARD:
 			Task = CTrainingTask::TaskType::FEED_FORWARD;
 			break;
-		case energyplatform::SystemTask::AVAILABLE_TECHNOLOGICAL_MODE:
+		case unetwork::SystemTask::AVAILABLE_TECHNOLOGICAL_MODE:
 			Task = CTrainingTask::TaskType::AVAILABLE_TECHNOLOGICAL_MODE;
 			break;
-		case energyplatform::SystemTask::MAX_THROUGHPUT:
+		case unetwork::SystemTask::MAX_THROUGHPUT:
 			Task = CTrainingTask::TaskType::MAX_THROUGHPUT;
 			break;
-		case energyplatform::SystemTask::SIMPLE:
+		case unetwork::SystemTask::SIMPLE:
 			Task = CTrainingTask::TaskType::SIMPLE;
 			break;
 		default:
@@ -74,20 +74,20 @@ namespace SimulationServer
 		return Task;
 	}
 
-	inline void operator<<(energyplatform::OptimizationParameter &eParam, Objects::OptimizationParam &iParam)
+	inline void operator<<(unetwork::OptimizationParameter &eParam, Objects::OptimizationParam &iParam)
 	{
 		eParam.set_id(iParam.GetUId());
 
 		bool bDiscrete = iParam.IsDiscrete();
 		eParam.mutable_metadata()->set_type(bDiscrete
-			? energyplatform::ParameterType::PT_DISCRETE
-			: energyplatform::ParameterType::PT_CONTINUOUS);
+			? unetwork::ParameterType::PT_DISCRETE
+			: unetwork::ParameterType::PT_CONTINUOUS);
 
-		energyplatform::PhysicalValueType vtype = energyplatform::PhysicalValueType::PV_NOTYPE;
+		unetwork::PhysicalValueType vtype = unetwork::PhysicalValueType::PV_NOTYPE;
 		switch (iParam.m_Code)
 		{
 		case OParam::O_OB:
-			vtype = energyplatform::PhysicalValueType::PV_FREQUENCY;
+			vtype = unetwork::PhysicalValueType::PV_FREQUENCY;
 			break;
 		default:
 			break;
@@ -115,7 +115,7 @@ namespace SimulationServer
 		eParam.set_info(iParam.GetInfo());
 	}
 
-	void operator>>(const energyplatform::OptimizationParameter &eParam, Objects::OptimizationParam &iParam)
+	void operator>>(const unetwork::OptimizationParameter &eParam, Objects::OptimizationParam &iParam)
 	{
 		bool discrete = iParam.IsDiscrete();
 
